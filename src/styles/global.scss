@@ -146,7 +146,80 @@ button {
   opacity: 75%;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: $bg-root-light;
+  color: $text-dark;
+  margin-left: 250px;
+  margin-top: $header-height;
+  min-height: calc(100vh - $header-height) !important;
+
+  h2 {
+    color: $text-dark;
+  }
+
+  @media (max-width: 991px) {
+    margin-left: 0;
+  }
+}
+
+table {
+  cursor: default;
+
+  tr {
+    &:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.substrate {
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  background: $bg-substrate-light;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  .empty-table {
+    margin-top: 24px;
+
+    .icon-big {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+
+  .table-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+}
+
 .dark-theme {
+  .container {
+    background: $bg-root-dark;
+    color: $text-light;
+  }
+
+  .substrate {
+    background: $bg-substrate-dark;
+  }
+
   .value {
     color: $text-light;
   }
