@@ -47,3 +47,11 @@ export const postUserCover = async (user: number, image: File) => {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
 };
+
+export const fetchUsers = async (params: UserQueryParams) => axios({
+  method: 'get',
+  url: `${import.meta.env.VITE_APP_API_URL}/api/users`,
+  params,
+  withCredentials: true,
+  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+});
