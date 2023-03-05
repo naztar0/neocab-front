@@ -3,7 +3,8 @@ import cookies from 'js-cookie';
 import { Theme } from '@/constants/settings';
 
 const initialState = {
-  theme: cookies.get('theme') ? Number(cookies.get('theme')) : Theme.Dark,
+  theme: cookies.get('theme') ? Number(cookies.get('theme'))
+    : window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.Dark : Theme.Light,
 };
 
 export const themeSlice = createSlice({
