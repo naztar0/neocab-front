@@ -65,6 +65,7 @@
 
 body {
   margin: 0;
+  width: 100% !important;
   height: auto !important;
   font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif !important;
 
@@ -101,6 +102,7 @@ a {
   font-weight: 500;
   color: $blue-light;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
     color: $blue-dark;
@@ -118,18 +120,34 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   width: 100%;
-  margin-top: 1rem;
 
   &:hover {
     border-color: $blue-dark;
   }
 
   &:focus, &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+    outline: none;
   }
-
 }
 
 .pd-0 {
   padding: 0 !important;
+}
+
+.title {
+  font-size: calc(0.75rem + 0.5vw);
+  font-weight: 600;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $text-dark;
+  opacity: 75%;
+}
+
+.dark-theme {
+  .value {
+    color: $text-light;
+  }
 }
