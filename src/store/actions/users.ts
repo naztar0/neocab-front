@@ -6,7 +6,22 @@ import {
   fetchUserRating,
   fetchUserSyllabus,
   postUserCover,
+  fetchUsers,
 } from '@/requests/users';
+
+export const getMyProfile = createAsyncThunk(
+  'get_my_profile',
+  async ({ user }: { user: number }) => (
+    await fetchUserProfile(user)
+  ).data,
+);
+
+export const getMyPhoto = createAsyncThunk(
+  'get_my_photo',
+  async ({ user }: { user: number }) => (
+    await fetchUserPhoto(user)
+  ).data,
+);
 
 export const getUserProfile = createAsyncThunk(
   'get_user_profile',
@@ -47,5 +62,12 @@ export const setUserCover = createAsyncThunk(
   'post_user_cover',
   async ({ user, image }: { user: number, image: File }) => (
     await postUserCover(user, image)
+  ).data,
+);
+
+export const getUsers = createAsyncThunk(
+  'get_users',
+  async ({ params }: { params: UserQueryParams }) => (
+    await fetchUsers(params)
   ).data,
 );
