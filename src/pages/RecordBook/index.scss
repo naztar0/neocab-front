@@ -1,16 +1,8 @@
 @import "src/styles/variables";
+@import "src/styles/components/subjectTable";
 
-.debts {
-  border: 2px solid $yellow-light;
-
-  .table-title {
-    justify-content: start;
-  }
-
-  .icon {
-    color: $yellow-light;
-    margin-right: 10px;
-  }
+.debt {
+  color: $yellow-light;
 }
 
 .dark-theme {
