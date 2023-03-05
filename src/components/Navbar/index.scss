@@ -6,8 +6,8 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  width: 100%;
+  padding: 0 24px;
+  width: calc(100% - 48px);
   z-index: 99;
   top: 0;
   background: $bg-substrate-light;
@@ -36,15 +36,6 @@ header {
       border: none;
       caret-color: $black50;
       font-weight: 100;
-
-      + span {
-        left: 0 !important;
-        background: transparent;
-      }
-
-      &:focus {
-        box-shadow: none;
-      }
     }
 
     button {

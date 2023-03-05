@@ -6,17 +6,25 @@
   height: 100vh;
   z-index: 2;
   user-select: none;
+  background: $bg-substrate-light;
+
+  ul {
+    background: $bg-root-light;
+
+    li {
+      padding-left: 32px !important;
+    }
+  }
 }
-.sidebar li {
-  padding-left: 32px !important;
-}
+
 .icon {
   font-size: 18px !important;
 }
-.ant-menu-item-disabled {
-  cursor: default !important;
 
-  &:focus {
-    background-color: transparent !important;
+.dark-theme {
+  .sidebar {
+    ul {
+      background: $bg-substrate-dark;
+    }
   }
 }
