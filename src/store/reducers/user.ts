@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   getUserProfile,
+  getUserPhoto,
   getUsers,
 } from '@/store/actions/users';
 import {
@@ -15,7 +16,8 @@ import {
 const initialState = {
   isLoading: false,
   users: [],
-  user: null,
+  user: <User | null>null,
+  image: <string | null>null,
 };
 
 export const userSlice = createSlice({
@@ -30,12 +32,29 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserProfile.fulfilled, (state, action) => {
       state.user = action.payload;
+      if (state.user && state.image) {
+        state.user.image = state.image;
+      }
       state.isLoading = false;
     });
     builder.addCase(getUserProfile.rejected, (state) => {
       state.isLoading = false;
     });
     builder.addCase(getUserProfile.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(getUserPhoto.fulfilled, (state, action) => {
+      if (state.user && (!state.user.image || state.user.image.startsWith('data:image'))) {
+        state.user.image = action.payload;
+      } else {
+        state.image = action.payload;
+      }
+    });
+    builder.addCase(getUserPhoto.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(getUserPhoto.pending, (state) => {
       state.isLoading = true;
     });
 
