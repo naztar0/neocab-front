@@ -18,6 +18,47 @@ export function yearToSemester(year: number, prev = false): number {
     - (prev && yearToSemester(year) > 1 ? 1 : 0) : 0;
 }
 
-export function calculationFormat(s: string) {
-  return s.replace(/\*/g, ' × ').replace(/\[/g, '(').replace(/]/g, ')');
+export function shortDepartmentName(name: string): string {
+  if (!name) return '';
+  const str = name.replace(/(-| +і +| +та +| +й +| +ім\..+)/ig, ' ').trim().split(' ');
+  let res = '';
+  for (let i = 0; i < str.length; i++) {
+    res += str[i][0].toUpperCase();
+  }
+  return res;
+}
+
+export function toMark5(mark: number): number {
+  if (mark < 60) return 2;
+  if (mark < 75) return 3;
+  if (mark < 90) return 4;
+  return 5;
+}
+
+export function toMarkNational(mark: number): string {
+  if (mark < 60) return 'fail';
+  if (mark < 75) return 'satisfactory';
+  if (mark < 90) return 'good';
+  return 'excellent';
+}
+
+export function toMarkEcts(mark: number): string {
+  if (mark < 35) return 'F';
+  if (mark < 60) return 'FX';
+  if (mark < 64) return 'E';
+  if (mark < 75) return 'D';
+  if (mark < 82) return 'C';
+  if (mark < 90) return 'B';
+  return 'A';
+}
+
+export function formatDate(date: string): string {
+  const d = new Date(date);
+  return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
+}
+
+export function formatName(user: User): string {
+  const fn = user.first_name ? user.first_name[0] : '';
+  const mn = user.middle_name ? user.middle_name[0] : '';
+  return `${user.last_name} ${fn}. ${mn}.`;
 }
