@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserProfile, getUserPhoto, setUserCover } from '@/store/actions/users';
+import { getMyProfile, getMyPhoto, setUserCover } from '@/store/actions/users';
 
 const initialState = {
   isLoading: true,
@@ -16,21 +16,21 @@ export const profileSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUserProfile.fulfilled, (state, action) => {
+    builder.addCase(getMyProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
       if (state.profile && state.image) {
         state.profile.image = state.image;
       }
       state.isLoading = false;
     });
-    builder.addCase(getUserProfile.rejected, (state) => {
+    builder.addCase(getMyProfile.rejected, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(getUserProfile.pending, (state) => {
+    builder.addCase(getMyProfile.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(getUserPhoto.fulfilled, (state, action) => {
+    builder.addCase(getMyPhoto.fulfilled, (state, action) => {
       if (state.profile && (!state.profile.image || state.profile.image.startsWith('data:image'))) {
         state.profile.image = action.payload;
       } else {
