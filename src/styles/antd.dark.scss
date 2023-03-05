@@ -3,8 +3,11 @@
 $component-background: $bg-substrate-dark;
 $popover-color: $white10;
 $layout-header-background: $bg-substrate-dark;
+$menu-item-selected: $blue-dark2;
 
 .ant-menu {
+  border-right: 1px solid $white10 !important;
+
   li:not(.ant-menu-item-selected) {
     opacity: 25%;
     transition: all 0.3s ease-out !important;
@@ -13,4 +16,13 @@ $layout-header-background: $bg-substrate-dark;
       opacity: 100%;
     }
   }
+
+  .ant-menu-item-selected {
+    background-color: $menu-item-selected !important;
+  }
+}
+
+.ant-layout-sider-zero-width-trigger {
+  background: $bg-substrate-dark !important;
+  box-shadow: 5px 5px 15px -5px $black;
 }
