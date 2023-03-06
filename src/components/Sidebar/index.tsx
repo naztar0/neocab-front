@@ -39,9 +39,9 @@ const items = [
     label: 'Syllabus',
   },
   {
-    key: 'people',
+    key: 'search',
     icon: <Icons.SearchOutlined className="icon" />,
-    label: 'People',
+    label: 'Search',
   },
   {
     key: 'settings',
