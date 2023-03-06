@@ -3,9 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from '@ant-design/icons';
 import {
-  Badge, Button, Input, Popover, List,
+  Badge,
+  Button,
+  Input,
+  Popover,
+  List,
+  message,
 } from 'antd';
 import Avatar from '@/components/Avatar';
+import {
+  searchPattern,
+  searchPatternString,
+} from '@/constants/search';
 import logo from '@/assets/images/logo.jpg';
 import { logoutAction } from '@/store/actions/login';
 import { AppDispatch } from '@/store/store';
@@ -54,23 +63,36 @@ export default function Navbar() {
   const [openNotifications, setOpenNotifications] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
 
-  const logout = () => {
-    dispatch(logoutAction());
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('token');
-  };
-
   useEffect(() => {
     if (!isLoginLoading && !localStorage.getItem('token')) {
       navigate('/login');
     }
   }, [isLoginLoading]);
 
+  const logout = () => {
+    dispatch(logoutAction());
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('token');
+  };
+
+  const onSearch = (value: string) => {
+    if (searchPattern.test(value)) {
+      navigate(`/search?q=${value}`);
+    } else {
+      message.error('Search value must contain only letters and spaces').then();
+    }
+  };
+
   return (
     <header>
       <div>
         <img src={logo} className="logo" alt="NeoCab" />
-        <Input.Search className="search" placeholder="Search" onSearch={() => {}} />
+        <Input.Search
+          className="search"
+          placeholder="Search"
+          pattern={searchPatternString}
+          onSearch={onSearch}
+        />
       </div>
       <div>
         <Popover
