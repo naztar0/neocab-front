@@ -7,22 +7,35 @@ import * as Icons from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
+import SubjectData from '@/components/SubjectData';
 import { getUserRecordBook } from '@/store/actions/users';
-import { yearToSemester } from '@/helpers/utils';
+import {
+  yearToSemester,
+  toMark5,
+  toMarkNational,
+  toMarkEcts,
+  formatDate,
+} from '@/helpers/utils';
 import './index.scss';
 
 export default function RecordBook() {
   const dispatch = useDispatch<AppDispatch>();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoading: boolean = useSelector((state: any) => state.recordBookReducer.isLoading);
-  const recordBookData: { record_book: RecordBook[], debts: Debt[] } = useSelector(
-    (state: any) => state.recordBookReducer.recordBook,
-  );
+  const recordBookData: RecordBook[] = useSelector((state: any) => state.recordBookReducer.recordBook);
 
-  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true) || 1);
+  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true));
 
   useEffect(() => {
-    dispatch(getUserRecordBook({ user: profileData.id, semester }));
+    if (profileData) {
+      setSemester(yearToSemester(profileData.year, true));
+    }
+  }, [profileData]);
+
+  useEffect(() => {
+    if (semester) {
+      dispatch(getUserRecordBook({ user: profileData.id, semester }));
+    }
   }, [semester]);
 
   const rbColumns: ColumnsType<RecordBook> = isLoading ? [] : [
@@ -31,26 +44,22 @@ export default function RecordBook() {
       dataIndex: 'subject',
       title: 'Subject',
       render: (value, record) => (
-        <div className="row-data">
-          <span className="subject-name">{record.subject.name}</span>
-          <div>
-            <span className="professor">{record.professor}</span>
-            <Tooltip title={record.cathedra.full} placement="right">
-              <span className="cathedra">{record.cathedra.short}</span>
-            </Tooltip>
-          </div>
-        </div>
+        <SubjectData
+          title={record.syllabus.subject.title}
+          professor={record.syllabus.subject.professor}
+          department={record.syllabus.subject.department?.name}
+        />
       ),
-      sorter: (a, b) => a.subject.name.localeCompare(b.subject.name),
+      sorter: (a, b) => a.syllabus.subject.title.localeCompare(b.syllabus.subject.title),
     },
     {
       key: 'credit',
       dataIndex: 'credit',
       title: 'Credit',
       render: (value, record) => (
-        <span>{record.credit}</span>
+        <span>{record.syllabus.credit}</span>
       ),
-      sorter: (a, b) => a.credit.localeCompare(b.credit),
+      sorter: (a, b) => parseFloat(a.syllabus.credit) - parseFloat(b.syllabus.credit),
     },
     {
       key: 'control',
@@ -58,122 +67,62 @@ export default function RecordBook() {
       title: 'E/C',
       render: (value, record) => (
         <div className="row-data e-c">
-          <span>{record.control || '-'}</span>
-          <span>{record.individual_task || '-'}</span>
+          <span>{record.syllabus.control || '-'}</span>
+          <span>{record.syllabus.individual_task || '-'}</span>
         </div>
       ),
-      sorter: (a, b) => a.control.localeCompare(b.control),
+      sorter: (a, b) => a.syllabus.control.localeCompare(b.syllabus.control),
     },
     {
       key: 'mark_5',
       dataIndex: 'mark_5',
       title: 'Nat',
       render: (value, record) => (
-        <Tooltip title={record.mark_national} placement="top">
-          <span>{record.mark_5}</span>
-        </Tooltip>
+        record.debt_date ? (
+          <span className="debt"><Icons.WarningOutlined /></span>
+        ) : (
+          <Tooltip title={toMarkNational(record.mark)} placement="top">
+            <span>{toMark5(record.mark)}</span>
+          </Tooltip>
+        )
       ),
-      sorter: (a, b) => a.mark_5 - b.mark_5,
+      sorter: (a, b) => a.mark - b.mark,
     },
     {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: 'Mark',
       render: (value, record) => (
-        <Tooltip title={record.mark_national} placement="top">
-          <span>{record.mark_100}</span>
-        </Tooltip>
+        record.debt_date ? (
+          <Tooltip title={formatDate(record.debt_date)} placement="top">
+            <span className="debt">Debt</span>
+          </Tooltip>
+        ) : (
+          <Tooltip title={toMarkNational(record.mark)} placement="top">
+            <span>{record.mark}</span>
+          </Tooltip>
+        )
       ),
-      sorter: (a, b) => a.mark_100 - b.mark_100,
+      sorter: (a, b) => a.mark - b.mark,
     },
     {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
       title: 'ECTS',
       render: (value, record) => (
-        <Tooltip title={record.mark_national} placement="top">
-          <span>{record.mark_ects}</span>
-        </Tooltip>
+        record.debt_date ? (
+          <span className="debt"><Icons.WarningOutlined /></span>
+        ) : (
+          <Tooltip title={toMarkNational(record.mark)} placement="top">
+            <span>{toMarkEcts(record.mark)}</span>
+          </Tooltip>
+        )
       ),
-      sorter: (a, b) => a.mark_ects.localeCompare(b.mark_ects),
+      sorter: (a, b) => a.mark - b.mark,
     },
   ];
 
-  const debtsColumns: ColumnsType<Debt> = isLoading ? [] : [
-    {
-      key: 'subject',
-      dataIndex: 'subject',
-      title: 'Subject',
-      render: (value, record) => (
-        <div className="row-data">
-          <span className="subject-name">{record.subject.name}</span>
-          <div>
-            <span className="professor">{record.professor}</span>
-            <Tooltip title={record.cathedra.full} placement="right">
-              <span className="cathedra">{record.cathedra.short}</span>
-            </Tooltip>
-          </div>
-        </div>
-      ),
-      sorter: (a, b) => a.subject.name.localeCompare(b.subject.name),
-    },
-    {
-      key: 'credit',
-      dataIndex: 'credit',
-      title: 'Credit',
-      render: (value, record) => (
-        <span>{record.credit}</span>
-      ),
-      sorter: (a, b) => a.credit.localeCompare(b.credit),
-    },
-    {
-      key: 'semester',
-      dataIndex: 'semester',
-      title: 'Semester',
-      render: (value, record) => (
-        <span>{record.semester}</span>
-      ),
-      sorter: (a, b) => a.semester - b.semester,
-    },
-    {
-      key: 'control',
-      dataIndex: 'control',
-      title: 'E/C',
-      render: (value, record) => (
-        <div className="row-data e-c">
-          <span>{record.control || '-'}</span>
-          <span>{record.individual_task || '-'}</span>
-        </div>
-      ),
-      sorter: (a, b) => a.control.localeCompare(b.control),
-    },
-    {
-      key: 'date',
-      dataIndex: 'date',
-      title: 'Date',
-      render: (value, record) => (
-        <span>{record.date}</span>
-      ),
-      sorter: (a, b) => Date.parse(a.date.replace(/(\d{2}).(\d{2}).(\d{4})/, '$2/$1/$3')) - Date.parse(b.date.replace(/(\d{2}).(\d{2}).(\d{4})/, '$2/$1/$3')),
-    },
-  ];
-
-  const rbDataSource = recordBookData.record_book?.map((data, index) => ({ key: index, ...data }));
-  const debtsDataSource = recordBookData.debts?.map((data, index) => ({ key: index, ...data }));
-
-  const rbTableTitle = () => (
-    <div className="table-title">
-      <span className="title">Record Book</span>
-      <Semester semester={semester} setSemester={setSemester} />
-    </div>
-  );
-
-  const debtsTableTitle = () => (
-    <div className="table-title">
-      <Icons.WarningOutlined className="icon" />
-      <span className="title">Debts</span>
-    </div>
-  );
+  const rbDataSource = recordBookData.map((data, index) => ({ key: index, ...data }));
 
   return (
     <Layout>
@@ -193,25 +142,12 @@ export default function RecordBook() {
               </div>
             ),
           }}
-          title={rbTableTitle}
-        />
-      </div>
-      <div className="substrate subject-table debts">
-        <Table
-          columns={debtsColumns}
-          dataSource={debtsDataSource}
-          pagination={false}
-          showSorterTooltip={false}
-          loading={isLoading}
-          locale={{
-            emptyText: (
-              <div className="empty-table">
-                <Icons.ExceptionOutlined className="icon-big" />
-                <p>No debts</p>
-              </div>
-            ),
-          }}
-          title={debtsTableTitle}
+          caption={(
+            <div className="table-title">
+              <span className="title">Record Book</span>
+              <Semester semester={semester} setSemester={setSemester} />
+            </div>
+          )}
         />
       </div>
     </Layout>

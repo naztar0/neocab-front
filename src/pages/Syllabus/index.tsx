@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Tooltip } from 'antd';
+import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import { Chart, ArcElement, Tooltip as ChartTooltip } from 'chart.js';
@@ -9,6 +9,7 @@ import * as Icons from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
+import SubjectData from '@/components/SubjectData';
 import { getUserSyllabus } from '@/store/actions/users';
 import { yearToSemester } from '@/helpers/utils';
 import './index.scss';
@@ -19,10 +20,18 @@ export default function Rating() {
   const isLoading: boolean = useSelector((state: any) => state.syllabusReducer.isLoading);
   const syllabusData: Syllabus[] = useSelector((state: any) => state.syllabusReducer.syllabus);
 
-  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true) || 1);
+  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true));
 
   useEffect(() => {
-    dispatch(getUserSyllabus({ user: profileData.id, semester }));
+    if (profileData) {
+      setSemester(yearToSemester(profileData.year, true));
+    }
+  }, [profileData]);
+
+  useEffect(() => {
+    if (semester) {
+      dispatch(getUserSyllabus({ user: profileData.id, semester }));
+    }
   }, [semester]);
 
   Chart.register(ArcElement, ChartTooltip);
@@ -33,16 +42,13 @@ export default function Rating() {
       dataIndex: 'subject',
       title: 'Subject',
       render: (value, record) => (
-        <div className="row-data">
-          <span className="subject-name">{record.subject.name}</span>
-          <div>
-            <Tooltip title={record.cathedra.full} placement="right">
-              <span className="cathedra">{record.cathedra.short}</span>
-            </Tooltip>
-          </div>
-        </div>
+        <SubjectData
+          title={record.subject.title}
+          professor={record.subject.professor}
+          department={record.subject.department?.name}
+        />
       ),
-      sorter: (a, b) => a.subject.name.localeCompare(b.subject.name),
+      sorter: (a, b) => a.subject.title.localeCompare(b.subject.title),
     },
     {
       key: 'credit',
@@ -72,18 +78,11 @@ export default function Rating() {
       render: (value, record) => (
         <span>{record.hours}</span>
       ),
-      sorter: (a, b) => a.hours - b.hours,
+      sorter: (a, b) => a.hours.localeCompare(b.hours),
     },
   ];
 
   const syllabusDataSource = syllabusData?.map((data, index) => ({ key: index, ...data }));
-
-  const syllabusTableTitle = () => (
-    <div className="table-title">
-      <span className="title">Syllabus</span>
-      <Semester semester={semester} setSemester={setSemester} />
-    </div>
-  );
 
   const colors1: string[] = [];
   for (let i = 0; i < syllabusData.length; i++) {
@@ -95,7 +94,7 @@ export default function Rating() {
   }
 
   const creditsChart = {
-    labels: syllabusData?.map((data) => data.subject.name),
+    labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
         label: 'Credits',
@@ -108,7 +107,7 @@ export default function Rating() {
   };
 
   const hoursChart = {
-    labels: syllabusData?.map((data) => data.subject.name),
+    labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
         label: 'Hours',
@@ -147,7 +146,12 @@ export default function Rating() {
               </div>
             ),
           }}
-          title={syllabusTableTitle}
+          caption={(
+            <div className="table-title">
+              <span className="title">Syllabus</span>
+              <Semester semester={semester} setSemester={setSemester} />
+            </div>
+          )}
         />
       </div>
       <div className="substrate charts">
@@ -155,7 +159,7 @@ export default function Rating() {
           {syllabusData?.map((data, index) => (
             <div className="legend-item" key={data.subject.id}>
               <div className="legend-color" style={{ backgroundColor: colors1[index] }} />
-              <span className="legend-name">{data.subject.name}</span>
+              <span className="legend-name">{data.subject.title}</span>
             </div>
           ))}
         </div>
