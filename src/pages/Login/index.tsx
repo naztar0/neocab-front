@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -22,6 +22,7 @@ import './index.scss';
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const msLoginUrl = useSelector((state: any) => state.loginReducer.msLoginUrl);
   const userData = useSelector((state: any) => state.loginReducer.user);
@@ -29,7 +30,14 @@ export default function Login() {
   const isError = useSelector((state: any) => state.loginReducer.isError);
   const errorCode = useSelector((state: any) => state.loginReducer.errorCode);
   const theme: Theme = useSelector((state: any) => state.themeReducer.theme);
+
   const [nativeRequired, setNativeRequired] = useState(false);
+  const [isLoginViaCabinet, setIsLoginViaCabinet] = useState(false);
+  const [checkCabinetLogin, setCheckCabinetLogin] = useState(false);
+  const [cabinetCredentials, setCabinetCredentials] = useState({ email: '', password: '' });
+
+  const checkCabinetLoginRef = useRef(checkCabinetLogin);
+  checkCabinetLoginRef.current = checkCabinetLogin;
 
   const getMsLoginUrl = () => {
     dispatch(getAzureLoginUrl());
@@ -66,18 +74,29 @@ export default function Login() {
     if (isError) {
       switch (errorCode) {
         case 401:
-          message.error('Wrong email or password').then();
+          message.error('Wrong email or password', 10).then();
+          if (checkCabinetLoginRef.current) {
+            setCheckCabinetLogin(false);
+          }
           break;
         case 403:
-          message.warning('For the first time you need to login via login and password from cabinet', 15).then();
-          setNativeRequired(true);
+          if (isLoginViaCabinet) {
+            if (!checkCabinetLoginRef.current) {
+              message.warning('For the first time it may take up to a minute to login', 10).then();
+              setCheckCabinetLogin(true);
+            }
+            setTimeout(() => dispatch(loginViaCabinet(cabinetCredentials)), 8000);
+          } else {
+            message.warning('For the first time you need to login via login and password from cabinet', 15).then();
+            setNativeRequired(true);
+          }
           break;
         default:
           message.error('Something went wrong').then();
           break;
       }
     }
-  }, [isError]);
+  }, [isError, errorCode, isLoginViaCabinet]);
 
   useEffect(() => {
     const msLogin = new URLSearchParams(document.location.search).get('ms');
@@ -87,6 +106,8 @@ export default function Login() {
   }, []);
 
   const onSubmit = (values: { email: string; password: string }) => {
+    setIsLoginViaCabinet(true);
+    setCabinetCredentials(values);
     dispatch(loginViaCabinet(values));
   };
 
