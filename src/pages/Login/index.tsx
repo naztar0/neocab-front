@@ -10,7 +10,6 @@ import {
   Divider,
 } from 'antd';
 import { Helmet } from 'react-helmet';
-import darkStyles from 'antd/dist/antd.dark.less';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as MsLoginLight } from '@/assets/images/ms_signin_light.svg';
 import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.svg';
@@ -132,7 +131,7 @@ export default function Login() {
             <Form.Item
               label="Password"
               name="password"
-              rules={[{ required: true, message: 'Please input your password!', pattern: /^[a-zA-Z\d]{4,8}$/ }]}
+              rules={[{ required: true, message: 'Please input your password!', pattern: /^[a-zA-Z0-9]{4,8}$/ }]}
             >
               <Input.Password />
             </Form.Item>
@@ -144,7 +143,6 @@ export default function Login() {
           </button>
         </div>
       </Spin>
-      {theme === Theme.Dark ? <style>{darkStyles}</style> : null}
     </div>
   );
 }
