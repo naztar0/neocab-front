@@ -45,7 +45,7 @@ export default function Login() {
 
   useEffect(() => {
     if (userData?.id && authData?.token) {
-      if (!userData.microsoft_id) {
+      if (!userData.azure_id) {
         getMsLoginUrl();
       } else {
         localStorage.setItem('user_id', userData.id);
@@ -65,7 +65,7 @@ export default function Login() {
   }, [authData]);
 
   useEffect(() => {
-    if (msLoginUrl && (!authData?.token || !userData?.microsoft_id)) {
+    if (msLoginUrl && (!authData?.token || !userData?.azure_id)) {
       window.location.replace(msLoginUrl);
     }
   }, [msLoginUrl]);
