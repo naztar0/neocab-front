@@ -37,7 +37,10 @@ export default function Avatar({
       >
         <span
           style={{
-            fontSize: `${(size * 2) / 3}${units}`, lineHeight: `${size * 1.025}${units}`, userSelect: 'none', color: 'white',
+            fontSize: `${(size * 2) / 3}${units}`,
+            lineHeight: `${size * 1.025}${units}`,
+            userSelect: 'none',
+            color: 'white',
           }}
           className="avatar-username"
         >
