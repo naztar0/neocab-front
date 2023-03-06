@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
@@ -8,8 +7,18 @@ import * as Icons from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
-import { getUserRating } from '@/store/actions/users';
-import { yearToSemester, calculationFormat } from '@/helpers/utils';
+import UserModal from '@/components/UserModal';
+import {
+  getUserPhoto,
+  getUserProfile,
+  getUserRating,
+} from '@/store/actions/users';
+import {
+  yearToSemester,
+  toMark5,
+  toMarkEcts,
+  formatName,
+} from '@/helpers/utils';
 import './index.scss';
 
 export default function Rating() {
@@ -17,11 +26,22 @@ export default function Rating() {
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoading: boolean = useSelector((state: any) => state.ratingReducer.isLoading);
   const ratingData: Rating[] = useSelector((state: any) => state.ratingReducer.rating);
+  const userLoading: boolean = useSelector((state: any) => state.userReducer.isLoading);
+  const userData: User = useSelector((state: any) => state.userReducer.user);
 
-  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true) || 1);
+  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true));
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(getUserRating({ user: profileData.id, semester }));
+    if (profileData) {
+      setSemester(yearToSemester(profileData.year, true));
+    }
+  }, [profileData]);
+
+  useEffect(() => {
+    if (semester) {
+      dispatch(getUserRating({ user: profileData.id, semester }));
+    }
   }, [semester]);
 
   useEffect(() => {
@@ -45,25 +65,24 @@ export default function Rating() {
       key: 'position',
       dataIndex: 'position',
       title: '№',
-      render: (value, record) => (
+      render: (value, record, index) => (
         <>
-          <span>{record.position}</span>
-          <span className="student-id">{record.student.id}</span>
+          <span>{index + 1}</span>
+          <span className="student-id">{record.user?.student_id || record.student_id}</span>
         </>
       ),
-      sorter: (a, b) => a.position - b.position,
     },
     {
       key: 'student',
       dataIndex: 'student',
       title: 'Student',
-      render: (value, record) => {
-        const percent = (record.position * 100) / ratingData.length;
+      render: (value, record, index) => {
+        const percent = ((index + 1) * 100) / ratingData.length;
         const probability = percent > 50 ? '0%' : (percent > 45 ? 'висока' : '100%');
         return (
           <Tooltip
             title={
-              record.student.id === profileData?.student_id
+              record.user?.student_id === profileData?.student_id
                 ? `Percentage in the rating: ${percent.toFixed(2)}%\n`
                 + `Probability of getting a scholarship: ${probability}`
                 : null
@@ -71,54 +90,67 @@ export default function Rating() {
             placement="right"
           >
             <div>
-              <Link to={`/student/${record.student.id}`}>
-                <span>{record.student.name}</span>
-              </Link>
+              {record.user ? (
+                <span>{formatName(record.user)}</span>
+              ) : (
+                <span>{record.name}</span>
+              )}
             </div>
           </Tooltip>
         );
       },
-      sorter: (a, b) => a.student.name.localeCompare(b.student.name),
+      onCell: (data) => ({
+        onClick: () => {
+          if (data.user) {
+            dispatch(getUserProfile({ user: data.user.id }));
+            dispatch(getUserPhoto({ user: data.user.id }));
+            setModalOpen(true);
+          }
+        },
+      }),
+      sorter: (a, b) => (a.user?.last_name ?? a.name).localeCompare(b.user?.last_name ?? b.name),
     },
     {
       key: 'group',
       dataIndex: 'group',
       title: 'Group',
       render: (value, record) => (
-        <span>{record.group}</span>
+        <span>{record.user?.group.name ?? record.group}</span>
       ),
-      sorter: (a, b) => a.group.localeCompare(b.group),
+      sorter: (a, b) => (a.user?.group.name ?? a.group).localeCompare(b.user?.group.name ?? b.group),
     },
     {
       key: 'mark_5',
       dataIndex: 'mark_5',
       title: 'Nat',
       render: (value, record) => (
-        <span>{record.mark_5}</span>
+        <span>{toMark5(parseFloat(record.mark))}</span>
       ),
-      sorter: (a, b) => a.mark_5 - b.mark_5,
+      sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
+    },
+    {
+      key: 'mark_ects',
+      dataIndex: 'mark_ects',
+      title: 'ECTS',
+      render: (value, record) => (
+        <span>{toMarkEcts(parseFloat(record.mark))}</span>
+      ),
+      sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
     },
     {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: 'Mark',
       render: (value, record) => (
-        <Tooltip title={calculationFormat(record.calculation)} placement="left">
-          <span>{record.mark_100}</span>
+        <Tooltip title={record.comment} placement="left">
+          <span>{record.mark}</span>
         </Tooltip>
       ),
-      sorter: (a, b) => a.mark_100 - b.mark_100,
+      sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
     },
   ];
 
   const ratingDataSource = ratingData?.map((data, index) => ({ key: index, ...data }));
-
-  const ratingTableTitle = () => (
-    <div className="table-title">
-      <span className="title">Rating</span>
-      <Semester semester={semester} setSemester={setSemester} />
-    </div>
-  );
 
   return (
     <Layout>
@@ -139,9 +171,20 @@ export default function Rating() {
               </div>
             ),
           }}
-          title={ratingTableTitle}
+          caption={(
+            <div className="table-title">
+              <span className="title">Rating</span>
+              <Semester semester={semester} setSemester={setSemester} />
+            </div>
+          )}
         />
       </div>
+      <UserModal
+        isLoading={userLoading}
+        setModalOpen={setModalOpen}
+        modalOpen={modalOpen}
+        user={userData}
+      />
     </Layout>
   );
 }
