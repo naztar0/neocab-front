@@ -16,7 +16,7 @@ import { ReactComponent as MsLoginLight } from '@/assets/images/ms_signin_light.
 import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.svg';
 import { Theme } from '@/constants/settings';
 import { getAzureLoginUrl, loginViaAzure, loginViaCabinet } from '@/store/actions/login';
-import { getUserProfile } from '@/store/actions/users';
+import { getUserPhoto, getUserProfile } from '@/store/actions/users';
 import './index.scss';
 
 export default function Login() {
@@ -43,6 +43,7 @@ export default function Login() {
         localStorage.setItem('user_id', userData.id);
         localStorage.setItem('token', authData.token);
         dispatch(getUserProfile({ user: userData.id }));
+        dispatch(getUserPhoto({ user: userData.id }));
         navigate('/profile');
       }
     } else {
