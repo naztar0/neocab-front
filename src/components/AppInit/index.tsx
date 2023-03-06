@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Theme } from '@/constants/settings';
 import { AppDispatch } from '@/store/store';
-import { getUserProfile, getUserPhoto } from '@/store/actions/users';
+import { getMyProfile, getMyPhoto } from '@/store/actions/users';
 import { refreshAction } from '@/store/actions/login';
 
 export default function AppInit() {
@@ -19,8 +19,8 @@ export default function AppInit() {
     const userId = localStorage.getItem('user_id');
     const token = localStorage.getItem('token');
     if (token && userId) {
-      dispatch(getUserProfile({ user: +userId }));
-      dispatch(getUserPhoto({ user: +userId }));
+      dispatch(getMyProfile({ user: +userId }));
+      dispatch(getMyPhoto({ user: +userId }));
       dispatch(refreshAction());
     } else {
       navigate('/login');
