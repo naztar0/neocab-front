@@ -13,6 +13,7 @@ interface Profile {
   email: string;
   first_name: string;
   last_name: string;
+  middle_name: string;
   image: ?string;
   cover: ?string;
   student_id: number;
@@ -24,7 +25,6 @@ interface Profile {
   created_at: string;
   updated_at: string;
   year: number;
-  middle_name: string;
   train_level: string;
   train_form: string;
   payment: string;
@@ -112,13 +112,70 @@ interface Subject {
   notes: ?string;
   professor_id: ?number;
   department_id: ?number;
+  professor: ?User;
   department: Department;
-  professor: ?string; // Backward compatibility
+  professor_name: ?string; // Backward compatibility
 }
 
 interface Timestamps {
   created_at: string;
   updated_at: string;
+}
+
+interface CalendarEvent {
+  subject: string;
+  start: string;
+  end: string;
+  organizer: string;
+  joinUrl: string;
+}
+
+interface Schedule {
+  id: number;
+  week: number;
+  description: string;
+  group_id: number;
+  schedule_subjects: ScheduleSubject[];
+}
+
+interface ScheduleSubject {
+  id: number;
+  schedule_id: number;
+  subject_id: number;
+  time: string;
+  day: number;
+  notes: string;
+  subject: Subject;
+}
+
+interface AttendanceLog {
+  id: number;
+  user_id: number;
+  schedule_subject_id: number;
+  date: string;
+  schedule_subject: ScheduleSubject;
+}
+
+interface AttendanceHistory {
+  date: string;
+  count: number;
+}
+
+interface AttendanceMostVisited {
+  title: string;
+  count: number;
+}
+
+interface AttendanceResponse {
+  attendance: AttendanceLog[];
+  history: AttendanceHistory[];
+  most_visited: AttendanceMostVisited[];
+}
+
+interface AttendanceGroup {
+  date: string;
+  schedule_subject: ScheduleSubject;
+  users: User[];
 }
 
 interface Pagination<T> {
@@ -144,19 +201,21 @@ interface Pagination<T> {
 interface BaseQueryParams {
   page?: number;
   perPage?: number;
-  search?: string;
 }
 
 interface UserSortingParams {
   ordFirstName?: OrderType;
   ordLastName?: OrderType;
+  search?: string;
 }
 
 interface GroupSortingParams {
   ordName?: OrderType;
+  search?: string;
 }
 
 type User = Profile;
 type OrderType = 'asc' | 'desc';
 type UserQueryParams = BaseQueryParams & UserSortingParams;
 type GroupQueryParams = BaseQueryParams & GroupSortingParams;
+type AttendanceQueryParams = BaseQueryParams;
