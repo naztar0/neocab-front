@@ -5,7 +5,6 @@ import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import { Chart, ArcElement, Tooltip as ChartTooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import * as Icons from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -138,14 +137,6 @@ export default function Rating() {
           showSorterTooltip={false}
           loading={isLoading}
           size="small"
-          locale={{
-            emptyText: (
-              <div className="empty-table">
-                <Icons.ExceptionOutlined className="icon-big" />
-                <p>No data</p>
-              </div>
-            ),
-          }}
           caption={(
             <div className="table-title">
               <span className="title">Syllabus</span>

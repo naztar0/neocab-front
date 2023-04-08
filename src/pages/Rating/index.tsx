@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
-import * as Icons from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -163,14 +162,6 @@ export default function Rating() {
           showSorterTooltip={false}
           loading={isLoading}
           size="small"
-          locale={{
-            emptyText: (
-              <div className="empty-table">
-                <Icons.ExceptionOutlined className="icon-big" />
-                <p>No data</p>
-              </div>
-            ),
-          }}
           caption={(
             <div className="table-title">
               <span className="title">Rating</span>

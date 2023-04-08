@@ -134,14 +134,6 @@ export default function RecordBook() {
           pagination={false}
           showSorterTooltip={false}
           loading={isLoading}
-          locale={{
-            emptyText: (
-              <div className="empty-table">
-                <Icons.ExceptionOutlined className="icon-big" />
-                <p>No data</p>
-              </div>
-            ),
-          }}
           caption={(
             <div className="table-title">
               <span className="title">Record Book</span>
