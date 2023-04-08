@@ -18,6 +18,7 @@
     "dayjs": "^1.11.7",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
+    "react-activity-calendar": "github:naztar0/react-activity-calendar#dist/v2",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
