@@ -3,7 +3,6 @@ import {
   fetchGroups,
   fetchGroup,
   fetchGroupUsers,
-  fetchGroupSchedules,
   fetchSpecializations,
   fetchSpecialization,
   fetchSpecializationUsers,
@@ -34,6 +33,7 @@ import {
   fetchFacultyDepartments,
   fetchFacultyPrograms,
   fetchFacultySpecialities,
+  fetchGroupAttendance,
 } from '@/requests/groups';
 
 export const getGroups = createAsyncThunk(
@@ -54,13 +54,6 @@ export const getGroupUsers = createAsyncThunk(
   'get_group_users',
   async ({ group, params }: { group: number, params?: UserQueryParams }) => (
     await fetchGroupUsers(group, params)
-  ).data,
-);
-
-export const getGroupSchedules = createAsyncThunk(
-  'get_group_schedules',
-  async ({ group }: { group: number }) => (
-    await fetchGroupSchedules(group)
   ).data,
 );
 
@@ -271,5 +264,12 @@ export const getFacultySpecialities = createAsyncThunk(
   'get_faculty_specialities',
   async ({ faculty, params }: { faculty: number, params?: GroupQueryParams }) => (
     await fetchFacultySpecialities(faculty, params)
+  ).data,
+);
+
+export const getGroupAttendance = createAsyncThunk(
+  'get_group_attendance',
+  async ({ group, params }: { group: number, params?: AttendanceQueryParams }) => (
+    await fetchGroupAttendance(group, params)
   ).data,
 );

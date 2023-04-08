@@ -163,3 +163,8 @@ export const fetchFacultySpecialities = async (faculty: number, params?: GroupQu
   `/api/faculties/${faculty}/specialities`,
   { params },
 );
+
+export const fetchGroupAttendance = async (group: number, params?: AttendanceQueryParams) => getAxiosInstance().get(
+  `/api/groups/${group}/attendance`,
+  { params },
+);
