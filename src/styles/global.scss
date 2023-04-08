@@ -68,32 +68,59 @@ body {
   width: 100% !important;
   height: auto !important;
   font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif !important;
+  background: $bg-root-light;
 
-  &::-webkit-scrollbar {
+  &::-webkit-scrollbar,
+  *::-webkit-scrollbar {
     width: 13px;
   }
-  &::-webkit-scrollbar-track {
-    background: $white;
+  &::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-track {
+    background: $bg-root-light;
   }
-  &::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb,
+  *::-webkit-scrollbar-thumb {
     background: $black25;
-    border: 3px $white solid;
+    border: 3px transparent solid;
     border-radius: 99px;
+    background-clip: content-box;
   }
-  &::-webkit-scrollbar-thumb:hover {
+  &::-webkit-scrollbar-thumb:hover,
+  *::-webkit-scrollbar-thumb:hover {
     background: $black10;
+    background-clip: content-box;
   }
 
   &.dark-theme {
-    &::-webkit-scrollbar-track {
-      background: $black;
+    background: $bg-root-dark;
+
+    &::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-track {
+      background: $bg-root-dark;
     }
-    &::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb,
+    *::-webkit-scrollbar-thumb {
       background: $white25;
-      border: 3px $black solid;
+      background-clip: content-box;
     }
-    &::-webkit-scrollbar-thumb:hover {
+    &::-webkit-scrollbar-thumb:hover,
+    *::-webkit-scrollbar-thumb:hover {
       background: $white10;
+      background-clip: content-box;
+    }
+  }
+
+  //noinspection CssInvalidPropertyValue
+  @supports (overflow-y: overlay) {
+    overflow-y: overlay;
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &.dark-theme {
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
     }
   }
 }
