@@ -150,7 +150,7 @@ a {
   margin-top: 1.5rem;
   background: $bg-substrate-light;
 
-  &:first-child {
+  &:first-child, &.row {
     margin-top: 0;
   }
 
