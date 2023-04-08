@@ -22,7 +22,12 @@ const initialState = {
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.isError = false;
+      state.errorCode = 0;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loginViaCabinet.fulfilled, (state, action) => {
       state.authorization = action.payload.authorization;
@@ -95,5 +100,7 @@ export const loginSlice = createSlice({
     });
   },
 });
+
+export const { clearError } = loginSlice.actions;
 
 export default loginSlice.reducer;
