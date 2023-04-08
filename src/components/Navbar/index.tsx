@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from '@ant-design/icons';
@@ -60,9 +60,6 @@ export default function Navbar() {
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
 
-  const [openNotifications, setOpenNotifications] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
-
   useEffect(() => {
     if (!isLoginLoading && !localStorage.getItem('token')) {
       navigate('/login');
@@ -116,30 +113,27 @@ export default function Navbar() {
           title="Notifications"
           trigger="click"
           showArrow={false}
-          open={openNotifications}
-          onOpenChange={(value) => setOpenNotifications(value)}
-        />
-        <Badge count={unreadNotificationsCount}>
-          <Button
-            className="notification"
-            size="middle"
-            shape="circle"
-            icon={<Icons.BellOutlined />}
-            onClick={() => setOpenNotifications(true)}
-          />
-        </Badge>
+        >
+          <Badge count={unreadNotificationsCount}>
+            <Button
+              className="notification"
+              size="middle"
+              shape="circle"
+              icon={<Icons.BellOutlined />}
+            />
+          </Badge>
+        </Popover>
         <Popover
           content={<Button onClick={logout} loading={isLoginLoading}>Logout</Button>}
           placement="bottomRight"
           title="Profile"
           trigger="click"
           showArrow={false}
-          open={openProfile}
-          onOpenChange={(value) => setOpenProfile(value)}
-        />
-        <button type="button" className="avatar" onClick={() => setOpenProfile(true)}>
-          <Avatar size={36} avatar={profileData?.image} username={profileData?.first_name} mono />
-        </button>
+        >
+          <Button shape="circle" className="avatar">
+            <Avatar size={36} avatar={profileData?.image} username={profileData?.first_name} mono />
+          </Button>
+        </Popover>
       </div>
     </header>
   );
