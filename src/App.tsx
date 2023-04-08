@@ -9,6 +9,8 @@ import Login from '@/pages/Login';
 import Profile from '@/pages/Profile';
 import RecordBook from '@/pages/RecordBook';
 import Rating from '@/pages/Rating';
+import Schedule from '@/pages/Schedule';
+import ScheduleEdit from '@/pages/ScheduleEdit';
 import Syllabus from '@/pages/Syllabus';
 import Search from '@/pages/Search';
 import Settings from '@/pages/Settings';
@@ -27,6 +29,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/record-book" element={<RecordBook />} />
             <Route path="/rating" element={<Rating />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/schedule/edit" element={<ScheduleEdit />} />
             <Route path="/syllabus" element={<Syllabus />} />
             <Route path="/search" element={<Search />} />
             <Route path="/settings" element={<Settings />} />
