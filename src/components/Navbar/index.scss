@@ -60,10 +60,9 @@ header {
     right: 20px !important;
   }
 
-  button.avatar {
-    width: 0;
-    height: 0;
-    padding: 0 36px 36px 0;
+  .avatar {
+    height: 36px;
+    padding: 0;
     background: none;
     border: none;
 
