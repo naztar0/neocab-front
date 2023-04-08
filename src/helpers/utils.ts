@@ -75,3 +75,12 @@ export function formatName(user: User | null): string {
   const mn = user.middle_name ? user.middle_name[0] : '';
   return `${user.last_name} ${fn}. ${mn}.`;
 }
+
+export function getProfessorName(
+  { professor, professor_name }: { professor: User | null, professor_name: string | null },
+): string {
+  if (professor) {
+    return formatName(professor);
+  }
+  return professor_name || '';
+}
