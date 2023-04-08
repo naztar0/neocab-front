@@ -5,6 +5,7 @@ import {
   Button,
   Divider,
   Input,
+  Space,
   message,
   Pagination,
   Select,
@@ -373,7 +374,7 @@ export default function Search() {
       setPagePerPage({ page: 1, perPage: pagePerPage.perPage });
       setSearchValue(value);
     } else {
-      message.error('Search value must contain only letters and spaces').then();
+      message.error('Search value must contain only letters, numbers and spaces').then();
     }
   };
 
@@ -412,7 +413,7 @@ export default function Search() {
     <Layout>
       <Helmet title="Search" />
       <div className="substrate">
-        <Input.Group compact size="large">
+        <Space.Compact size="large">
           <Select
             className="search-select"
             defaultValue="User"
@@ -430,7 +431,7 @@ export default function Search() {
             pattern={searchPatternString}
             onSearch={onSearch}
           />
-        </Input.Group>
+        </Space.Compact>
       </div>
       <div className="substrate">
         <Steps
@@ -448,7 +449,7 @@ export default function Search() {
           }}
         />
         {searchValue !== null && (
-          <Input.Group compact>
+          <Space.Compact>
             <Select
               className="sort-select"
               size="middle"
@@ -468,10 +469,10 @@ export default function Search() {
             >
               {orderType === OrderType.Asc ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
             </Button>
-          </Input.Group>
+          </Space.Compact>
         )}
         <Divider>{stepTitles[currentStepType]}</Divider>
-        <Spin spinning={isLoading}>
+        <Spin spinning={isLoading} size="large">
           {currentStepType === StepType.User ? (
             <Table
               columns={userColumns}
