@@ -38,3 +38,8 @@ export const postUserCover = async (user: number, image: File) => {
     formData,
   );
 };
+
+export const postUserAttendance = async (user: number, scheduleSubject: number, data: any) => getAxiosInstance().post(
+  `/api/users/${user}/attendance/${scheduleSubject}`,
+  data,
+);
