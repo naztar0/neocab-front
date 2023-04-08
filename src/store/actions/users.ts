@@ -5,8 +5,10 @@ import {
   fetchUserRecordBook,
   fetchUserRating,
   fetchUserSyllabus,
-  postUserCover,
+  fetchUserAttendance,
   fetchUsers,
+  postUserCover,
+  postUserAttendance,
 } from '@/requests/users';
 
 export const getMyProfile = createAsyncThunk(
@@ -58,10 +60,10 @@ export const getUserSyllabus = createAsyncThunk(
   ).data,
 );
 
-export const setUserCover = createAsyncThunk(
-  'post_user_cover',
-  async ({ user, image }: { user: number, image: File }) => (
-    await postUserCover(user, image)
+export const getUserAttendance = createAsyncThunk(
+  'get_user_attendance',
+  async ({ user }: { user: number }) => (
+    await fetchUserAttendance(user)
   ).data,
 );
 
@@ -69,5 +71,19 @@ export const getUsers = createAsyncThunk(
   'get_users',
   async ({ params }: { params: UserQueryParams }) => (
     await fetchUsers(params)
+  ).data,
+);
+
+export const setUserCover = createAsyncThunk(
+  'post_user_cover',
+  async ({ user, image }: { user: number, image: File }) => (
+    await postUserCover(user, image)
+  ).data,
+);
+
+export const setUserAttendance = createAsyncThunk(
+  'post_user_attendance',
+  async ({ user, scheduleSubject, data }: { user: number, scheduleSubject: number, data: any }) => (
+    await postUserAttendance(user, scheduleSubject, data)
   ).data,
 );
