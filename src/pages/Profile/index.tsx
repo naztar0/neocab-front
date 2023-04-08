@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import {
   Skeleton, Button, Upload, UploadProps, message,
 } from 'antd';
@@ -14,9 +15,17 @@ import './index.scss';
 
 export default function Profile() {
   const dispatch = useDispatch<AppDispatch>();
+  const [searchParams, setSearchParams] = useSearchParams();
   const isLoading: boolean = useSelector((state: any) => state.profileReducer.isLoading);
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoadingCover: boolean = useSelector((state: any) => state.coverReducer.isLoading);
+
+  useEffect(() => {
+    if (searchParams.get('r')) {
+      setSearchParams();
+      window.location.reload();
+    }
+  }, [searchParams]);
 
   const props: UploadProps = {
     showUploadList: false,

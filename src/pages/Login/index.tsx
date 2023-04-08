@@ -15,7 +15,7 @@ import { ReactComponent as MsLoginLight } from '@/assets/images/ms_signin_light.
 import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.svg';
 import { Theme } from '@/constants/settings';
 import { getAzureLoginUrl, loginViaAzure, loginViaCabinet } from '@/store/actions/login';
-import { getUserPhoto, getUserProfile } from '@/store/actions/users';
+import { clearError } from '@/store/reducers/login';
 import './index.scss';
 
 export default function Login() {
@@ -49,16 +49,13 @@ export default function Login() {
       } else {
         localStorage.setItem('user_id', userData.id);
         localStorage.setItem('token', authData.token);
-        dispatch(getUserProfile({ user: userData.id }));
-        dispatch(getUserPhoto({ user: userData.id }));
-        navigate('/profile');
+        navigate('/profile?r=1');
       }
     } else {
       const userId = localStorage.getItem('user_id');
       const token = localStorage.getItem('token');
       if (token && userId) {
-        dispatch(getUserProfile({ user: +userId }));
-        navigate('/profile');
+        navigate('/profile?r=1');
       }
     }
   }, [authData]);
@@ -85,6 +82,7 @@ export default function Login() {
               setCheckCabinetLogin(true);
             }
             setTimeout(() => dispatch(loginViaCabinet(cabinetCredentials)), 8000);
+            dispatch(clearError());
           } else {
             message.warning('For the first time you need to login via login and password from cabinet', 15).then();
             setNativeRequired(true);
@@ -113,7 +111,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <Helmet title="Login" />
-      <Spin spinning={isLoading} size="large">
+      <Spin spinning={isLoading || checkCabinetLogin} size="large">
         <div className="substrate">
           <Form
             name="basic"
@@ -135,7 +133,7 @@ export default function Login() {
             >
               <Input.Password />
             </Form.Item>
-            <Button type="primary" htmlType="submit">Submit</Button>
+            <Button type="primary" htmlType="submit" className="button-main">Submit</Button>
           </Form>
           <Divider />
           <button type="button" className="ms-login" onClick={getMsLoginUrl}>
