@@ -7,6 +7,8 @@ import AppInit from '@/components/AppInit';
 import ConfigProvider from '@/components/ConfigProvider';
 import Login from '@/pages/Login';
 import Profile from '@/pages/Profile';
+import Attendance from '@/pages/Attendance';
+import AttendanceEdit from '@/pages/AttendanceEdit';
 import RecordBook from '@/pages/RecordBook';
 import Rating from '@/pages/Rating';
 import Schedule from '@/pages/Schedule';
@@ -27,6 +29,8 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/attendance/edit" element={<AttendanceEdit />} />
             <Route path="/record-book" element={<RecordBook />} />
             <Route path="/rating" element={<Rating />} />
             <Route path="/schedule" element={<Schedule />} />
