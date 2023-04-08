@@ -57,7 +57,20 @@ export function formatDate(date: string): string {
   return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
 }
 
-export function formatName(user: User): string {
+export function formatZero(data: number): string {
+  return data < 10 ? `0${data}` : data.toString();
+}
+
+export function getDate(date: string): Date {
+  return new Date(`${date}Z`);
+}
+
+export function getDay(date: Date): number {
+  return date.getDay() || 7;
+}
+
+export function formatName(user: User | null): string {
+  if (!user) return '';
   const fn = user.first_name ? user.first_name[0] : '';
   const mn = user.middle_name ? user.middle_name[0] : '';
   return `${user.last_name} ${fn}. ${mn}.`;
