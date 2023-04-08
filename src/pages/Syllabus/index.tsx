@@ -10,7 +10,7 @@ import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
 import SubjectData from '@/components/SubjectData';
 import { getUserSyllabus } from '@/store/actions/users';
-import { yearToSemester } from '@/helpers/utils';
+import { yearToSemester, getProfessorName } from '@/helpers/utils';
 import './index.scss';
 
 export default function Rating() {
@@ -19,11 +19,11 @@ export default function Rating() {
   const isLoading: boolean = useSelector((state: any) => state.syllabusReducer.isLoading);
   const syllabusData: Syllabus[] = useSelector((state: any) => state.syllabusReducer.syllabus);
 
-  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0, true));
+  const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0));
 
   useEffect(() => {
     if (profileData) {
-      setSemester(yearToSemester(profileData.year, true));
+      setSemester(yearToSemester(profileData.year));
     }
   }, [profileData]);
 
@@ -43,7 +43,7 @@ export default function Rating() {
       render: (value, record) => (
         <SubjectData
           title={record.subject.title}
-          professor={record.subject.professor}
+          professor={getProfessorName(record.subject)}
           department={record.subject.department?.name}
         />
       ),

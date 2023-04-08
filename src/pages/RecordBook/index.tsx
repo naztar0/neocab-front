@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
-import * as Icons from '@ant-design/icons';
+import { WarningOutlined } from '@ant-design/icons';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -15,6 +15,7 @@ import {
   toMarkNational,
   toMarkEcts,
   formatDate,
+  getProfessorName,
 } from '@/helpers/utils';
 import './index.scss';
 
@@ -46,7 +47,7 @@ export default function RecordBook() {
       render: (value, record) => (
         <SubjectData
           title={record.syllabus.subject.title}
-          professor={record.syllabus.subject.professor}
+          professor={getProfessorName(record.syllabus.subject)}
           department={record.syllabus.subject.department?.name}
         />
       ),
@@ -79,7 +80,7 @@ export default function RecordBook() {
       title: 'Nat',
       render: (value, record) => (
         record.debt_date ? (
-          <span className="debt"><Icons.WarningOutlined /></span>
+          <span className="debt"><WarningOutlined /></span>
         ) : (
           <Tooltip title={toMarkNational(record.mark)} placement="top">
             <span>{toMark5(record.mark)}</span>
@@ -111,7 +112,7 @@ export default function RecordBook() {
       title: 'ECTS',
       render: (value, record) => (
         record.debt_date ? (
-          <span className="debt"><Icons.WarningOutlined /></span>
+          <span className="debt"><WarningOutlined /></span>
         ) : (
           <Tooltip title={toMarkNational(record.mark)} placement="top">
             <span>{toMarkEcts(record.mark)}</span>
