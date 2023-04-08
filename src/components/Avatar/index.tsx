@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { colorChar, utfChar } from '@/helpers/utils';
 import defaultAvatar from '@/assets/images/default_avatar.jpg';
 import { Theme } from '@/constants/settings';
+import { IMAGES_URL } from '@/config';
 
 export default function Avatar({
   avatar, size, username, rounded, units, align, mono,
@@ -25,7 +26,7 @@ export default function Avatar({
     if (avatar.startsWith('data:image')) {
       src = avatar;
     } else {
-      src = import.meta.env.VITE_APP_IMAGES_URL + avatar;
+      src = IMAGES_URL + avatar;
     }
     return <img src={src} alt="avatar" style={style} />;
   }

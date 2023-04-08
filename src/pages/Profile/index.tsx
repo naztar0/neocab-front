@@ -11,6 +11,7 @@ import Avatar from '@/components/Avatar';
 import StudentProfileData from '@/components/StudentProfileData';
 import { setUserCover } from '@/store/actions/users';
 import defaultCover from '@/assets/images/default_cover.jpg';
+import { IMAGES_URL } from '@/config';
 import './index.scss';
 
 export default function Profile() {
@@ -48,7 +49,7 @@ export default function Profile() {
         <div className="cover">
           {!isLoading ? (
             <img
-              src={profileData.cover ? import.meta.env.VITE_APP_IMAGES_URL + profileData.cover : defaultCover}
+              src={profileData.cover ? IMAGES_URL + profileData.cover : defaultCover}
               alt="cover"
             />
           ) : (
