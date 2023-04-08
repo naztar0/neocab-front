@@ -73,6 +73,12 @@ $border-radius-base: 5px;
 .ant-btn-default {
   box-shadow: none !important;
 }
+.ant-popover-title {
+  min-width: 0 !important;
+}
+.ant-drawer-content {
+  background: $bg-substrate-dark !important;
+}
 
 .dark-theme {
   @import "antd.dark";
