@@ -30,44 +30,6 @@ import { Role } from '@/constants/profile';
 import { getProfessorName, formatDate } from '@/helpers/utils';
 import './index.scss';
 
-const lastAttendancesColumns: ColumnsType<AttendanceLog> = [
-  {
-    dataIndex: 'subject',
-    title: 'Subject',
-    render: (value, data) => (
-      <SubjectData
-        title={data.schedule_subject.subject.title}
-        professor={getProfessorName(data.schedule_subject.subject)}
-        department={null}
-      />
-    ),
-  },
-  {
-    dataIndex: 'date',
-    title: 'Date',
-    render: (value, data) => (
-      <span className="date">{`${formatDate(data.date)} ${data.schedule_subject.time}`}</span>
-    ),
-  },
-];
-
-const mostVisitedSubjectsColumns: ColumnsType<AttendanceMostVisited> = [
-  {
-    dataIndex: 'subject',
-    title: 'Subject',
-    render: (value, data) => (
-      <span className="subject">{data.title}</span>
-    ),
-  },
-  {
-    dataIndex: 'count',
-    title: 'Visits',
-    render: (value, data) => (
-      <span className="count">{data.count}</span>
-    ),
-  },
-];
-
 export default function Attendance() {
   const dispatch = useDispatch<AppDispatch>();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
@@ -98,6 +60,44 @@ export default function Attendance() {
     data.push(lastDay);
     return data;
   }, [attendanceData]);
+
+  const lastAttendancesColumns: ColumnsType<AttendanceLog> = useMemo(() => [
+    {
+      dataIndex: 'subject',
+      title: 'Subject',
+      render: (value, data) => (
+        <SubjectData
+          title={data.schedule_subject.subject.title}
+          professor={getProfessorName(data.schedule_subject.subject)}
+          department={null}
+        />
+      ),
+    },
+    {
+      dataIndex: 'date',
+      title: 'Date',
+      render: (value, data) => (
+        <span className="date">{`${formatDate(data.date)} ${data.schedule_subject.time}`}</span>
+      ),
+    },
+  ], []);
+
+  const mostVisitedSubjectsColumns: ColumnsType<AttendanceMostVisited> = useMemo(() => [
+    {
+      dataIndex: 'subject',
+      title: 'Subject',
+      render: (value, data) => (
+        <span className="subject">{data.title}</span>
+      ),
+    },
+    {
+      dataIndex: 'count',
+      title: 'Visits',
+      render: (value, data) => (
+        <span className="count">{data.count}</span>
+      ),
+    },
+  ], []);
 
   const mostVisitedSubjectsDataSource = useMemo(() => (
     attendanceData?.most_visited.map((data, index) => ({ ...data, key: index }))
