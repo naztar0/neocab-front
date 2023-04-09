@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from '@ant-design/icons';
@@ -66,19 +66,19 @@ export default function Navbar() {
     }
   }, [isLoginLoading]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     dispatch(logoutAction());
     localStorage.removeItem('user_id');
     localStorage.removeItem('token');
-  };
+  }, []);
 
-  const onSearch = (value: string) => {
+  const onSearch = useCallback((value: string) => {
     if (searchPattern.test(value)) {
       navigate(`/search?q=${value}`);
     } else {
       message.error('Search value must contain only letters and spaces').then();
     }
-  };
+  }, []);
 
   return (
     <header>

@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -38,9 +43,9 @@ export default function Login() {
   const checkCabinetLoginRef = useRef(checkCabinetLogin);
   checkCabinetLoginRef.current = checkCabinetLogin;
 
-  const getMsLoginUrl = () => {
+  const getMsLoginUrl = useCallback(() => {
     dispatch(getAzureLoginUrl());
-  };
+  }, []);
 
   useEffect(() => {
     if (userData?.id && authData?.token) {
@@ -102,11 +107,11 @@ export default function Login() {
     }
   }, []);
 
-  const onSubmit = (values: { email: string; password: string }) => {
+  const onSubmit = useCallback((values: { email: string; password: string }) => {
     setIsLoginViaCabinet(true);
     setCabinetCredentials(values);
     dispatch(loginViaCabinet(values));
-  };
+  }, []);
 
   return (
     <div className="login-page">
