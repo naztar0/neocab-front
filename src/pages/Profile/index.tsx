@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -28,7 +28,7 @@ export default function Profile() {
     }
   }, [searchParams]);
 
-  const props: UploadProps = {
+  const props: UploadProps = useMemo(() => ({
     showUploadList: false,
     beforeUpload: (file) => {
       const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -40,7 +40,7 @@ export default function Profile() {
     customRequest: (options) => {
       dispatch(setUserCover({ user: profileData.id, image: options.file as File }));
     },
-  };
+  }), [profileData]);
 
   return (
     <Layout>

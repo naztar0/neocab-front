@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -59,7 +59,7 @@ export default function Rating() {
     }, 750);
   }, [isLoading]);
 
-  const ratingColumns: ColumnsType<Rating> = isLoading ? [] : [
+  const ratingColumns: ColumnsType<Rating> = useMemo(() => [
     {
       key: 'position',
       dataIndex: 'position',
@@ -147,9 +147,11 @@ export default function Rating() {
       ),
       sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
     },
-  ];
+  ], [ratingData]);
 
-  const ratingDataSource = ratingData?.map((data, index) => ({ key: index, ...data }));
+  const ratingDataSource = useMemo(() => (
+    ratingData?.map((data, index) => ({ key: index, ...data })) || []
+  ), [ratingData]);
 
   return (
     <Layout>

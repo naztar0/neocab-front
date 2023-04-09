@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -12,6 +12,14 @@ import SubjectData from '@/components/SubjectData';
 import { getUserSyllabus } from '@/store/actions/users';
 import { yearToSemester, getProfessorName } from '@/helpers/utils';
 import './index.scss';
+
+const chartOptions = {
+  maintainAspectRatio: false,
+  cutout: '83%',
+  responsive: true,
+  borderRadius: 99,
+  spacing: 20,
+};
 
 export default function Rating() {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,9 +41,11 @@ export default function Rating() {
     }
   }, [semester]);
 
-  Chart.register(ArcElement, ChartTooltip);
+  if (!Object.keys(Chart.instances).length) {
+    Chart.register(ArcElement, ChartTooltip);
+  }
 
-  const syllabusColumns: ColumnsType<Syllabus> = isLoading ? [] : [
+  const syllabusColumns: ColumnsType<Syllabus> = useMemo(() => [
     {
       key: 'subject',
       dataIndex: 'subject',
@@ -79,20 +89,29 @@ export default function Rating() {
       ),
       sorter: (a, b) => a.hours.localeCompare(b.hours),
     },
-  ];
+  ], []);
 
-  const syllabusDataSource = syllabusData?.map((data, index) => ({ key: index, ...data }));
+  const syllabusDataSource = useMemo(() => (
+    syllabusData?.map((data, index) => ({ key: index, ...data }))
+  ), [syllabusData]);
 
-  const colors1: string[] = [];
-  for (let i = 0; i < syllabusData.length; i++) {
-    colors1.push(`hsl(${(i * 360) / syllabusData.length}deg 100% 50% / 50%)`);
-  }
-  const colors2: string[] = [];
-  for (let i = 0; i < syllabusData.length; i++) {
-    colors2.push(`hsl(${(i * 360) / syllabusData.length}, 50%, 20%)`);
-  }
+  const colors1: string[] = useMemo(() => {
+    const colors: string[] = [];
+    for (let i = 0; i < syllabusData.length; i++) {
+      colors.push(`hsl(${(i * 360) / syllabusData.length}deg 100% 50% / 60%)`);
+    }
+    return colors;
+  }, [syllabusData]);
 
-  const creditsChart = {
+  const colors2: string[] = useMemo(() => {
+    const colors: string[] = [];
+    for (let i = 0; i < syllabusData.length; i++) {
+      colors.push(`hsl(${(i * 360) / syllabusData.length}, 50%, 20%)`);
+    }
+    return colors;
+  }, [syllabusData]);
+
+  const creditsChart = useMemo(() => ({
     labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
@@ -103,9 +122,9 @@ export default function Rating() {
         borderWidth: 1,
       },
     ],
-  };
+  }), [syllabusData, colors1, colors2]);
 
-  const hoursChart = {
+  const hoursChart = useMemo(() => ({
     labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
@@ -116,15 +135,7 @@ export default function Rating() {
         borderWidth: 1,
       },
     ],
-  };
-
-  const chartOptions = {
-    maintainAspectRatio: false,
-    cutout: '83%',
-    responsive: true,
-    borderRadius: 99,
-    spacing: 20,
-  };
+  }), [syllabusData, colors1, colors2]);
 
   return (
     <Layout>

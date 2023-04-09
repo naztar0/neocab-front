@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import { Helmet } from 'react-helmet';
@@ -39,8 +39,8 @@ export default function Schedule() {
     }
   }, [groupScheduleData]);
 
-  const getLocale = (language: Language) => {
-    switch (language) {
+  const locale = useMemo(() => {
+    switch (currLanguage) {
       case Language.English:
         return enUS;
       case Language.Russian:
@@ -50,9 +50,7 @@ export default function Schedule() {
       default:
         return uk;
     }
-  };
-
-  const locale = getLocale(currLanguage);
+  }, [currLanguage]);
 
   return (
     <Layout>

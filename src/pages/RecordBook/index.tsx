@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -39,7 +39,7 @@ export default function RecordBook() {
     }
   }, [semester]);
 
-  const rbColumns: ColumnsType<RecordBook> = isLoading ? [] : [
+  const rbColumns: ColumnsType<RecordBook> = useMemo(() => [
     {
       key: 'subject',
       dataIndex: 'subject',
@@ -121,9 +121,11 @@ export default function RecordBook() {
       ),
       sorter: (a, b) => a.mark - b.mark,
     },
-  ];
+  ], []);
 
-  const rbDataSource = recordBookData.map((data, index) => ({ key: index, ...data }));
+  const rbDataSource = useMemo(() => (
+    recordBookData.map((data, index) => ({ key: index, ...data })) || []
+  ), [recordBookData]);
 
   return (
     <Layout>
