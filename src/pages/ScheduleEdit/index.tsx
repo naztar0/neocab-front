@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Table,
@@ -75,7 +80,7 @@ export default function ScheduleEdit() {
     }
   }, [semester]);
 
-  const onSave = (values: any) => {
+  const onSave = useCallback((values: any) => {
     if (!values.week || !values.description) {
       message.error('Please fill all fields').then();
       return;
@@ -94,15 +99,15 @@ export default function ScheduleEdit() {
     setEditType(null);
     setSchedule(null);
     setDrawerOpen(false);
-  };
+  }, [editType, schedule]);
 
-  const onSubjectChange = (value: any) => {
+  const onSubjectChange = useCallback((value: any) => {
     if (!editScheduleSubjectId) {
       setEditScheduleSubjectId(value.subject);
     }
-  };
+  }, [editScheduleSubjectId]);
 
-  const onSubjectSave = (values: any) => {
+  const onSubjectSave = useCallback((values: any) => {
     if (!values.day || !values.time) {
       message.error('Please fill all fields').then();
       return;
@@ -112,9 +117,9 @@ export default function ScheduleEdit() {
       dispatch(editScheduleSubject({ scheduleSubject: editScheduleSubjectId, data: values }));
     }
     setEditScheduleSubjectId(null);
-  };
+  }, [editScheduleSubjectId]);
 
-  const onSubjectAdd = (values: any) => {
+  const onSubjectAdd = useCallback((values: any) => {
     if (!values.day || !values.time) {
       message.error('Please fill all fields').then();
       return;
@@ -124,13 +129,13 @@ export default function ScheduleEdit() {
       dispatch(addScheduleSubject({ schedule, subject: addScheduleSubjectId, data: values }));
     }
     setAddScheduleSubjectId(null);
-  };
+  }, [addScheduleSubjectId, schedule]);
 
-  const onSubjectDelete = (scheduleSubject: number) => {
+  const onSubjectDelete = useCallback((scheduleSubject: number) => {
     dispatch(removeScheduleSubject({ scheduleSubject }));
-  };
+  }, []);
 
-  const columns: ColumnsType<Schedule> = isLoading ? [] : [
+  const columns: ColumnsType<Schedule> = useMemo(() => [
     {
       dataIndex: 'week',
       render: (value, data) => (
@@ -183,9 +188,9 @@ export default function ScheduleEdit() {
         </div>
       ),
     },
-  ];
+  ], []);
 
-  const subjectsColumns: ColumnsType<Subject> = [
+  const subjectsColumns: ColumnsType<Subject> = useMemo(() => [
     {
       dataIndex: 'name',
       render: (value, data) => (
@@ -223,11 +228,23 @@ export default function ScheduleEdit() {
         </div>
       ),
     },
-  ];
+  ], [
+    addScheduleSubjectId,
+    groupScheduleData,
+    schedule,
+    editScheduleSubjectId,
+    onSubjectChange,
+    onSubjectSave,
+    onSubjectAdd,
+  ]);
 
-  const schedulesDataSource = groupScheduleData.map((data, index) => ({ key: index, ...data }));
+  const schedulesDataSource = useMemo(() => (
+    groupScheduleData.map((data, index) => ({ key: index, ...data })) || []
+  ), [groupScheduleData]);
 
-  const subjectsDataSource = groupSubjectsData.map((data, index) => ({ key: index, ...data }));
+  const subjectsDataSource = useMemo(() => (
+    groupSubjectsData.map((data, index) => ({ key: index, ...data })) || []
+  ), [groupSubjectsData]);
 
   return (
     <Layout>

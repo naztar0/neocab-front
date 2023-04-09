@@ -1,4 +1,9 @@
-import React, { useState, ForwardRefExoticComponent } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  ForwardRefExoticComponent,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Select,
@@ -29,6 +34,18 @@ import {
 } from '@/constants/settings';
 import './index.scss';
 
+interface ElementTitle {
+  text: string;
+  icon: JSX.Element;
+}
+
+interface DataType {
+  title: ElementTitle;
+  values: string[];
+  selected: string;
+  item: { name: SettingsName, type: SettingsType };
+}
+
 export default function Settings() {
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.themeReducer.theme);
@@ -41,7 +58,7 @@ export default function Settings() {
   const [languageSelected, setLanguageSelected] = useState(language);
   const [calendarWeekDaysSelected, setCalendarWeekDaysSelected] = useState(calendarWeekDays);
 
-  const settingsTitles = [
+  const settingsTitles = useMemo(() => [
     {
       text: 'Language',
       icon: <Icons.GlobalOutlined className="icon" />,
@@ -62,9 +79,9 @@ export default function Settings() {
       text: 'Calendar week days',
       icon: <Icons.InsertRowAboveOutlined className="icon" />,
     },
-  ];
+  ], []);
 
-  const settingsValues: { text: string, value: any }[][] = [
+  const settingsValues: { text: string, value: any }[][] = useMemo(() => [
     [
       { text: 'English', value: Language.English },
       { text: 'Русский', value: Language.Russian },
@@ -85,29 +102,17 @@ export default function Settings() {
       { text: 'Mon - Sat', value: CalendarWeekDays.toSaturday },
       { text: 'Mon - Sun', value: CalendarWeekDays.toSunday },
     ],
-  ];
+  ], [calendarStartHour, calendarEndHour]);
 
-  const settingsSelected = [
+  const settingsSelected = useMemo(() => [
     settingsValues[0].find((item) => item.value === languageSelected)?.text || '',
     settingsValues[1].find((item) => item.value === themeSelected)?.text || '',
     settingsValues[2][0].text,
     settingsValues[3][0].text,
     settingsValues[4].find((item) => item.value === calendarWeekDaysSelected)?.text || '',
-  ];
+  ], [settingsValues, languageSelected, themeSelected, calendarWeekDaysSelected]);
 
-  interface ElementTitle {
-    text: string;
-    icon: JSX.Element;
-  }
-
-  interface DataType {
-    title: ElementTitle;
-    values: string[];
-    selected: string;
-    item: { name: SettingsName, type: SettingsType };
-  }
-
-  const selectSwitch = ({ value, name }: { value: string, name: SettingsName }) => {
+  const selectSwitch = useCallback(({ value, name }: { value: string, name: SettingsName }) => {
     switch (name) {
       case SettingsName.Language:
         value = settingsValues[0].find((item) => item.text === value)?.value;
@@ -130,9 +135,9 @@ export default function Settings() {
       default:
         break;
     }
-  };
+  }, [settingsValues]);
 
-  const inputNumberSwitch = ({ value, name }: { value: string | null, name: SettingsName }) => {
+  const inputNumberSwitch = useCallback(({ value, name }: { value: string | null, name: SettingsName }) => {
     const numberValue = value ? Number(value) : 0;
     switch (name) {
       case SettingsName.CalendarStartHour:
@@ -154,9 +159,9 @@ export default function Settings() {
       default:
         break;
     }
-  };
+  }, []);
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<DataType> = useMemo(() => [
     {
       dataIndex: 'title',
       width: '80%',
@@ -196,15 +201,16 @@ export default function Settings() {
         }
       },
     },
-  ];
+  ], [selectSwitch, inputNumberSwitch]);
 
-  const settingsDataSource: DataType[] = settingsTitles.map((title, index) => ({
-    key: index,
-    title,
-    values: settingsValues[index].map((value) => value.text),
-    selected: settingsSelected[index],
-    item: settingsList[index],
-  }));
+  const settingsDataSource: DataType[] = useMemo(() => (
+    settingsTitles.map((title, index) => ({
+      key: index,
+      title,
+      values: settingsValues[index].map((value) => value.text),
+      selected: settingsSelected[index],
+      item: settingsList[index],
+    }))), [settingsValues, settingsSelected]);
 
   return (
     <Layout>

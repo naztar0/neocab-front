@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -40,20 +40,21 @@ export default function Header({ locale }: { locale: Locale }) {
   const currentMonth = new Date(useSelector((state: any) => state.scheduleReducer.currentMonth));
   const week: number = useSelector((state: any) => state.scheduleReducer.week);
 
-  const changeWeekHandle = (btnType: BtnType) => {
+  const changeWeekHandle = useCallback((btnType: BtnType) => {
     if (btnType === 'prev') {
       dispatch(setCurrentMonth(subWeeks(currentMonth, 1).toJSON()));
     }
     if (btnType === 'next') {
       dispatch(setCurrentMonth(addWeeks(currentMonth, 1).toJSON()));
     }
-  };
+  }, [currentMonth]);
 
-  const weekSchedule = groupScheduleData
-    ? groupScheduleData.find((item) => item.week === week) || groupScheduleData[0]
-    : null;
+  const weekSchedule = useMemo(() => {
+    if (!groupScheduleData.length) return null;
+    return groupScheduleData.find((item) => item.week === week) || groupScheduleData[0];
+  }, [groupScheduleData, week]);
 
-  const weekOptions = () => (
+  const weekOptions = useCallback(() => (
     groupScheduleData.map((item) => (
       <Tooltip title={item.description} key={item.week} placement="leftBottom">
         <Button
@@ -64,7 +65,7 @@ export default function Header({ locale }: { locale: Locale }) {
         </Button>
       </Tooltip>
     ))
-  ) as unknown as JSX.Element;
+  ) as unknown as JSX.Element, [groupScheduleData]);
 
   return (
     <div className="header">

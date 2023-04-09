@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -277,25 +282,39 @@ export default function Search() {
     }
   }, [searchValue, groupSortingParams, userSortingParams, pagePerPage]);
 
-  const stepObjects = [
+  const stepObjects = useMemo(() => [
     [faculty, setFaculty],
     [speciality, setSpeciality],
     [program, setProgram],
     [department, setDepartment],
     [specialization, setSpecialization],
     [group, setGroup],
-  ];
+  ], [
+    faculty,
+    speciality,
+    program,
+    department,
+    specialization,
+    group,
+  ]);
 
-  const stepData = [
+  const stepData = useMemo(() => [
     facultiesData,
     specialitiesData,
     programsData,
     departmentsData,
     specializationsData,
     groupsData,
-  ];
+  ], [
+    facultiesData,
+    specialitiesData,
+    programsData,
+    departmentsData,
+    specializationsData,
+    groupsData,
+  ]);
 
-  const stepTitles = [
+  const stepTitles = useMemo(() => [
     'Faculty',
     'Speciality',
     'Program',
@@ -303,18 +322,18 @@ export default function Search() {
     'Specialization',
     'Group',
     'User',
-  ];
+  ], []);
 
-  const userSortingList = [
+  const userSortingList = useMemo(() => [
     { key: 'ordFirstName', value: 'by first name' },
     { key: 'ordLastName', value: 'by last name' },
-  ];
+  ], []);
 
-  const groupSortingList = [
+  const groupSortingList = useMemo(() => [
     { key: 'ordName', value: 'by name' },
-  ];
+  ], []);
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<DataType> = useMemo(() => [
     {
       render: (data) => (
         <span className="name">{data.name}</span>
@@ -328,9 +347,9 @@ export default function Search() {
         },
       }),
     },
-  ];
+  ], [stepObjects, currentStepType]);
 
-  const userColumns: ColumnsType<User> = [
+  const userColumns: ColumnsType<User> = useMemo(() => [
     {
       key: 'name',
       dataIndex: 'name',
@@ -348,12 +367,12 @@ export default function Search() {
         },
       }),
     },
-  ];
+  ], []);
 
   const isLoading = facultyLoading || specialityLoading || programLoading
     || departmentLoading || specializationLoading || groupLoading || userLoading;
 
-  const getSteps = () => {
+  const getSteps = useCallback(() => {
     if (searchValue !== null) {
       return [];
     }
@@ -362,13 +381,13 @@ export default function Search() {
       steps.push({ title: stepTitles[i], description: stepObjects[i][0]?.name, key: i });
     }
     return steps;
-  };
+  }, [currentStepType, searchValue, stepObjects, stepTitles]);
 
-  const onSelectStepType = (value: string) => {
+  const onSelectStepType = useCallback((value: string) => {
     setSelectedStepType(stepTitles.indexOf(value));
-  };
+  }, [stepTitles]);
 
-  const onSearch = (value: string) => {
+  const onSearch = useCallback((value: string) => {
     value = value.trim();
     if (searchPattern.test(value)) {
       setPagePerPage({ page: 1, perPage: pagePerPage.perPage });
@@ -376,17 +395,17 @@ export default function Search() {
     } else {
       message.error('Search value must contain only letters, numbers and spaces').then();
     }
-  };
+  }, [pagePerPage.perPage]);
 
-  const onSelectSorting = (param: string) => {
+  const onSelectSorting = useCallback((param: string) => {
     if (selectedStepType === StepType.User) {
       setUserSortingParams({ [param]: orderType });
     } else {
       setGroupSortingParams({ [param]: orderType });
     }
-  };
+  }, [orderType, selectedStepType]);
 
-  const onSelectOrder = () => {
+  const onSelectOrder = useCallback(() => {
     const value = orderType === OrderType.Asc ? OrderType.Desc : OrderType.Asc;
     if (selectedStepType === StepType.User) {
       setUserSortingParams({ [Object.keys(userSortingParams)[0]]: value });
@@ -394,9 +413,9 @@ export default function Search() {
       setGroupSortingParams({ [Object.keys(groupSortingParams)[0]]: value });
     }
     setOrderType(value);
-  };
+  }, [orderType, selectedStepType, userSortingParams, groupSortingParams]);
 
-  const getSelectedSorting = () => {
+  const getSelectedSorting = useCallback(() => {
     const sortingParams = selectedStepType === StepType.User ? userSortingParams : groupSortingParams;
     const sortingList = selectedStepType === StepType.User ? userSortingList : groupSortingList;
     for (let i = 0; i < sortingList.length; i++) {
@@ -405,9 +424,11 @@ export default function Search() {
       }
     }
     return '-';
-  };
+  }, [selectedStepType, userSortingParams, groupSortingParams, userSortingList, groupSortingList]);
 
-  const total = ((currentStepType === StepType.User ? usersData?.total : stepData[currentStepType]?.total) || 0);
+  const total = useMemo(() => (
+    (currentStepType === StepType.User ? usersData?.total : stepData[currentStepType]?.total) || 0
+  ), [currentStepType, usersData, stepData]);
 
   return (
     <Layout>
