@@ -17,6 +17,7 @@ import specialityReducer from '@/store/reducers/speciality';
 import facultyReducer from '@/store/reducers/faculty';
 import scheduleReducer from '@/store/reducers/schedule';
 import attendanceReducer from '@/store/reducers/attendance';
+import notificationReducer from '@/store/reducers/notification';
 
 const rootReducer = combineReducers({
   themeReducer,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   facultyReducer,
   scheduleReducer,
   attendanceReducer,
+  notificationReducer,
 });
 
 // eslint-disable-next-line import/prefer-default-export
