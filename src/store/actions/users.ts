@@ -11,6 +11,13 @@ import {
   postUserAttendance,
 } from '@/requests/users';
 
+export const getUsers = createAsyncThunk(
+  'get_users',
+  async ({ params }: { params: UserQueryParams }) => (
+    await fetchUsers(params)
+  ).data,
+);
+
 export const getMyProfile = createAsyncThunk(
   'get_my_profile',
   async ({ user }: { user: number }) => (
@@ -64,13 +71,6 @@ export const getUserAttendance = createAsyncThunk(
   'get_user_attendance',
   async ({ user }: { user: number }) => (
     await fetchUserAttendance(user)
-  ).data,
-);
-
-export const getUsers = createAsyncThunk(
-  'get_users',
-  async ({ params }: { params: UserQueryParams }) => (
-    await fetchUsers(params)
   ).data,
 );
 

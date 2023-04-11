@@ -1,5 +1,10 @@
 import { getAxiosInstance } from '@/requests/config';
 
+export const fetchUsers = async (params: UserQueryParams) => getAxiosInstance().get(
+  '/api/users',
+  { params },
+);
+
 export const fetchUserProfile = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/profile`,
 );
@@ -22,11 +27,6 @@ export const fetchUserSyllabus = async (user: number, semester: number) => getAx
 
 export const fetchUserAttendance = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/attendance`,
-);
-
-export const fetchUsers = async (params: UserQueryParams) => getAxiosInstance().get(
-  '/api/users',
-  { params },
 );
 
 export const postUserCover = async (user: number, image: File) => {
