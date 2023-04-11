@@ -21,6 +21,7 @@ import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.sv
 import { Theme } from '@/constants/settings';
 import { getAzureLoginUrl, loginViaAzure, loginViaCabinet } from '@/store/actions/login';
 import { clearError } from '@/store/reducers/login';
+import { ReactComponent as Logo } from '@/assets/images/logo_mini.svg';
 import './index.scss';
 
 export default function Login() {
@@ -116,6 +117,8 @@ export default function Login() {
   return (
     <div className="login-page">
       <Helmet title="Login" />
+      <Logo className="logo" />
+      <h1 className="title">Sign in to NeoCab</h1>
       <Spin spinning={isLoading || checkCabinetLogin} size="large">
         <div className="substrate">
           <Form
