@@ -2,9 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import cookies from 'js-cookie';
 import { Theme } from '@/constants/settings';
 
+const getTheme = () => {
+  if (cookies.get('theme')) {
+    return Number(cookies.get('theme'));
+  }
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return Theme.Dark;
+  }
+  return Theme.Light;
+};
+
 const initialState = {
-  theme: cookies.get('theme') ? Number(cookies.get('theme'))
-    : window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.Dark : Theme.Light,
+  theme: getTheme(),
 };
 
 export const themeSlice = createSlice({
