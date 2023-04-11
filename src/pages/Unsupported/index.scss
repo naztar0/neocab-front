@@ -1,0 +1,49 @@
+@import "src/styles/variables";
+
+.unsupported-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $bg-root-light;
+  padding: 30px;
+
+  .logo {
+    width: 75%;
+  }
+
+  .content {
+    margin-top: 60px;
+    text-align: center;
+    width: 100%;
+    font-size: 26px;
+    color: $text-dark;
+  }
+
+  a {
+    width: 80%;
+
+    button {
+      margin-top: 40px;
+      height: fit-content;
+      width: 100%;
+      padding: 30px 20px;
+      font-size: 20px;
+      color: $text-light;
+    }
+  }
+}
+
+.dark-theme {
+  .unsupported-container {
+    background: $bg-root-dark;
+
+    .logo {
+      filter: invert(1);
+    }
+
+    .content {
+      color: $text-light;
+    }
+  }
+}
