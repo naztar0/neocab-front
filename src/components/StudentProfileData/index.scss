@@ -68,9 +68,12 @@ $section-border-light: #e0e0e0;
         padding: 16px 0;
       }
 
+      .title {
+        flex: 1;
+      }
+
       .value {
-        margin-left: 25%;
-        position: absolute;
+        flex: 3;
       }
 
       &:not(:last-child)::after {
