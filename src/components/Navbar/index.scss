@@ -22,7 +22,19 @@ header {
   }
 
   .logo {
-    height: 40px;
+    margin-left: 8px;
+    margin-top: -6px;
+    height: 36px;
+    transition: all 0.5s ease-out;
+
+    g * {
+      opacity: 0.8;
+      transition: opacity 0.1s ease-in;
+    }
+
+    g *:hover {
+      opacity: 1;
+    }
   }
 
   .search {
@@ -42,6 +54,15 @@ header {
       background-color: $bg-root-light;
       border: none;
       height: 32px;
+    }
+
+    @media (max-width: 660px) {
+      margin-left: 20px;
+      position: initial;
+    }
+
+    @media (max-width: 500px) {
+      display: none;
     }
   }
 
@@ -71,32 +92,37 @@ header {
     }
   }
 }
-.notifications li {
-  padding: 8px 0 !important;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
 
-  &.unread {
-    opacity: 100%;
-  }
+.notifications {
+  max-width: 320px;
 
-  .status {
-    margin-right: 6px;
-  }
+  li {
+    padding: 8px 0 !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 
-  .date-time {
-    font-size: 10px;
-    color: $black50;
-  }
+    &.unread {
+      opacity: 100%;
+    }
 
-  &:first-child {
-    padding-top: 0 !important;
-  }
+    .status {
+      margin-right: 6px;
+    }
 
-  &:last-child {
-      padding-bottom: 0 !important;
+    .date-time {
+      font-size: 10px;
+      color: $black50;
+    }
+
+    &:first-child {
+      padding-top: 0 !important;
+    }
+
+    &:last-child {
+        padding-bottom: 0 !important;
+    }
   }
 }
 
@@ -104,6 +130,10 @@ header {
   header {
     background: $bg-substrate-dark;
     border-bottom: 1px solid $white10;
+
+    .logo {
+      filter: invert(1);
+    }
 
     .search {
       input {
