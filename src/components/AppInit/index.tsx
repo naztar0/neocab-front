@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import { Theme } from '@/constants/settings';
 import { AppDispatch } from '@/store/store';
 import { getMyProfile, getMyPhoto } from '@/store/actions/users';
@@ -11,9 +12,24 @@ export default function AppInit() {
   const navigate = useNavigate();
   const theme = useSelector((state: any) => state.themeReducer.theme);
   const authData = useSelector((state: any) => state.loginReducer.authorization);
+  const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
+
+  const requestNotificationPermission = useCallback(() => {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission().then((result) => {
+        if (result === 'denied') {
+          message.error('You have to allow notifications to receive updates').then();
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    if (document.location.href.includes('login')) {
+    if (window.innerWidth < 660) {
+      navigate('/unsupported');
+      return;
+    }
+    if (document.location.pathname.includes('login')) {
       return;
     }
     const userId = localStorage.getItem('user_id');
@@ -22,10 +38,20 @@ export default function AppInit() {
       dispatch(getMyProfile({ user: +userId }));
       dispatch(getMyPhoto({ user: +userId }));
       dispatch(refreshAction());
+      requestNotificationPermission();
+      if (document.location.pathname === '/') {
+        navigate('/profile');
+      }
     } else {
       navigate('/login');
     }
   }, []);
+
+  useEffect(() => {
+    if (!isLoginLoading && !localStorage.getItem('token')) {
+      navigate('/login');
+    }
+  }, [isLoginLoading]);
 
   useEffect(() => {
     if (authData?.token) {
