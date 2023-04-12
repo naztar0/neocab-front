@@ -89,3 +89,8 @@ export const truncate = (str: string, length: number): string => {
   if (str.length <= length) return str;
   return `${str.substring(0, length)}...`;
 };
+
+export const isPrefersDark = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
