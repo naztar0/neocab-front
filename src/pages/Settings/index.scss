@@ -1,9 +1,9 @@
 @import "src/styles/variables";
 
-table {
+.settings-table {
   tr {
     .icon {
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     &:last-child {
@@ -12,10 +12,16 @@ table {
       }
     }
   }
-}
 
-.select {
-  width: 100%;
+  .select,
+  .button {
+    width: 100%;
+  }
+
+  .button {
+    text-align: start;
+    padding-left: 11px;
+  }
 }
 
 .dark-theme {
