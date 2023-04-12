@@ -18,6 +18,7 @@ export enum CalendarWeekDays {
 export enum SettingsType {
   Select,
   InputNumber,
+  Button,
 }
 
 export enum SettingsName {
@@ -26,6 +27,7 @@ export enum SettingsName {
   CalendarStartHour,
   CalendarEndHour,
   'CalendarWeekDays',
+  'SyncProfilePhoto',
 }
 
 export const settingsList = [
@@ -48,5 +50,9 @@ export const settingsList = [
   {
     name: SettingsName.CalendarWeekDays,
     type: SettingsType.Select,
+  },
+  {
+    name: SettingsName.SyncProfilePhoto,
+    type: SettingsType.Button,
   },
 ];

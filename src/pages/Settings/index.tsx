@@ -10,11 +10,13 @@ import {
   message,
   Table,
   InputNumber,
+  Button,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import cookies from 'js-cookie';
 import Icon, * as Icons from '@ant-design/icons';
+import { AppDispatch } from '@/store/store';
 import { ReactComponent as RoutineIcon } from '@/assets/icons/routine.svg';
 import Layout from '@/components/Layout';
 import { setTheme } from '@/store/reducers/theme';
@@ -32,6 +34,7 @@ import {
   SettingsName,
   settingsList,
 } from '@/constants/settings';
+import { syncUserPhoto } from '@/store/actions/users';
 import './index.scss';
 
 interface ElementTitle {
@@ -47,12 +50,13 @@ interface DataType {
 }
 
 export default function Settings() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useSelector((state: any) => state.themeReducer.theme);
   const language = useSelector((state: any) => state.languageReducer.language);
   const calendarStartHour = useSelector((state: any) => state.scheduleReducer.calendarStartHour);
   const calendarEndHour = useSelector((state: any) => state.scheduleReducer.calendarEndHour);
   const calendarWeekDays = useSelector((state: any) => state.scheduleReducer.calendarWeekDays);
+  const profileData = useSelector((state: any) => state.profileReducer.profile);
 
   const [themeSelected, setThemeSelected] = useState(theme);
   const [languageSelected, setLanguageSelected] = useState(language);
@@ -79,6 +83,10 @@ export default function Settings() {
       text: 'Calendar week days',
       icon: <Icons.InsertRowAboveOutlined className="icon" />,
     },
+    {
+      text: 'Sync profile photo',
+      icon: <Icons.SyncOutlined className="icon" />,
+    },
   ], []);
 
   const settingsValues: { text: string, value: any }[][] = useMemo(() => [
@@ -102,6 +110,9 @@ export default function Settings() {
       { text: 'Mon - Sat', value: CalendarWeekDays.toSaturday },
       { text: 'Mon - Sun', value: CalendarWeekDays.toSunday },
     ],
+    [
+      { text: 'Synchronize', value: null },
+    ],
   ], [calendarStartHour, calendarEndHour]);
 
   const settingsSelected = useMemo(() => [
@@ -110,6 +121,7 @@ export default function Settings() {
     settingsValues[2][0].text,
     settingsValues[3][0].text,
     settingsValues[4].find((item) => item.value === calendarWeekDaysSelected)?.text || '',
+    settingsValues[5][0].text,
   ], [settingsValues, languageSelected, themeSelected, calendarWeekDaysSelected]);
 
   const selectSwitch = useCallback(({ value, name }: { value: string, name: SettingsName }) => {
@@ -161,6 +173,17 @@ export default function Settings() {
     }
   }, []);
 
+  const buttonSwitch = useCallback(({ name }: { name: SettingsName }) => {
+    switch (name) {
+      case SettingsName.SyncProfilePhoto:
+        dispatch(syncUserPhoto({ user: profileData.id }));
+        message.success('Synced successfully').then();
+        break;
+      default:
+        break;
+    }
+  }, [profileData]);
+
   const columns: ColumnsType<DataType> = useMemo(() => [
     {
       dataIndex: 'title',
@@ -196,6 +219,15 @@ export default function Settings() {
                 onChange={(value) => inputNumberSwitch({ value, name: item.name })}
               />
             );
+          case SettingsType.Button:
+            return (
+              <Button
+                className="button"
+                onClick={() => buttonSwitch({ name: item.name })}
+              >
+                {selected}
+              </Button>
+            );
           default:
             return null;
         }
@@ -217,6 +249,7 @@ export default function Settings() {
       <Helmet title="Settings" />
       <div className="substrate">
         <Table
+          className="settings-table"
           columns={columns}
           dataSource={settingsDataSource}
           pagination={false}
