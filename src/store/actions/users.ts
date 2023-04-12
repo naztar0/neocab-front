@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   fetchUserProfile,
-  fetchUserPhoto,
   fetchUserRecordBook,
   fetchUserRating,
   fetchUserSyllabus,
   fetchUserAttendance,
   fetchUsers,
+  postSyncUserPhoto,
   postUserCover,
   postUserAttendance,
 } from '@/requests/users';
@@ -25,24 +25,10 @@ export const getMyProfile = createAsyncThunk(
   ).data,
 );
 
-export const getMyPhoto = createAsyncThunk(
-  'get_my_photo',
-  async ({ user }: { user: number }) => (
-    await fetchUserPhoto(user)
-  ).data,
-);
-
 export const getUserProfile = createAsyncThunk(
   'get_user_profile',
   async ({ user }: { user: number }) => (
     await fetchUserProfile(user)
-  ).data,
-);
-
-export const getUserPhoto = createAsyncThunk(
-  'get_user_photo',
-  async ({ user }: { user: number }) => (
-    await fetchUserPhoto(user)
   ).data,
 );
 
@@ -71,6 +57,13 @@ export const getUserAttendance = createAsyncThunk(
   'get_user_attendance',
   async ({ user }: { user: number }) => (
     await fetchUserAttendance(user)
+  ).data,
+);
+
+export const syncUserPhoto = createAsyncThunk(
+  'sync_user_photo',
+  async ({ user }: { user: number }) => (
+    await postSyncUserPhoto(user)
   ).data,
 );
 

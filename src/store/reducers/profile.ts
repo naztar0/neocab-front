@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMyProfile, getMyPhoto, setUserCover } from '@/store/actions/users';
+import {
+  getMyProfile,
+  setUserCover,
+  syncUserPhoto,
+} from '@/store/actions/users';
 
 const initialState = {
   isLoading: true,
@@ -30,11 +34,9 @@ export const profileSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(getMyPhoto.fulfilled, (state, action) => {
-      if (state.profile && (!state.profile.image || state.profile.image.startsWith('data:image'))) {
+    builder.addCase(syncUserPhoto.fulfilled, (state, action) => {
+      if (state.profile) {
         state.profile.image = action.payload;
-      } else {
-        state.image = action.payload;
       }
     });
 

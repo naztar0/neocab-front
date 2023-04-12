@@ -9,10 +9,6 @@ export const fetchUserProfile = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/profile`,
 );
 
-export const fetchUserPhoto = async (user: number) => getAxiosInstance().get(
-  `/api/users/${user}/photo`,
-);
-
 export const fetchUserRecordBook = async (user: number, semester: number) => getAxiosInstance().get(
   `/api/users/${user}/record-book/${semester}`,
 );
@@ -27,6 +23,10 @@ export const fetchUserSyllabus = async (user: number, semester: number) => getAx
 
 export const fetchUserAttendance = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/attendance`,
+);
+
+export const postSyncUserPhoto = async (user: number) => getAxiosInstance().post(
+  `/api/users/${user}/photo`,
 );
 
 export const postUserCover = async (user: number, image: File) => {
