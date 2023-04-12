@@ -22,13 +22,7 @@ export default function Avatar({
     style = { ...style, borderRadius: '999px' };
   }
   if (avatar) {
-    let src: string;
-    if (avatar.startsWith('data:image')) {
-      src = avatar;
-    } else {
-      src = IMAGES_URL + avatar;
-    }
-    return <img src={src} alt="avatar" style={style} />;
+    return <img src={IMAGES_URL + avatar} alt="avatar" style={style} />;
   }
   if (username) {
     return (
