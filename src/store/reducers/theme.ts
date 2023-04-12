@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import cookies from 'js-cookie';
 import { Theme } from '@/constants/settings';
+import { isPrefersDark } from '@/helpers/utils';
 
 const getTheme = () => {
   if (cookies.get('theme')) {
     return Number(cookies.get('theme'));
   }
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  if (isPrefersDark()) {
     return Theme.Dark;
   }
   return Theme.Light;
