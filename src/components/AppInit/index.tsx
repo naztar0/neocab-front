@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { Theme } from '@/constants/settings';
 import { AppDispatch } from '@/store/store';
-import { getMyProfile, getMyPhoto } from '@/store/actions/users';
+import { getMyProfile } from '@/store/actions/users';
 import { refreshAction } from '@/store/actions/login';
+import { isPrefersDark } from '@/helpers/utils';
 
 export default function AppInit() {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +26,10 @@ export default function AppInit() {
   }, []);
 
   useEffect(() => {
+    const link: HTMLAnchorElement | null = document.querySelector("link[rel~='icon']");
+    if (link && isPrefersDark()) {
+      link.href = '/favicon_dark.svg';
+    }
     if (window.innerWidth < 660) {
       navigate('/unsupported');
       return;
@@ -36,7 +41,6 @@ export default function AppInit() {
     const token = localStorage.getItem('token');
     if (token && userId) {
       dispatch(getMyProfile({ user: +userId }));
-      dispatch(getMyPhoto({ user: +userId }));
       dispatch(refreshAction());
       requestNotificationPermission();
       if (document.location.pathname === '/') {

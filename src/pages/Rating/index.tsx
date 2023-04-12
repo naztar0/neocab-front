@@ -8,7 +8,6 @@ import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
 import UserModal from '@/components/UserModal';
 import {
-  getUserPhoto,
   getUserProfile,
   getUserRating,
 } from '@/store/actions/users';
@@ -102,7 +101,6 @@ export default function Rating() {
         onClick: () => {
           if (data.user) {
             dispatch(getUserProfile({ user: data.user.id }));
-            dispatch(getUserPhoto({ user: data.user.id }));
             setModalOpen(true);
           }
         },

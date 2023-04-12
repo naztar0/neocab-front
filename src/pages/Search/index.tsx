@@ -37,7 +37,6 @@ import {
   UserDataType,
 } from '@/constants/search';
 import {
-  getUserPhoto,
   getUserProfile,
   getUsers,
 } from '@/store/actions/users';
@@ -362,7 +361,6 @@ export default function Search() {
       onCell: (data) => ({
         onClick: () => {
           dispatch(getUserProfile({ user: data.id }));
-          dispatch(getUserPhoto({ user: data.id }));
           setModalOpen(true);
         },
       }),
@@ -434,7 +432,7 @@ export default function Search() {
     <Layout>
       <Helmet title="Search" />
       <div className="substrate">
-        <Space.Compact size="large">
+        <Space.Compact size="large" className="search-group">
           <Select
             className="search-select"
             defaultValue="User"
