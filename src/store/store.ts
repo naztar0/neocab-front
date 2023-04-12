@@ -8,6 +8,7 @@ import recordBookReducer from '@/store/reducers/recordBook';
 import ratingReducer from '@/store/reducers/rating';
 import syllabusReducer from '@/store/reducers/syllabus';
 import coverReducer from '@/store/reducers/cover';
+import photoReducer from '@/store/reducers/photo';
 import userReducer from '@/store/reducers/user';
 import groupReducer from '@/store/reducers/group';
 import specializationReducer from '@/store/reducers/specialization';
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   ratingReducer,
   syllabusReducer,
   coverReducer,
+  photoReducer,
   userReducer,
   groupReducer,
   specializationReducer,
