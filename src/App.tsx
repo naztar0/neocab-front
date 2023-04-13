@@ -16,6 +16,7 @@ import ScheduleEdit from '@/pages/ScheduleEdit';
 import Syllabus from '@/pages/Syllabus';
 import Search from '@/pages/Search';
 import Settings from '@/pages/Settings';
+import Help from '@/pages/Help';
 import Unsupported from '@/pages/Unsupported';
 import './styles/global.scss';
 import './styles/antd.scss';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/syllabus" element={<Syllabus />} />
             <Route path="/search" element={<Search />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/help" element={<Help />} />
             <Route path="/unsupported" element={<Unsupported />} />
           </Routes>
         </BrowserRouter>
