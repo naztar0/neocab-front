@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import { Helmet } from 'react-helmet';
 import { enUS, ru, uk } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Calendar from '@/components/Calendar';
@@ -17,6 +18,7 @@ import './index.scss';
 
 export default function Schedule() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const scheduleType: ScheduleType = useSelector((state: any) => state.scheduleReducer.scheduleType);
   const groupScheduleData: Schedule[] = useSelector((state: any) => state.scheduleReducer.groupSchedule);
@@ -54,7 +56,7 @@ export default function Schedule() {
 
   return (
     <Layout>
-      <Helmet title="Schedule" />
+      <Helmet title={t('common.menu.schedule')} />
       <div className="substrate subject-table">
         <Spin spinning={isLoading} size="large">
           <Calendar locale={locale} />

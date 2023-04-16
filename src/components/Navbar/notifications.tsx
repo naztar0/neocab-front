@@ -14,6 +14,7 @@ import {
   message,
 } from 'antd';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 import {
   getUserNotifications,
   postNotificationRead,
@@ -30,6 +31,7 @@ import './index.scss';
 
 export default function Notifications() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const notificationsData: UserNotification[] = useSelector((state: any) => state.notificationReducer.notifications);
   const dataSwitch: boolean = useSelector((state: any) => state.notificationReducer.dataSwitch);
@@ -53,7 +55,7 @@ export default function Notifications() {
     if (notificationsData.length > 0) {
       if (lastNotification && lastNotification !== notificationsData[0].id && !notificationsData[0].read) {
         try {
-          const notification = new Notification('New notification', {
+          const notification = new Notification(t('navbar.new_notification'), {
             body: notificationsData[0].text,
           });
           notification.onclick = () => {
@@ -61,7 +63,7 @@ export default function Notifications() {
             notification.close();
           };
         } catch (e) {
-          message.info('New notification!').then();
+          message.info(t('navbar.new_notification')).then();
         }
       }
       setLastNotification(notificationsData[0].id);
@@ -111,7 +113,7 @@ export default function Notifications() {
         />
       )}
       placement="bottomRight"
-      title="Notifications"
+      title={t('navbar.notifications')}
       trigger="click"
       showArrow={false}
       onOpenChange={() => setCurrentNotification(null)}

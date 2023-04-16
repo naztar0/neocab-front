@@ -4,6 +4,7 @@ import {
   Button,
   Popover,
 } from 'antd';
+import { useTranslation, Trans } from 'react-i18next';
 import Avatar from '@/components/Avatar';
 import { logoutAction } from '@/store/actions/login';
 import { AppDispatch } from '@/store/store';
@@ -11,6 +12,7 @@ import './index.scss';
 
 export default function Profile() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
 
@@ -22,9 +24,9 @@ export default function Profile() {
 
   return (
     <Popover
-      content={<Button onClick={logout} loading={isLoginLoading}>Logout</Button>}
+      content={<Button onClick={logout} loading={isLoginLoading}><Trans i18nKey="navbar.logout" /></Button>}
       placement="bottomRight"
-      title="Profile"
+      title={t('navbar.profile')}
       trigger="click"
       showArrow={false}
     >

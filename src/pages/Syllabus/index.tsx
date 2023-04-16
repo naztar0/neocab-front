@@ -5,6 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import { Chart, ArcElement, Tooltip as ChartTooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -23,6 +24,7 @@ const chartOptions = {
 
 export default function Rating() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoading: boolean = useSelector((state: any) => state.syllabusReducer.isLoading);
   const syllabusData: Syllabus[] = useSelector((state: any) => state.syllabusReducer.syllabus);
@@ -49,7 +51,7 @@ export default function Rating() {
     {
       key: 'subject',
       dataIndex: 'subject',
-      title: 'Subject',
+      title: t('syllabus.subject'),
       render: (value, record) => (
         <SubjectData
           title={record.subject.title}
@@ -62,7 +64,7 @@ export default function Rating() {
     {
       key: 'credit',
       dataIndex: 'credit',
-      title: 'Credit',
+      title: t('syllabus.credits'),
       render: (value, record) => (
         <span>{record.credit}</span>
       ),
@@ -71,11 +73,11 @@ export default function Rating() {
     {
       key: 'control',
       dataIndex: 'control',
-      title: 'E/C',
+      title: t('syllabus.control'),
       render: (value, record) => (
         <div className="row-data e-c">
-          <span>{record.control || '-'}</span>
-          <span>{record.individual_task || '-'}</span>
+          <span>{record.control ? t(`syllabus.${record.control}`) : '-'}</span>
+          <span>{record.individual_task ? t(`syllabus.${record.individual_task}`) : '-'}</span>
         </div>
       ),
       sorter: (a, b) => a.control.localeCompare(b.control),
@@ -83,13 +85,13 @@ export default function Rating() {
     {
       key: 'hours',
       dataIndex: 'hours',
-      title: 'Hours',
+      title: t('syllabus.hours'),
       render: (value, record) => (
         <span>{record.hours}</span>
       ),
       sorter: (a, b) => a.hours.localeCompare(b.hours),
     },
-  ], []);
+  ], [t]);
 
   const syllabusDataSource = useMemo(() => (
     syllabusData?.map((data, index) => ({ key: index, ...data }))
@@ -115,31 +117,31 @@ export default function Rating() {
     labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
-        label: 'Credits',
+        label: t('syllabus.credits'),
         data: syllabusData?.map((data) => data.credit),
         backgroundColor: colors1,
         borderColor: colors2,
         borderWidth: 1,
       },
     ],
-  }), [syllabusData, colors1, colors2]);
+  }), [syllabusData, colors1, colors2, t]);
 
   const hoursChart = useMemo(() => ({
     labels: syllabusData?.map((data) => data.subject.title),
     datasets: [
       {
-        label: 'Hours',
+        label: t('syllabus.hours'),
         data: syllabusData?.map((data) => data.hours),
         backgroundColor: colors1,
         borderColor: colors2,
         borderWidth: 1,
       },
     ],
-  }), [syllabusData, colors1, colors2]);
+  }), [syllabusData, colors1, colors2, t]);
 
   return (
     <Layout>
-      <Helmet title="Syllabus" />
+      <Helmet title={t('common.menu.syllabus') as string} />
       <div className="substrate subject-table">
         <Table
           columns={syllabusColumns}
@@ -150,7 +152,9 @@ export default function Rating() {
           size="small"
           caption={(
             <div className="table-title">
-              <span className="title">Syllabus</span>
+              <span className="title">
+                <Trans i18nKey="common.menu.syllabus" />
+              </span>
               <Semester semester={semester} setSemester={setSemester} />
             </div>
           )}
@@ -166,13 +170,17 @@ export default function Rating() {
           ))}
         </div>
         <div className="chart">
-          <span className="chart-title">Credits</span>
+          <span className="chart-title">
+            <Trans i18nKey="syllabus.credits" />
+          </span>
           <div>
             <Doughnut data={creditsChart} height={300} options={chartOptions} />
           </div>
         </div>
         <div className="chart">
-          <span className="chart-title">Hours</span>
+          <span className="chart-title">
+            <Trans i18nKey="syllabus.hours" />
+          </span>
           <div>
             <Doughnut data={hoursChart} height={300} options={chartOptions} />
           </div>

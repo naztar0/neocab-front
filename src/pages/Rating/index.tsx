@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -21,6 +22,7 @@ import './index.scss';
 
 export default function Rating() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoading: boolean = useSelector((state: any) => state.ratingReducer.isLoading);
   const ratingData: Rating[] = useSelector((state: any) => state.ratingReducer.rating);
@@ -73,16 +75,15 @@ export default function Rating() {
     {
       key: 'student',
       dataIndex: 'student',
-      title: 'Student',
+      title: t('rating.student'),
       render: (value, record, index) => {
         const percent = ((index + 1) * 100) / ratingData.length;
-        const probability = percent > 50 ? '0%' : (percent > 45 ? 'висока' : '100%');
+        const probability = percent > 50 ? '0%' : (percent > 45 ? t('rating.high_probability') : '100%');
         return (
           <Tooltip
             title={
               record.user?.student_id === profileData?.student_id
-                ? `Percentage in the rating: ${percent.toFixed(2)}%\n`
-                + `Probability of getting a scholarship: ${probability}`
+                ? t('rating.percentage', { percent: percent.toFixed(2), probability })
                 : null
             }
             placement="right"
@@ -110,7 +111,7 @@ export default function Rating() {
     {
       key: 'group',
       dataIndex: 'group',
-      title: 'Group',
+      title: t('rating.group'),
       render: (value, record) => (
         <span>{record.user?.group.name ?? record.group}</span>
       ),
@@ -119,7 +120,7 @@ export default function Rating() {
     {
       key: 'mark_5',
       dataIndex: 'mark_5',
-      title: 'Nat',
+      title: t('rating.national'),
       render: (value, record) => (
         <span>{toMark5(parseFloat(record.mark))}</span>
       ),
@@ -128,7 +129,7 @@ export default function Rating() {
     {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
-      title: 'ECTS',
+      title: t('rating.ects'),
       render: (value, record) => (
         <span>{toMarkEcts(parseFloat(record.mark))}</span>
       ),
@@ -137,7 +138,7 @@ export default function Rating() {
     {
       dataIndex: 'mark_100',
       key: 'mark_100',
-      title: 'Mark',
+      title: t('rating.mark'),
       render: (value, record) => (
         <Tooltip title={record.comment} placement="left">
           <span>{record.mark}</span>
@@ -153,7 +154,7 @@ export default function Rating() {
 
   return (
     <Layout>
-      <Helmet title="Rating" />
+      <Helmet title={t('common.menu.rating') as string} />
       <div className="substrate subject-table">
         <Table
           columns={ratingColumns}
@@ -164,7 +165,9 @@ export default function Rating() {
           size="small"
           caption={(
             <div className="table-title">
-              <span className="title">Rating</span>
+              <span className="title">
+                <Trans i18nKey="common.menu.rating" />
+              </span>
               <Semester semester={semester} setSemester={setSemester} />
             </div>
           )}

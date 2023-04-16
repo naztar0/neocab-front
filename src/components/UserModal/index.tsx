@@ -3,6 +3,7 @@ import {
   Skeleton,
   Modal,
 } from 'antd';
+import { Trans, useTranslation } from 'react-i18next';
 import Avatar from '@/components/Avatar';
 import StudentProfileData from '@/components/StudentProfileData';
 import './index.scss';
@@ -17,6 +18,7 @@ interface Props {
 export default function UserModal({
   isLoading, user, modalOpen, setModalOpen,
 }: Props) {
+  useTranslation();
   const isLoadingLocal = !user || isLoading;
 
   return (
@@ -44,7 +46,9 @@ export default function UserModal({
               <span className="name">
                 {`${user.last_name} ${user.first_name} ${user.middle_name}`}
               </span>
-              <span className="role">{user.role}</span>
+              <span className="role">
+                <Trans i18nKey={`profile.roles.${user.role}`} />
+              </span>
               <a className="email" href={`mailto:${user.email}`}>{user.email}</a>
             </>
           ) : (

@@ -24,6 +24,7 @@ import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { Helmet } from 'react-helmet';
 import { Dayjs } from 'dayjs';
 import { format } from 'date-fns';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { resetAttendance } from '@/store/reducers/attendance';
 import { resetUsers } from '@/store/reducers/user';
@@ -49,6 +50,7 @@ import './index.scss';
 
 export default function AttendanceEdit() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const groupSchedules: Schedule[] = useSelector((state: any) => state.scheduleReducer.groupSchedule);
   const groupUsers: Pagination<User> = useSelector((state: any) => state.userReducer.users);
@@ -102,7 +104,7 @@ export default function AttendanceEdit() {
 
   const sendAttendance = useCallback(({ target }: CheckboxChangeEvent) => {
     if (!attendanceSS || !attendanceDate) {
-      message.error('Please select subject and date').then();
+      message.error(t('attendance.edit.messages.select_subjects_and_date')).then();
       return;
     }
     if (target.checked) {
@@ -146,7 +148,7 @@ export default function AttendanceEdit() {
   const attendanceColumns: ColumnsType<AttendanceGroup> = useMemo(() => [
     {
       dataIndex: 'subject',
-      title: 'Subject',
+      title: t('attendance.edit.subject'),
       render: (value, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
@@ -160,7 +162,7 @@ export default function AttendanceEdit() {
     },
     {
       dataIndex: 'date',
-      title: 'Date',
+      title: t('attendance.edit.date'),
       render: (value, data) => (
         <span className="date">{formatDate(data.date)}</span>
       ),
@@ -170,7 +172,7 @@ export default function AttendanceEdit() {
     },
     {
       dataIndex: 'time',
-      title: 'Time',
+      title: t('attendance.edit.time'),
       render: (value, data) => (
         <span className="time">{data.schedule_subject.time}</span>
       ),
@@ -180,7 +182,7 @@ export default function AttendanceEdit() {
     },
     {
       dataIndex: 'attendances-count',
-      title: 'Attendances count',
+      title: t('attendance.edit.attendances_count'),
       render: (value, data) => (
         <span className="attendances-count">{data.users.length}</span>
       ),
@@ -192,7 +194,7 @@ export default function AttendanceEdit() {
 
   return (
     <Layout>
-      <Helmet title="Edit Attendances" />
+      <Helmet title={t('attendance.edit.title') as string} />
       <div className="substrate">
         <Table
           columns={attendanceColumns}
@@ -201,7 +203,9 @@ export default function AttendanceEdit() {
           loading={isLoading}
           caption={(
             <div className="table-title">
-              <span className="title">Edit Attendances</span>
+              <span className="title">
+                <Trans i18nKey="attendance.edit.title" />
+              </span>
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
@@ -211,7 +215,9 @@ export default function AttendanceEdit() {
                   setDrawerOpen(true);
                 }}
               >
-                Add attendances
+                <span>
+                  <Trans i18nKey="attendance.edit.add_attendances" />
+                </span>
               </Button>
             </div>
           )}
@@ -226,7 +232,7 @@ export default function AttendanceEdit() {
           className="pagination"
         />
         <Drawer
-          title="Edit Attendances"
+          title={t('attendance.edit.title')}
           placement="right"
           closable
           onClose={() => {
@@ -240,13 +246,13 @@ export default function AttendanceEdit() {
             requiredMark={false}
           >
             <Form.Item
-              label="Date"
+              label={t('attendance.edit.date')}
               name="date"
               rules={[{ required: true }]}
             >
               <DatePicker
                 className="date"
-                placeholder="Date"
+                placeholder={t('attendance.edit.date') as string}
                 onSelect={(date) => {
                   setAttendanceDate(date);
                   setAttendanceSS(null);
@@ -254,7 +260,7 @@ export default function AttendanceEdit() {
               />
             </Form.Item>
             <Form.Item
-              label="Week"
+              label={t('attendance.edit.week')}
               name="week"
               rules={[{ required: true }]}
             >
@@ -275,7 +281,7 @@ export default function AttendanceEdit() {
               </Select>
             </Form.Item>
             <Form.Item
-              label="Subject"
+              label={t('attendance.edit.subject')}
               name="subject"
               rules={[{ required: true }]}
             >
@@ -294,7 +300,7 @@ export default function AttendanceEdit() {
               </Select>
             </Form.Item>
             <Form.Item
-              label="Students"
+              label={t('attendance.edit.students')}
               name="students"
             >
               <List
@@ -323,7 +329,7 @@ export default function AttendanceEdit() {
           onCancel={() => setAttendanceModal(modalInit)}
           footer={[
             <Button key="back" onClick={() => setAttendanceModal(modalInit)}>
-              Close
+              <Trans i18nKey="common.buttons.close" />
             </Button>,
           ]}
         >

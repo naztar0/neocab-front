@@ -17,6 +17,7 @@ import {
   format,
   subWeeks,
 } from 'date-fns';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import {
   setCurrentMonth,
@@ -33,6 +34,7 @@ import './index.scss';
 
 export default function Header({ locale }: { locale: Locale }) {
   const dispatch = useDispatch<AppDispatch>();
+  useTranslation();
 
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const groupScheduleData: Schedule[] = useSelector((state: any) => state.scheduleReducer.groupSchedule);
@@ -103,7 +105,7 @@ export default function Header({ locale }: { locale: Locale }) {
             type={scheduleType === ScheduleType.azure ? 'primary' : 'default'}
             onClick={() => scheduleType !== ScheduleType.azure && dispatch(setScheduleType(ScheduleType.azure))}
           >
-            Teams
+            <Trans i18nKey="schedule.teams" />
           </Button>
           <Button
             className="schedule-type"
@@ -111,7 +113,7 @@ export default function Header({ locale }: { locale: Locale }) {
             type={scheduleType === ScheduleType.custom ? 'primary' : 'default'}
             onClick={() => scheduleType !== ScheduleType.custom && dispatch(setScheduleType(ScheduleType.custom))}
           >
-            Custom
+            <Trans i18nKey="schedule.custom" />
           </Button>
           {scheduleType === ScheduleType.custom
             && (profileData.role === Role.Headman || profileData.role === Role.Admin)
@@ -121,7 +123,7 @@ export default function Header({ locale }: { locale: Locale }) {
                   className="schedule-type schedule-edit"
                   size="middle"
                 >
-                  Edit
+                  <span><Trans i18nKey="schedule.edit_schedule" /></span>
                 </Button>
               </Link>
             )}

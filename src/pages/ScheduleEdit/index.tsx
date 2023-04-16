@@ -25,6 +25,7 @@ import {
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { Helmet } from 'react-helmet';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import {
@@ -49,6 +50,7 @@ import './index.scss';
 
 export default function ScheduleEdit() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const groupScheduleData: Schedule[] = useSelector((state: any) => state.scheduleReducer.groupSchedule);
   const groupSubjectsData: Subject[] = useSelector((state: any) => state.scheduleReducer.groupSubjects);
@@ -82,7 +84,7 @@ export default function ScheduleEdit() {
 
   const onSave = useCallback((values: any) => {
     if (!values.week || !values.description) {
-      message.error('Please fill all fields').then();
+      message.error(t('common.messages.fill_all_fields')).then();
       return;
     }
     if (editType === ScheduleEditType.addNew) {
@@ -109,7 +111,7 @@ export default function ScheduleEdit() {
 
   const onSubjectSave = useCallback((values: any) => {
     if (!values.day || !values.time) {
-      message.error('Please fill all fields').then();
+      message.error(t('common.messages.fill_all_fields')).then();
       return;
     }
     values.time = dayjs(values.time).format(timeFormat);
@@ -121,7 +123,7 @@ export default function ScheduleEdit() {
 
   const onSubjectAdd = useCallback((values: any) => {
     if (!values.day || !values.time) {
-      message.error('Please fill all fields').then();
+      message.error(t('common.messages.fill_all_fields')).then();
       return;
     }
     values.time = dayjs(values.time).format(timeFormat);
@@ -171,10 +173,10 @@ export default function ScheduleEdit() {
             }}
           />
           <Popconfirm
-            title="Delete the schedule?"
-            description="Are you sure to delete this schedule?"
-            okText="Yes"
-            cancelText="No"
+            title={t('schedule.edit.delete_schedule')}
+            description={t('schedule.edit.sure_to_delete_schedule')}
+            okText={t('common.buttons.yes')}
+            cancelText={t('common.buttons.no')}
             placement="left"
             onConfirm={() => {
               dispatch(removeSchedule({ schedule: data.id }));
@@ -248,7 +250,7 @@ export default function ScheduleEdit() {
 
   return (
     <Layout>
-      <Helmet title="Edit Schedules" />
+      <Helmet title={t('schedule.edit.title') as string} />
       <div className="substrate schedules-table">
         <Table
           columns={columns}
@@ -258,7 +260,9 @@ export default function ScheduleEdit() {
           loading={isLoading}
           caption={(
             <div className="table-title">
-              <span className="title">Edit Schedules</span>
+              <span className="title">
+                <Trans i18nKey="schedule.edit.title" />
+              </span>
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
@@ -268,15 +272,17 @@ export default function ScheduleEdit() {
                   setDrawerOpen(true);
                 }}
               >
-                Add new schedule
+                <span><Trans i18nKey="schedule.edit.add_schedule" /></span>
               </Button>
             </div>
           )}
         />
         <Drawer
           title={schedule
-            ? `Edit schedule ${groupScheduleData.find((item) => item.id === schedule)?.week}`
-            : 'Add new schedule'}
+            ? t(
+              'schedule.edit.edit_schedule',
+              { schedule: groupScheduleData.find((item) => item.id === schedule)?.week },
+            ) : t('schedule.edit.add_schedule')}
           placement="right"
           closable
           onClose={() => {
@@ -295,20 +301,37 @@ export default function ScheduleEdit() {
               requiredMark={false}
             >
               <Form.Item
-                label="Week"
+                label={t('schedule.edit.week')}
                 name="week"
-                rules={[{ required: true, message: 'Please input valid week number!', type: 'number' }]}
+                rules={[{
+                  required: true,
+                  message: t('schedule.edit.messages.input_valid_week') as string,
+                  type: 'number',
+                }]}
               >
-                <InputNumber min={1} max={52} placeholder="E.g. 1" />
+                <InputNumber
+                  min={1}
+                  max={52}
+                  placeholder={t('schedule.edit.description_placeholder') as string}
+                />
               </Form.Item>
               <Form.Item
-                label="Description"
+                label={t('schedule.edit.description')}
                 name="description"
-                rules={[{ required: true, message: 'Please input description!' }]}
+                rules={[{
+                  required: true,
+                  message: t('schedule.edit.messages.input_description') as string,
+                }]}
               >
-                <Input minLength={1} maxLength={255} placeholder="E.g. week 1 / exam week" />
+                <Input
+                  minLength={1}
+                  maxLength={255}
+                  placeholder={t('schedule.edit.description_placeholder') as string}
+                />
               </Form.Item>
-              <Button type="primary" htmlType="submit" className="button-main">Submit</Button>
+              <Button type="primary" htmlType="submit" className="button-main">
+                <span><Trans i18nKey="common.buttons.submit" /></span>
+              </Button>
             </Form>
           ) : editType === ScheduleEditType.editSubjects ? (
             <div className="edit-subjects subject-table">

@@ -5,6 +5,7 @@ import {
   Skeleton, Button, Upload, UploadProps, message,
 } from 'antd';
 import { Helmet } from 'react-helmet';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Avatar from '@/components/Avatar';
@@ -15,6 +16,7 @@ import './index.scss';
 
 export default function Profile() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isLoading: boolean = useSelector((state: any) => state.profileReducer.isLoading);
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
@@ -32,7 +34,7 @@ export default function Profile() {
     beforeUpload: (file) => {
       const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isImage) {
-        message.error(`${file.name} is not an image file`).then();
+        message.error(t('profile.messages.not_image', { filename: file.name })).then();
       }
       return isImage || Upload.LIST_IGNORE;
     },
@@ -43,7 +45,7 @@ export default function Profile() {
 
   return (
     <Layout>
-      <Helmet title="Profile" />
+      <Helmet title={t('common.menu.profile') as string} />
       <div className="substrate pd-0">
         <div className="cover">
           {!isLoading ? (
@@ -55,7 +57,9 @@ export default function Profile() {
             <Skeleton.Input active className="skeleton" />
           )}
           <Upload className="upload" {...props}>
-            <Button loading={isLoadingCover} disabled={isLoadingCover}>Edit cover</Button>
+            <Button loading={isLoadingCover} disabled={isLoadingCover}>
+              <span><Trans i18nKey="profile.edit_cover" /></span>
+            </Button>
           </Upload>
         </div>
         <div className="basic">

@@ -16,6 +16,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import cookies from 'js-cookie';
 import Icon, * as Icons from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as RoutineIcon } from '@/assets/icons/routine.svg';
 import Layout from '@/components/Layout';
@@ -51,6 +52,7 @@ interface DataType {
 
 export default function Settings() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const theme = useSelector((state: any) => state.themeReducer.theme);
   const language = useSelector((state: any) => state.languageReducer.language);
   const calendarStartHour = useSelector((state: any) => state.scheduleReducer.calendarStartHour);
@@ -64,30 +66,30 @@ export default function Settings() {
 
   const settingsTitles = useMemo(() => [
     {
-      text: 'Language',
+      text: t('settings.language'),
       icon: <Icons.GlobalOutlined className="icon" />,
     },
     {
-      text: 'Theme',
+      text: t('settings.theme'),
       icon: <Icon component={RoutineIcon as unknown as ForwardRefExoticComponent<any>} className="icon" />,
     },
     {
-      text: 'Calendar start hour',
+      text: t('settings.calendar_start_hour'),
       icon: <Icons.DownCircleOutlined className="icon" />,
     },
     {
-      text: 'Calendar end hour',
+      text: t('settings.calendar_end_hour'),
       icon: <Icons.UpCircleOutlined className="icon" />,
     },
     {
-      text: 'Calendar week days',
+      text: t('settings.calendar_week_days'),
       icon: <Icons.InsertRowAboveOutlined className="icon" />,
     },
     {
-      text: 'Sync profile photo',
+      text: t('settings.sync_profile_photo'),
       icon: <Icons.SyncOutlined className="icon" />,
     },
-  ], []);
+  ], [t]);
 
   const settingsValues: { text: string, value: any }[][] = useMemo(() => [
     [
@@ -96,8 +98,8 @@ export default function Settings() {
       { text: 'Українська', value: Language.Ukrainian },
     ],
     [
-      { text: 'Light', value: Theme.Light },
-      { text: 'Dark', value: Theme.Dark },
+      { text: t('settings.themes.light'), value: Theme.Light },
+      { text: t('settings.themes.dark'), value: Theme.Dark },
     ],
     [
       { text: calendarStartHour.toString(), value: null },
@@ -106,14 +108,14 @@ export default function Settings() {
       { text: calendarEndHour.toString(), value: null },
     ],
     [
-      { text: 'Mon - Fri', value: CalendarWeekDays.toFriday },
-      { text: 'Mon - Sat', value: CalendarWeekDays.toSaturday },
-      { text: 'Mon - Sun', value: CalendarWeekDays.toSunday },
+      { text: t('settings.calendar_week_days_list.mon_fri'), value: CalendarWeekDays.toFriday },
+      { text: t('settings.calendar_week_days_list.mon_sat'), value: CalendarWeekDays.toSaturday },
+      { text: t('settings.calendar_week_days_list.mon_sun'), value: CalendarWeekDays.toSunday },
     ],
     [
-      { text: 'Synchronize', value: null },
+      { text: t('settings.sync'), value: null },
     ],
-  ], [calendarStartHour, calendarEndHour]);
+  ], [calendarStartHour, calendarEndHour, t]);
 
   const settingsSelected = useMemo(() => [
     settingsValues[0].find((item) => item.value === languageSelected)?.text || '',
@@ -154,7 +156,7 @@ export default function Settings() {
     switch (name) {
       case SettingsName.CalendarStartHour:
         if (numberValue < 0 || numberValue > 22) {
-          message.error('Incorrect value').then();
+          message.error(t('common.messages.incorrect_value')).then();
           return;
         }
         dispatch(setCalendarStartHour(numberValue));
@@ -162,7 +164,7 @@ export default function Settings() {
         break;
       case SettingsName.CalendarEndHour:
         if (numberValue < 1 || numberValue > 23) {
-          message.error('Incorrect value').then();
+          message.error(t('common.messages.incorrect_value')).then();
           return;
         }
         dispatch(setCalendarEndHour(numberValue));
@@ -177,7 +179,7 @@ export default function Settings() {
     switch (name) {
       case SettingsName.SyncProfilePhoto:
         dispatch(syncUserPhoto({ user: profileData.id }));
-        message.success('Synced successfully').then();
+        message.success(t('settings.messages.synced')).then();
         break;
       default:
         break;
@@ -246,7 +248,7 @@ export default function Settings() {
 
   return (
     <Layout>
-      <Helmet title="Settings" />
+      <Helmet title={t('common.menu.settings') as string} />
       <div className="substrate">
         <Table
           className="settings-table"

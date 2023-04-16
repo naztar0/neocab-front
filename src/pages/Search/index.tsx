@@ -24,6 +24,7 @@ import {
 } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import {
@@ -68,6 +69,7 @@ import './index.scss';
 export default function Search() {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
   const facultyLoading: boolean = useSelector((state: any) => state.facultyReducer.isLoading);
   const facultiesData: Pagination<Faculty> = useSelector((state: any) => state.facultyReducer.faculties);
   const specialityLoading: boolean = useSelector((state: any) => state.specialityReducer.isLoading);
@@ -314,23 +316,23 @@ export default function Search() {
   ]);
 
   const stepTitles = useMemo(() => [
-    'Faculty',
-    'Speciality',
-    'Program',
-    'Department',
-    'Specialization',
-    'Group',
-    'User',
-  ], []);
+    t('common.divisions.faculty'),
+    t('common.divisions.speciality'),
+    t('common.divisions.educational_program'),
+    t('common.divisions.department'),
+    t('common.divisions.specialization'),
+    t('common.divisions.group'),
+    t('search.user'),
+  ], [t]);
 
   const userSortingList = useMemo(() => [
-    { key: 'ordFirstName', value: 'by first name' },
-    { key: 'ordLastName', value: 'by last name' },
-  ], []);
+    { key: 'ordFirstName', value: t('search.sort.by_first_name') },
+    { key: 'ordLastName', value: t('search.sort.by_last_name') },
+  ], [t]);
 
   const groupSortingList = useMemo(() => [
-    { key: 'ordName', value: 'by name' },
-  ], []);
+    { key: 'ordName', value: t('search.sort.by_name') },
+  ], [t]);
 
   const columns: ColumnsType<DataType> = useMemo(() => [
     {
@@ -391,9 +393,9 @@ export default function Search() {
       setPagePerPage({ page: 1, perPage: pagePerPage.perPage });
       setSearchValue(value);
     } else {
-      message.error('Search value must contain only letters, numbers and spaces').then();
+      message.error(t('search.search_error')).then();
     }
-  }, [pagePerPage.perPage]);
+  }, [pagePerPage.perPage, t]);
 
   const onSelectSorting = useCallback((param: string) => {
     if (selectedStepType === StepType.User) {
@@ -430,12 +432,12 @@ export default function Search() {
 
   return (
     <Layout>
-      <Helmet title="Search" />
+      <Helmet title={t('common.menu.search') as string} />
       <div className="substrate">
         <Space.Compact size="large" className="search-group">
           <Select
             className="search-select"
-            defaultValue="User"
+            defaultValue={stepTitles[selectedStepType]}
             size="large"
             onSelect={onSelectStepType}
           >
@@ -445,7 +447,7 @@ export default function Search() {
           </Select>
           <Input.Search
             className="search-input"
-            placeholder="Search"
+            placeholder={t('search.search_placeholder') as string}
             size="large"
             pattern={searchPatternString}
             onSearch={onSearch}
@@ -473,7 +475,7 @@ export default function Search() {
               className="sort-select"
               size="middle"
               onSelect={onSelectSorting}
-              value={`Sort ${getSelectedSorting()}`}
+              value={t('search.sorting', { sort: getSelectedSorting() })}
             >
               {currentStepType === StepType.User ? userSortingList.map((item) => (
                 <Select.Option key={item.key} value={item.key}>{item.value}</Select.Option>

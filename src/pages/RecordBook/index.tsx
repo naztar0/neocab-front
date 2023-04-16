@@ -4,6 +4,7 @@ import { Table, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import { WarningOutlined } from '@ant-design/icons';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import Semester from '@/components/Semester';
@@ -21,6 +22,7 @@ import './index.scss';
 
 export default function RecordBook() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const isLoading: boolean = useSelector((state: any) => state.recordBookReducer.isLoading);
   const recordBookData: RecordBook[] = useSelector((state: any) => state.recordBookReducer.recordBook);
@@ -43,7 +45,7 @@ export default function RecordBook() {
     {
       key: 'subject',
       dataIndex: 'subject',
-      title: 'Subject',
+      title: t('record_book.subject'),
       render: (value, record) => (
         <SubjectData
           title={record.syllabus.subject.title}
@@ -56,7 +58,7 @@ export default function RecordBook() {
     {
       key: 'credit',
       dataIndex: 'credit',
-      title: 'Credit',
+      title: t('record_book.credits'),
       render: (value, record) => (
         <span>{record.syllabus.credit}</span>
       ),
@@ -65,11 +67,11 @@ export default function RecordBook() {
     {
       key: 'control',
       dataIndex: 'control',
-      title: 'E/C',
+      title: t('record_book.control'),
       render: (value, record) => (
         <div className="row-data e-c">
-          <span>{record.syllabus.control || '-'}</span>
-          <span>{record.syllabus.individual_task || '-'}</span>
+          <span>{record.syllabus.control ? t(`record_book.${record.syllabus.control}`) : '-'}</span>
+          <span>{record.syllabus.individual_task ? t(`record_book.${record.syllabus.individual_task}`) : '-'}</span>
         </div>
       ),
       sorter: (a, b) => a.syllabus.control.localeCompare(b.syllabus.control),
@@ -77,7 +79,7 @@ export default function RecordBook() {
     {
       key: 'mark_5',
       dataIndex: 'mark_5',
-      title: 'Nat',
+      title: t('record_book.national'),
       render: (value, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
@@ -92,11 +94,11 @@ export default function RecordBook() {
     {
       dataIndex: 'mark_100',
       key: 'mark_100',
-      title: 'Mark',
+      title: t('record_book.mark'),
       render: (value, record) => (
         record.debt_date ? (
           <Tooltip title={formatDate(record.debt_date)} placement="top">
-            <span className="debt">Debt</span>
+            <span className="debt"><Trans i18nKey="record_book.debt" /></span>
           </Tooltip>
         ) : (
           <Tooltip title={toMarkNational(record.mark)} placement="top">
@@ -109,7 +111,7 @@ export default function RecordBook() {
     {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
-      title: 'ECTS',
+      title: t('record_book.ects'),
       render: (value, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
@@ -121,7 +123,7 @@ export default function RecordBook() {
       ),
       sorter: (a, b) => a.mark - b.mark,
     },
-  ], []);
+  ], [t]);
 
   const rbDataSource = useMemo(() => (
     recordBookData.map((data, index) => ({ key: index, ...data })) || []
@@ -129,7 +131,7 @@ export default function RecordBook() {
 
   return (
     <Layout>
-      <Helmet title="Record Book" />
+      <Helmet title={t('common.menu.record_book') as string} />
       <div className="substrate subject-table">
         <Table
           columns={rbColumns}
@@ -139,7 +141,9 @@ export default function RecordBook() {
           loading={isLoading}
           caption={(
             <div className="table-title">
-              <span className="title">Record Book</span>
+              <span className="title">
+                <Trans i18nKey="common.menu.record_book" />
+              </span>
               <Semester semester={semester} setSemester={setSemester} />
             </div>
           )}

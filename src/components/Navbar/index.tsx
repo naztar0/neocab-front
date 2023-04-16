@@ -4,6 +4,7 @@ import {
   Input,
   message,
 } from 'antd';
+import { useTranslation } from 'react-i18next';
 import Notifications from '@/components/Navbar/notifications';
 import Profile from '@/components/Navbar/profile';
 import {
@@ -15,12 +16,13 @@ import './index.scss';
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onSearch = useCallback((value: string) => {
     if (searchPattern.test(value)) {
       navigate(`/search?q=${value}`);
     } else {
-      message.error('Search value must contain only letters and spaces').then();
+      message.error(t('navbar.search_error')).then();
     }
   }, []);
 
@@ -30,7 +32,7 @@ export default function Navbar() {
         <Logo className="logo" />
         <Input.Search
           className="search"
-          placeholder="Search"
+          placeholder={t('navbar.search') as string}
           pattern={searchPatternString}
           onSearch={onSearch}
         />

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Skeleton } from 'antd';
 import * as Icons from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { yearToSemester } from '@/helpers/utils';
 import './index.scss';
 
@@ -10,29 +11,31 @@ interface Props {
 }
 
 export default function StudentProfileData({ isLoading, user }: Props) {
+  const { t } = useTranslation();
+
   const profileRowTitles = useMemo(() => [
-    ['Year • Semester', <Icons.CalendarOutlined className="icon" />],
-    ['Group', <Icons.TeamOutlined className="icon" />],
-    ['Education level', <Icons.BookOutlined className="icon" />],
-    ['Form of study', <Icons.EyeOutlined className="icon" />],
-    ['Payment form', <Icons.DollarOutlined className="icon" />],
-  ], []);
+    [t('profile.year_semester'), <Icons.CalendarOutlined className="icon" />],
+    [t('profile.group'), <Icons.TeamOutlined className="icon" />],
+    [t('profile.education_level'), <Icons.BookOutlined className="icon" />],
+    [t('profile.form_of_study'), <Icons.EyeOutlined className="icon" />],
+    [t('profile.payment_form'), <Icons.DollarOutlined className="icon" />],
+  ], [t]);
 
   const profileRowValues = useMemo(() => (!user ? [] : [
     `${user.year} • ${yearToSemester(user.year)}`,
     user.group.name,
-    user.train_level,
-    user.train_form,
-    user.payment,
+    t(`profile.train_levels.${user.train_level}`),
+    t(`profile.train_forms.${user.train_form}`),
+    t(`profile.payment_forms.${user.payment}`),
   ]), [user]);
 
   const profileColTitles = useMemo(() => [
-    'Faculty',
-    'Speciality',
-    'Educational program',
-    'Department',
-    'Specialization',
-  ], []);
+    t('common.divisions.faculty'),
+    t('common.divisions.speciality'),
+    t('common.divisions.educational_program'),
+    t('common.divisions.department'),
+    t('common.divisions.specialization'),
+  ], [t]);
 
   const profileColValues = useMemo(() => (!user ? [] : [
     user.group.specialization.department.program.speciality.faculty.name,

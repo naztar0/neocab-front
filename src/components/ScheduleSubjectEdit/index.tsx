@@ -13,6 +13,7 @@ import {
   MessageOutlined,
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import {
   dayNames,
   timeFormat,
@@ -30,6 +31,8 @@ type ScheduleSubjectEditProps = {
 export default function ScheduleSubjectEdit({
   editScheduleSubjectId, scheduleSubject, onChange, onSave, onDelete,
 }: ScheduleSubjectEditProps) {
+  const { t } = useTranslation();
+
   return (
     <Form
       className="date-time"
@@ -49,7 +52,7 @@ export default function ScheduleSubjectEdit({
           <Form.Item name="notes" noStyle>
             <Input
               className="notes"
-              placeholder="Type any notes"
+              placeholder={t('schedule.edit.notes_placeholder') as string}
               onChange={() => onChange({ subject: scheduleSubject?.id })}
             />
           </Form.Item>
@@ -65,7 +68,7 @@ export default function ScheduleSubjectEdit({
       <Form.Item name="time" noStyle>
         <TimePicker
           className="time"
-          placeholder="Time"
+          placeholder={t('schedule.edit.time') as string}
           format={timeFormat}
           minuteStep={5}
           onChange={() => onChange({ subject: scheduleSubject?.id })}

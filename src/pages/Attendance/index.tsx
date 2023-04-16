@@ -10,9 +10,14 @@ import {
 } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
-import ActivityCalendar, { Activity, Level } from 'react-activity-calendar';
+import ActivityCalendar, {
+  Activity,
+  Labels,
+  Level,
+} from 'react-activity-calendar';
 import { startOfYear, endOfYear, format } from 'date-fns';
 import dayjs from 'dayjs';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { getUserAttendance } from '@/store/actions/users';
 import { resetAttendance } from '@/store/reducers/attendance';
@@ -32,6 +37,7 @@ import './index.scss';
 
 export default function Attendance() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const theme: Theme = useSelector((state: any) => state.themeReducer.theme);
   const attendanceData: AttendanceResponse = useSelector((state: any) => state.attendanceReducer.attendance);
@@ -64,7 +70,7 @@ export default function Attendance() {
   const lastAttendancesColumns: ColumnsType<AttendanceLog> = useMemo(() => [
     {
       dataIndex: 'subject',
-      title: 'Subject',
+      title: t('attendance.subject'),
       render: (value, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
@@ -75,29 +81,29 @@ export default function Attendance() {
     },
     {
       dataIndex: 'date',
-      title: 'Date',
+      title: t('attendance.date'),
       render: (value, data) => (
         <span className="date">{`${formatDate(data.date)} ${data.schedule_subject.time}`}</span>
       ),
     },
-  ], []);
+  ], [t]);
 
   const mostVisitedSubjectsColumns: ColumnsType<AttendanceMostVisited> = useMemo(() => [
     {
       dataIndex: 'subject',
-      title: 'Subject',
+      title: t('attendance.subject'),
       render: (value, data) => (
         <span className="subject">{data.title}</span>
       ),
     },
     {
       dataIndex: 'count',
-      title: 'Visits',
+      title: t('attendance.visits'),
       render: (value, data) => (
         <span className="count">{data.count}</span>
       ),
     },
-  ], []);
+  ], [t]);
 
   const mostVisitedSubjectsDataSource = useMemo(() => (
     attendanceData?.most_visited.map((data, index) => ({ ...data, key: index }))
@@ -107,14 +113,49 @@ export default function Attendance() {
     attendanceData?.attendance.slice(-historyLimit).map((data, index) => ({ ...data, key: index }))
   ), [attendanceData]);
 
+  const labels: Labels = useMemo(() => ({
+    months: [
+      t('attendance.labels.months.january'),
+      t('attendance.labels.months.february'),
+      t('attendance.labels.months.march'),
+      t('attendance.labels.months.april'),
+      t('attendance.labels.months.may'),
+      t('attendance.labels.months.june'),
+      t('attendance.labels.months.july'),
+      t('attendance.labels.months.august'),
+      t('attendance.labels.months.september'),
+      t('attendance.labels.months.october'),
+      t('attendance.labels.months.november'),
+      t('attendance.labels.months.december'),
+    ],
+    weekdays: [
+      t('attendance.labels.weekdays.monday'),
+      t('attendance.labels.weekdays.tuesday'),
+      t('attendance.labels.weekdays.wednesday'),
+      t('attendance.labels.weekdays.thursday'),
+      t('attendance.labels.weekdays.friday'),
+      t('attendance.labels.weekdays.saturday'),
+      t('attendance.labels.weekdays.sunday'),
+    ],
+    legend: {
+      less: t('attendance.labels.legend.less') as string,
+      more: t('attendance.labels.legend.more') as string,
+    },
+    totalCount: t('attendance.labels.total_count') as string,
+  }), [t]);
+
   return (
     <Layout>
-      <Helmet title="Attendance" />
+      <Helmet title={t('common.menu.attendance') as string} />
       {(profileData?.role === Role.Headman || profileData?.role === Role.Admin) && (
         <div className="attendance-title">
-          <span className="title">Attendance</span>
+          <span className="title">
+            <Trans i18nKey="common.menu.attendance" />
+          </span>
           <Link to="/attendance/edit">
-            <Button>Edit attendances</Button>
+            <Button>
+              <Trans i18nKey="attendance.edit_attendances" />
+            </Button>
           </Link>
         </div>
       )}
@@ -124,10 +165,11 @@ export default function Attendance() {
             <ActivityCalendar
               loading={isLoading}
               data={daysData}
-              weekStart={1}
+              weekStart={0}
               fontSize={12}
               color={mainColor}
               colorScheme={theme === Theme.Dark ? 'dark' : 'light'}
+              labels={labels}
               showWeekdayLabels
               hideTotalCount
               eventHandlers={{
@@ -136,7 +178,11 @@ export default function Attendance() {
                 ),
               }}
               renderBlock={(block, activity) => (
-                <Tooltip title={`${formatDate(activity.date)}: ${activity.count} attendances`}>
+                <Tooltip title={t(
+                  'attendance.attendances',
+                  { date: formatDate(activity.date), count: activity.count },
+                )}
+                >
                   {block}
                 </Tooltip>
               )}
@@ -150,7 +196,9 @@ export default function Attendance() {
               loading={isLoading}
               caption={(
                 <div className="title">
-                  <span>Last attendances</span>
+                  <span>
+                    <Trans i18nKey="attendance.last_attendances" />
+                  </span>
                 </div>
               )}
             />
@@ -165,7 +213,9 @@ export default function Attendance() {
             loading={isLoading}
             caption={(
               <div className="title">
-                <span>Most visited subjects</span>
+                <span>
+                  <Trans i18nKey="attendance.most_visited_subjects" />
+                </span>
               </div>
             )}
           />
@@ -176,7 +226,9 @@ export default function Attendance() {
         open={!!modalDay}
         onCancel={() => setModalDay(null)}
         footer={[
-          <Button key="back" onClick={() => setModalDay(null)}>Close</Button>,
+          <Button key="back" onClick={() => setModalDay(null)}>
+            <Trans i18nKey="common.buttons.close" />
+          </Button>,
         ]}
       >
         {attendanceData?.attendance.filter((day) => day.date === modalDay)

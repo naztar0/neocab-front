@@ -15,6 +15,7 @@ import {
   Divider,
 } from 'antd';
 import { Helmet } from 'react-helmet';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as MsLoginLight } from '@/assets/images/ms_signin_light.svg';
 import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.svg';
@@ -27,6 +28,7 @@ import './index.scss';
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const msLoginUrl = useSelector((state: any) => state.loginReducer.msLoginUrl);
@@ -76,7 +78,7 @@ export default function Login() {
     if (isError) {
       switch (errorCode) {
         case 401:
-          message.error('Wrong email or password', 10).then();
+          message.error(t('login.messages.wrong_credentials'), 10).then();
           if (checkCabinetLoginRef.current) {
             setCheckCabinetLogin(false);
           }
@@ -84,18 +86,18 @@ export default function Login() {
         case 403:
           if (isLoginViaCabinet) {
             if (!checkCabinetLoginRef.current) {
-              message.warning('For the first time it may take up to a minute to login', 10).then();
+              message.warning(t('login.messages.long_first_time_login'), 10).then();
               setCheckCabinetLogin(true);
             }
             setTimeout(() => dispatch(loginViaCabinet(cabinetCredentials)), 8000);
             dispatch(clearError());
           } else {
-            message.warning('For the first time you need to login via login and password from cabinet', 15).then();
+            message.warning(t('login.messages.cabinet_login_required'), 15).then();
             setNativeRequired(true);
           }
           break;
         default:
-          message.error('Something went wrong').then();
+          message.error(t('common.messages.something_went_wrong')).then();
           break;
       }
     }
@@ -116,9 +118,9 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <Helmet title="Login" />
+      <Helmet title={t('common.menu.login') as string} />
       <Logo className="logo" />
-      <h1 className="title">Sign in to NeoCab</h1>
+      <h1 className="title"><Trans i18nKey="login.form.label" /></h1>
       <Spin spinning={isLoading || checkCabinetLogin} size="large">
         <div className="substrate">
           <Form
@@ -128,20 +130,30 @@ export default function Login() {
             requiredMark={false}
           >
             <Form.Item
-              label="Email"
+              label={t('login.form.email')}
               name="email"
-              rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+              rules={[{
+                required: true,
+                message: t('login.messages.input_email') as string,
+                type: 'email',
+              }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="Password"
+              label={t('login.form.password')}
               name="password"
-              rules={[{ required: true, message: 'Please input your password!', pattern: /^[a-zA-Z0-9]{4,8}$/ }]}
+              rules={[{
+                required: true,
+                message: t('login.messages.input_password') as string,
+                pattern: /^[a-zA-Z0-9]{4,8}$/,
+              }]}
             >
               <Input.Password />
             </Form.Item>
-            <Button type="primary" htmlType="submit" className="button-main">Submit</Button>
+            <Button type="primary" htmlType="submit" className="button-main">
+              <span><Trans i18nKey="common.buttons.submit" /></span>
+            </Button>
           </Form>
           <Divider />
           <button type="button" className="ms-login" onClick={getMsLoginUrl}>

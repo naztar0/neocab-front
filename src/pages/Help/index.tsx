@@ -20,6 +20,7 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 import { Helmet } from 'react-helmet';
+import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
 import {
@@ -35,6 +36,7 @@ import './index.scss';
 
 export default function Help() {
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const language: Language = useSelector((state: any) => state.languageReducer.language);
   const isLoading: boolean = useSelector((state: any) => state.faqReducer.isLoading);
@@ -51,29 +53,29 @@ export default function Help() {
 
   const inputContent = useMemo(() => [
     {
-      qLabel: 'Question in English',
+      qLabel: t('help.question_in_english'),
       qName: 'question_en',
-      aLabel: 'Answer in English',
+      aLabel: t('help.answer_in_english'),
       aName: 'answer_en',
     },
     {
-      qLabel: 'Question in Russian',
+      qLabel: t('help.question_in_russian'),
       qName: 'question_ru',
-      aLabel: 'Answer in Russian',
+      aLabel: t('help.answer_in_russian'),
       aName: 'answer_ru',
     },
     {
-      qLabel: 'Question in Ukrainian',
+      qLabel: t('help.question_in_ukrainian'),
       qName: 'question_uk',
-      aLabel: 'Answer in Ukrainian',
+      aLabel: t('help.answer_in_ukrainian'),
       aName: 'answer_uk',
     },
-  ], []);
+  ], [t]);
 
   const onSave = useCallback((values: Object) => {
     if (editType === FaqEditType.add) {
       if (Object.values(values).some((value) => !value.trim())) {
-        message.error('Please fill all fields').then();
+        message.error(t('common.messages.fill_all_fields')).then();
         return;
       }
       dispatch(addFaq({ data: values }));
@@ -82,7 +84,7 @@ export default function Help() {
         Object.entries(values).filter(([key, value]) => key && value?.trim()),
       );
       if (!Object.keys(values).length) {
-        message.error('Please fill at least one field').then();
+        message.error(t('common.messages.fill_one_field')).then();
         return;
       }
       dispatch(editFaq({ faq: currentFaq, data: values }));
@@ -90,7 +92,7 @@ export default function Help() {
     setEditType(null);
     setCurrentFaq(null);
     setDrawerOpen(false);
-  }, [editType, currentFaq]);
+  }, [editType, currentFaq, t]);
 
   const getActions = useCallback((faq: number) => (
     <div className="actions">
@@ -105,10 +107,10 @@ export default function Help() {
         }}
       />
       <Popconfirm
-        title="Delete the question?"
-        description="Are you sure to delete this question?"
-        okText="Yes"
-        cancelText="No"
+        title={t('help.delete_question')}
+        description={t('help.sure_to_delete_question')}
+        okText={t('common.buttons.yes')}
+        cancelText={t('common.buttons.no')}
         placement="left"
         onConfirm={() => {
           dispatch(removeFaq({ faq }));
@@ -124,18 +126,20 @@ export default function Help() {
 
   return (
     <Layout>
-      <Helmet title="Help" />
+      <Helmet title={t('common.menu.help') as string} />
       <div className="substrate">
         {(profileData?.role === Role.Admin) && (
           <div className="help-title">
-            <span className="title">Help</span>
+            <span className="title">
+              <Trans i18nKey="common.menu.help" />
+            </span>
             <Button
               onClick={() => {
                 setDrawerOpen(true);
                 setEditType(FaqEditType.add);
               }}
             >
-              Add faq
+              <span><Trans i18nKey="help.add_question" /></span>
             </Button>
           </div>
         )}
@@ -153,7 +157,7 @@ export default function Help() {
           </Collapse>
         </Spin>
         <Drawer
-          title="Edit FAQ"
+          title={editType === FaqEditType.add ? t('help.add_question') : t('help.edit_question')}
           placement="right"
           closable
           onClose={() => {
@@ -184,7 +188,9 @@ export default function Help() {
                 </Form.Item>
               </div>
             ))}
-            <Button type="primary" htmlType="submit">Submit</Button>
+            <Button type="primary" htmlType="submit">
+              <span><Trans i18nKey="common.buttons.submit" /></span>
+            </Button>
           </Form>
         </Drawer>
       </div>

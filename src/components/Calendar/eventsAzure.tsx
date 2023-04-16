@@ -8,11 +8,13 @@ import {
   setMinutes,
   differenceInMinutes,
 } from 'date-fns';
+import { Trans, useTranslation } from 'react-i18next';
 import { getDate } from '@/helpers/utils';
 import { shiftCoefficient } from '@/constants/schedule';
 import './index.scss';
 
 export default function EventsAzure({ events, day }: { events: CalendarEvent[], day: Date }) {
+  useTranslation();
   const calendarStartHour = useSelector((state: any) => state.scheduleReducer.calendarStartHour);
   const calendarEndHour = useSelector((state: any) => state.scheduleReducer.calendarEndHour);
   const calendarWeekDays = useSelector((state: any) => state.scheduleReducer.calendarWeekDays);
@@ -36,7 +38,9 @@ export default function EventsAzure({ events, day }: { events: CalendarEvent[], 
               title={`${format(eventStart, 'HH:mm')} - ${format(eventEnd, 'HH:mm')}`}
               content={(
                 <a href={event.joinUrl} target="_blank" rel="noreferrer">
-                  <Button size="middle" type="primary" icon={<VideoCameraOutlined />}>Join</Button>
+                  <Button size="middle" type="primary" icon={<VideoCameraOutlined />}>
+                    <span><Trans i18nKey="schedule.join" /></span>
+                  </Button>
                 </a>
               )}
             >
