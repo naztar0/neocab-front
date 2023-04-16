@@ -1,0 +1,248 @@
+{
+  "attendance": {
+    "attendances": "{{date}}: {{count}} attendances",
+    "date": "Date",
+    "edit": {
+      "add_attendances": "Add attendances",
+      "attendances_count": "Attendances count",
+      "date": "Date",
+      "messages": {
+        "select_subjects_and_date": "Please select subject and date"
+      },
+      "students": "Students",
+      "subject": "Subject",
+      "time": "Time",
+      "title": "Edit attendances",
+      "week": "Week"
+    },
+    "edit_attendances": "Edit attendances",
+    "labels": {
+      "legend": {
+        "less": "Less",
+        "more": "More"
+      },
+      "months": {
+        "april": "Apr",
+        "august": "Aug",
+        "december": "Dec",
+        "february": "Feb",
+        "january": "Jan",
+        "july": "Jul",
+        "june": "Jun",
+        "march": "Mar",
+        "may": "May",
+        "november": "Nov",
+        "october": "Oct",
+        "september": "Sep"
+      },
+      "total_count": "Total count",
+      "weekdays": {
+        "friday": "Fri",
+        "monday": "Mon",
+        "saturday": "Sat",
+        "sunday": "Sun",
+        "thursday": "Thu",
+        "tuesday": "Tue",
+        "wednesday": "Wed"
+      }
+    },
+    "last_attendances": "Last attendances",
+    "most_visited_subjects": "Most visited subjects",
+    "subject": "Subject",
+    "visits": "Visits"
+  },
+  "common": {
+    "buttons": {
+      "close": "Close",
+      "no": "No",
+      "submit": "Submit",
+      "yes": "Yes"
+    },
+    "components": {
+      "semester": "Semester {{semester}}"
+    },
+    "divisions": {
+      "department": "Department",
+      "educational_program": "Educational program",
+      "faculty": "Faculty",
+      "group": "Group",
+      "speciality": "Speciality",
+      "specialization": "Specialization"
+    },
+    "menu": {
+      "attendance": "Attendance",
+      "help": "Help",
+      "login": "Login",
+      "profile": "Profile",
+      "rating": "Rating",
+      "record_book": "Record book",
+      "schedule": "Schedule",
+      "search": "Search",
+      "settings": "Settings",
+      "syllabus": "Syllabus"
+    },
+    "messages": {
+      "fill_all_fields": "Please fill all fields",
+      "fill_one_field": "Please fill at least one field",
+      "incorrect_value": "Incorrect value",
+      "something_went_wrong": "Something went wrong"
+    }
+  },
+  "help": {
+    "add_question": "Add question",
+    "answer_in_english": "Answer in English",
+    "answer_in_russian": "Answer in Russian",
+    "answer_in_ukrainian": "Answer in Ukrainian",
+    "delete_question": "Delete the question?",
+    "edit_question": "Edit question",
+    "question_in_english": "Question in English",
+    "question_in_russian": "Question in Russian",
+    "question_in_ukrainian": "Question in Ukrainian",
+    "sure_to_delete_question": "Are you sure to delete this question?"
+  },
+  "login": {
+    "form": {
+      "email": "Email",
+      "label": "Sign in to NeoCab",
+      "password": "Password"
+    },
+    "messages": {
+      "cabinet_login_required": "For the first time you need to login via login and password from cabinet",
+      "input_email": "Please input your email!",
+      "input_password": "Please input your password!",
+      "long_first_time_login": "For the first time it may take up to a minute to login",
+      "wrong_credentials": "Wrong email or password"
+    }
+  },
+  "navbar": {
+    "logout": "Logout",
+    "new_notification": "New notification!",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "search": "Search",
+    "search_error": "Search value must contain only letters and spaces"
+  },
+  "profile": {
+    "edit_cover": "Edit cover",
+    "education_level": "Education level",
+    "form_of_study": "Form of study",
+    "group": "Group",
+    "messages": {
+      "not_image": "{{filename}} is not an image file"
+    },
+    "payment_form": "Payment form",
+    "payment_forms": {
+      "budget": "Budget",
+      "contract": "Contract"
+    },
+    "roles": {
+      "admin": "Admin",
+      "headman": "Headman",
+      "professor": "Professor",
+      "student": "Student"
+    },
+    "train_forms": {
+      "extramural": "Extramural",
+      "full-time": "Full time"
+    },
+    "train_levels": {
+      "bachelor": "Bachelor",
+      "master": "Master"
+    },
+    "year_semester": "Year • Semester"
+  },
+  "rating": {
+    "ects": "ECTS",
+    "group": "Group",
+    "high_probability": "high",
+    "mark": "Mark",
+    "national": "Nat",
+    "percentage": "Percentage in the rating: {{percent}}%\nProbability of getting a scholarship: {{probability}}",
+    "student": "Student"
+  },
+  "record_book": {
+    "control": "Control",
+    "coursework": "Coursework",
+    "credit": "Credit",
+    "credits": "Credit",
+    "debt": "Debt",
+    "ects": "ECTS",
+    "essay": "essay",
+    "exam": "Exam",
+    "mark": "Mark",
+    "national": "Nat",
+    "subject": "Subject",
+    "test": "Test"
+  },
+  "schedule": {
+    "custom": "Custom",
+    "edit": {
+      "add_schedule": "Add new schedule",
+      "delete_schedule": "Delete the schedule?",
+      "description": "Description",
+      "description_placeholder": "E.g. week 1 / exam week",
+      "edit_schedule": "Edit schedule {{schedule}}",
+      "messages": {
+        "input_description": "Please input description",
+        "input_valid_week": "Please input valid week number"
+      },
+      "notes_placeholder": "Type any notes",
+      "sure_to_delete_schedule": "Are you sure to delete this schedule?",
+      "time": "Time",
+      "title": "Edit schedules",
+      "week": "Week",
+      "week_placeholder": "E.g. 1"
+    },
+    "edit_schedule": "Edit",
+    "join": "Join",
+    "teams": "Teams"
+  },
+  "search": {
+    "search_error": "Search value must contain only letters, numbers and spaces",
+    "search_placeholder": "Search",
+    "sort": {
+      "by_first_name": "by first name",
+      "by_last_name": "by last name",
+      "by_name": "by name"
+    },
+    "sorting": "Sort {{sort}}",
+    "user": "User"
+  },
+  "settings": {
+    "calendar_end_hour": "Calendar end hour",
+    "calendar_start_hour": "Calendar start hour",
+    "calendar_week_days": "Calendar week days",
+    "calendar_week_days_list": {
+      "mon_fri": "Mon -Fri",
+      "mon_sat": "Mon - Sat",
+      "mon_sun": "Mon - Sun"
+    },
+    "language": "Language",
+    "messages": {
+      "synced": "Synced successfully"
+    },
+    "sync": "Synchronize",
+    "sync_profile_photo": "Sync profile photo",
+    "synced": "Synced successfully",
+    "theme": "Theme",
+    "themes": {
+      "dark": "Dark",
+      "light": "Light"
+    }
+  },
+  "syllabus": {
+    "control": "Control",
+    "coursework": "Coursework",
+    "credit": "Credit",
+    "credits": "Credits",
+    "essay": "essay",
+    "exam": "Exam",
+    "hours": "Hours",
+    "subject": "Subject",
+    "test": "Test"
+  },
+  "unsupported": {
+    "button": "Open telegram bot",
+    "content": "We do not currently support mobile devices. Please use telegram bot instead."
+  }
+}

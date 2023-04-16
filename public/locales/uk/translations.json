@@ -1,0 +1,248 @@
+{
+  "attendance": {
+    "attendances": "{{date}}: {{count}} відвідувань",
+    "date": "Дата",
+    "edit": {
+      "add_attendances": "Додати відвідування",
+      "attendances_count": "Кількість відвідувань",
+      "date": "Дата",
+      "messages": {
+        "select_subjects_and_date": "Будь ласка, оберіть дисципліну та дату"
+      },
+      "students": "Студенти",
+      "subject": "Дисципліна",
+      "time": "Час",
+      "title": "Редагування відвідувань",
+      "week": "Тиждень"
+    },
+    "edit_attendances": "Редагувати відвідування",
+    "labels": {
+      "legend": {
+        "less": "Менше",
+        "more": "Більше"
+      },
+      "months": {
+        "april": "Квіт",
+        "august": "Сер",
+        "december": "Гру",
+        "february": "Лют",
+        "january": "Січ",
+        "july": "Лип",
+        "june": "Чер",
+        "march": "Бер",
+        "may": "Трав",
+        "november": "Лис",
+        "october": "Жов",
+        "september": "Вер"
+      },
+      "total_count": "Загальна кількість",
+      "weekdays": {
+        "friday": "Пт",
+        "monday": "Пн",
+        "saturday": "Сб",
+        "sunday": "Нд",
+        "thursday": "Чт",
+        "tuesday": "Вт",
+        "wednesday": "Ср"
+      }
+    },
+    "last_attendances": "Останні відвідування",
+    "most_visited_subjects": "Найбільш відвідувані дисципліни",
+    "subject": "Дисципліна",
+    "visits": "Відвідувань"
+  },
+  "common": {
+    "buttons": {
+      "close": "Закрити",
+      "no": "Ні",
+      "submit": "Відправити",
+      "yes": "Так"
+    },
+    "components": {
+      "semester": "Семестр {{semester}}"
+    },
+    "divisions": {
+      "department": "Кафедра",
+      "educational_program": "Освітня програма",
+      "faculty": "Факультет",
+      "group": "Група",
+      "speciality": "Спеціальність",
+      "specialization": "Спеціалізація"
+    },
+    "menu": {
+      "attendance": "Відвідуваність",
+      "help": "Допомога",
+      "login": "Вхід",
+      "profile": "Профіль",
+      "rating": "Рейтинг",
+      "record_book": "Залікова книжка",
+      "schedule": "Розклад",
+      "search": "Пошук",
+      "settings": "Налаштування",
+      "syllabus": "Навчальний план"
+    },
+    "messages": {
+      "fill_all_fields": "Будь ласка, заповніть усі поля",
+      "fill_one_field": "Будь ласка, заповніть хоча б одне поле",
+      "incorrect_value": "Невірне значення",
+      "something_went_wrong": "Щось пішло не так"
+    }
+  },
+  "help": {
+    "add_question": "Додати питання",
+    "answer_in_english": "Відповідь англійською",
+    "answer_in_russian": "Відповідь російською",
+    "answer_in_ukrainian": "Відповідь українською",
+    "delete_question": "Видалити питання?",
+    "edit_question": "Редагувати питання",
+    "question_in_english": "Питання англійською",
+    "question_in_russian": "Питання російською",
+    "question_in_ukrainian": "Питання українською",
+    "sure_to_delete_question": "Ви впевнені, що хочете видалити це запитання?"
+  },
+  "login": {
+    "form": {
+      "email": "Електронна пошта",
+      "label": "Увійти до NeoCab",
+      "password": "Пароль"
+    },
+    "messages": {
+      "cabinet_login_required": "В перший раз вам потрібно увійти використовуючи логін та пароль від кабінету",
+      "input_email": "Будь ласка, введіть свою електронну адресу!",
+      "input_password": "Будь ласка, введіть свій пароль!",
+      "long_first_time_login": "Перший раз вхід може зайняти до хвилини",
+      "wrong_credentials": "Неправильна адреса електронної пошти або пароль"
+    }
+  },
+  "navbar": {
+    "logout": "Вийти",
+    "new_notification": "Нове сповіщення!",
+    "notifications": "Повідомлення",
+    "profile": "Профіль",
+    "search": "Пошук",
+    "search_error": "Значення пошуку повинно містити лише літери та пробіли"
+  },
+  "profile": {
+    "edit_cover": "Змінити обкладинку",
+    "education_level": "Рівень навчання",
+    "form_of_study": "Форма навчання",
+    "group": "Група",
+    "messages": {
+      "not_image": "{{filename}} не є файлом зображення"
+    },
+    "payment_form": "Форма оплати",
+    "payment_forms": {
+      "budget": "Бюджет",
+      "contract": "Контракт"
+    },
+    "roles": {
+      "admin": "Адмін",
+      "headman": "Староста",
+      "professor": "Викладач",
+      "student": "Студент"
+    },
+    "train_forms": {
+      "extramural": "Заочна",
+      "full-time": "Денна"
+    },
+    "train_levels": {
+      "bachelor": "Бакалавр",
+      "master": "Магістр"
+    },
+    "year_semester": "Курс • Семестр"
+  },
+  "rating": {
+    "ects": "ECTS",
+    "group": "Група",
+    "high_probability": "висока",
+    "mark": "Бал",
+    "national": "Нац",
+    "percentage": "Відсоток у рейтингу: {{percent}}%\nЙмовірність отримання стипендії: {{probability}}",
+    "student": "Студент"
+  },
+  "record_book": {
+    "control": "Контроль",
+    "coursework": "Курсова робота",
+    "credit": "Залік",
+    "credits": "Кредит",
+    "debt": "Борг",
+    "ects": "ECTS",
+    "essay": "Реферат",
+    "exam": "Екзамен",
+    "mark": "Бал",
+    "national": "Нац",
+    "subject": "Дисципліна",
+    "test": "РГЗ"
+  },
+  "schedule": {
+    "custom": "Кастомний",
+    "edit": {
+      "add_schedule": "Додати розклад",
+      "delete_schedule": "Видалити розклад?",
+      "description": "Опис",
+      "description_placeholder": "Напр., тиждень 1 / тиждень екзаменів",
+      "edit_schedule": "Редагування розкладу {{schedule}}",
+      "messages": {
+        "input_description": "Будь ласка, введіть опис",
+        "input_valid_week": "Будь ласка, введіть дійсний номер тижня"
+      },
+      "notes_placeholder": "Будь-які примітки",
+      "sure_to_delete_schedule": "Ви впевнені, що хочете видалити цей розклад?",
+      "time": "Час",
+      "title": "Редагування розкладу",
+      "week": "Тиждень",
+      "week_placeholder": "Напр., 1"
+    },
+    "edit_schedule": "Редагувати",
+    "join": "Приєднатися",
+    "teams": "Teams"
+  },
+  "search": {
+    "search_error": "Значення пошуку повинно містити тільки літери, цифри та пробіли",
+    "search_placeholder": "Пошук",
+    "sort": {
+      "by_first_name": "за іменем",
+      "by_last_name": "за прізвищем",
+      "by_name": "за назвою"
+    },
+    "sorting": "Сортування {{sort}}",
+    "user": "Користувач"
+  },
+  "settings": {
+    "calendar_end_hour": "Кінцева година календаря",
+    "calendar_start_hour": "Початкова година календаря",
+    "calendar_week_days": "Дні тижня календаря",
+    "calendar_week_days_list": {
+      "mon_fri": "Пн - Пт",
+      "mon_sat": "Пн - Сб",
+      "mon_sun": "Пн - Нд"
+    },
+    "language": "Мова",
+    "messages": {
+      "synced": "Успішно синхронізовано"
+    },
+    "sync": "Синхронізувати",
+    "sync_profile_photo": "Синхронізувати фото профілю",
+    "synced": "Успішно синхронізовано",
+    "theme": "Тема",
+    "themes": {
+      "dark": "Темна",
+      "light": "Світла"
+    }
+  },
+  "syllabus": {
+    "control": "Контроль",
+    "coursework": "Курсова робота",
+    "credit": "Залік",
+    "credits": "Кредити",
+    "essay": "Реферат",
+    "exam": "Екзамен",
+    "hours": "Години",
+    "subject": "Дисципліна",
+    "test": "РГЗ"
+  },
+  "unsupported": {
+    "button": "Відкрити телеграм-бот",
+    "content": "Наразі ми не підтримуємо мобільні пристрої. Будь ласка, використовуйте телеграм-бот."
+  }
+}

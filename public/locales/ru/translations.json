@@ -1,0 +1,248 @@
+{
+  "attendance": {
+    "attendances": "{{date}}: {{count}} посещений",
+    "date": "Дата",
+    "edit": {
+      "add_attendances": "Добавить посещения",
+      "attendances_count": "Количество посещений",
+      "date": "Дата",
+      "messages": {
+        "select_subjects_and_date": "Пожалуйста, выберите дисциплину и дату"
+      },
+      "students": "Студенты",
+      "subject": "Дисциплина",
+      "time": "Время",
+      "title": "Редактирование посещаемости",
+      "week": "Неделя"
+    },
+    "edit_attendances": "Редактировать посещаемости",
+    "labels": {
+      "legend": {
+        "less": "Меньше",
+        "more": "Больше"
+      },
+      "months": {
+        "april": "Апр",
+        "august": "Авг",
+        "december": "Дек",
+        "february": "Фев",
+        "january": "Янв",
+        "july": "Июл",
+        "june": "Июн",
+        "march": "Мар",
+        "may": "Май",
+        "november": "Ноя",
+        "october": "Окт",
+        "september": "Сен"
+      },
+      "total_count": "Общее количество",
+      "weekdays": {
+        "friday": "Пт",
+        "monday": "Пн",
+        "saturday": "Сб",
+        "sunday": "Вс",
+        "thursday": "Чт",
+        "tuesday": "Вт",
+        "wednesday": "Ср"
+      }
+    },
+    "last_attendances": "Последние посещения",
+    "most_visited_subjects": "Наиболее посещаемые дисциплины",
+    "subject": "Дисциплина",
+    "visits": "Посещений"
+  },
+  "common": {
+    "buttons": {
+      "close": "Закрыть",
+      "no": "Нет",
+      "submit": "Отправить",
+      "yes": "Да"
+    },
+    "components": {
+      "semester": "Семестр {{semester}}"
+    },
+    "divisions": {
+      "department": "Кафедра",
+      "educational_program": "Образовательная программа",
+      "faculty": "Факультет",
+      "group": "Группа",
+      "speciality": "Специальность",
+      "specialization": "Специализация"
+    },
+    "menu": {
+      "attendance": "Посещаемость",
+      "help": "Помощь",
+      "login": "Вход",
+      "profile": "Профиль",
+      "rating": "Рейтинг",
+      "record_book": "Зачетная книжка",
+      "schedule": "Расписание",
+      "search": "Поиск",
+      "settings": "Настройки",
+      "syllabus": "Учебный план"
+    },
+    "messages": {
+      "fill_all_fields": "Пожалуйста, заполните все поля",
+      "fill_one_field": "Пожалуйста, заполните хотя бы одно поле",
+      "incorrect_value": "Неверное значение",
+      "something_went_wrong": "Что-то пошло не так"
+    }
+  },
+  "help": {
+    "add_question": "Добавить вопрос",
+    "answer_in_english": "Ответ на английском",
+    "answer_in_russian": "Ответ на русском",
+    "answer_in_ukrainian": "Ответ на украинском",
+    "delete_question": "Удалить вопрос?",
+    "edit_question": "Редактировать вопрос",
+    "question_in_english": "Вопрос на английском",
+    "question_in_russian": "Вопрос на русском",
+    "question_in_ukrainian": "Вопрос на украинском",
+    "sure_to_delete_question": "Вы уверены, что хотите удалить этот вопрос?"
+  },
+  "login": {
+    "form": {
+      "email": "Электронная почта",
+      "label": "Войти в NeoCab",
+      "password": "Пароль"
+    },
+    "messages": {
+      "cabinet_login_required": "В первый раз вам необходимо войти используя логин и пароль от кабинета",
+      "input_email": "Пожалуйста, введите свой email!",
+      "input_password": "Пожалуйста, введите свой пароль!",
+      "long_first_time_login": "В первый раз вход может занять до минуты",
+      "wrong_credentials": "Неправильный адрес электронной почты или пароль"
+    }
+  },
+  "navbar": {
+    "logout": "Выйти",
+    "new_notification": "Новое уведомление!",
+    "notifications": "Уведомления",
+    "profile": "Профиль",
+    "search": "Поиск",
+    "search_error": "Значение поиска должно содержать только буквы и пробелы"
+  },
+  "profile": {
+    "edit_cover": "Изменить обложку",
+    "education_level": "Уровень обучения",
+    "form_of_study": "Форма обучения",
+    "group": "Группа",
+    "messages": {
+      "not_image": "{{filename}} не является файлом изображения"
+    },
+    "payment_form": "Форма оплаты",
+    "payment_forms": {
+      "budget": "Бюджет",
+      "contract": "Контракт"
+    },
+    "roles": {
+      "admin": "Админ",
+      "headman": "Староста",
+      "professor": "Преподаватель",
+      "student": "Студент"
+    },
+    "train_forms": {
+      "extramural": "Заочная",
+      "full-time": "Дневная"
+    },
+    "train_levels": {
+      "bachelor": "Бакалавр",
+      "master": "Магистр"
+    },
+    "year_semester": "Курс • Семестр"
+  },
+  "rating": {
+    "ects": "ECTS",
+    "group": "Группа",
+    "high_probability": "высокая",
+    "mark": "Балл",
+    "national": "Нац",
+    "percentage": "Процент в рейтинге: {{percent}}%\nВероятность получения стипендии: {{probability}}",
+    "student": "Студент"
+  },
+  "record_book": {
+    "control": "Контроль",
+    "coursework": "Курсовая работа",
+    "credit": "Зачет",
+    "credits": "Кредит",
+    "debt": "Долг",
+    "ects": "ECTS",
+    "essay": "Реферат",
+    "exam": "Экзамен",
+    "mark": "Балл",
+    "national": "Нац",
+    "subject": "Дисциплина",
+    "test": "РГЗ"
+  },
+  "schedule": {
+    "custom": "Кастомное",
+    "edit": {
+      "add_schedule": "Добавить расписание",
+      "delete_schedule": "Удалить расписание?",
+      "description": "Описание",
+      "description_placeholder": "Напр., неделя 1 / неделя экзаменов",
+      "edit_schedule": "Редактирование расписания {{schedule}}",
+      "messages": {
+        "input_description": "Пожалуйста, введите описание",
+        "input_valid_week": "Пожалуйста, введите действительный номер недели"
+      },
+      "notes_placeholder": "Любые примечания",
+      "sure_to_delete_schedule": "Вы уверены, что хотите удалить это расписание?",
+      "time": "Время",
+      "title": "Редактирование расписаний",
+      "week": "Неделя",
+      "week_placeholder": "Напр., 1"
+    },
+    "edit_schedule": "Редактировать",
+    "join": "Присоединиться",
+    "teams": "Teams"
+  },
+  "search": {
+    "search_error": "Значение поиска должно содержать только буквы, цифры и пробелы",
+    "search_placeholder": "Поиск",
+    "sort": {
+      "by_first_name": "по имени",
+      "by_last_name": "по фамилии",
+      "by_name": "по названию"
+    },
+    "sorting": "Сортировка {{sort}}",
+    "user": "Пользователь"
+  },
+  "settings": {
+    "calendar_end_hour": "Конечное время календаря",
+    "calendar_start_hour": "Начальное время календаря",
+    "calendar_week_days": "Дни недели календаря",
+    "calendar_week_days_list": {
+      "mon_fri": "Пн - Пт",
+      "mon_sat": "Пн - Сб",
+      "mon_sun": "Пн - Вс"
+    },
+    "language": "Язык",
+    "messages": {
+      "synced": "Успешно синхронизировано "
+    },
+    "sync": "Синхронизировать",
+    "sync_profile_photo": "Синхронизировать фото профиля",
+    "synced": "Успешно синхронизировано ",
+    "theme": "Тема",
+    "themes": {
+      "dark": "Темная",
+      "light": "Светлая"
+    }
+  },
+  "syllabus": {
+    "control": "Контроль",
+    "coursework": "Курсовая работа",
+    "credit": "Зачет",
+    "credits": "Кредиты",
+    "essay": "Реферат",
+    "exam": "Экзамен",
+    "hours": "Часы",
+    "subject": "Дисциплина",
+    "test": "РГЗ"
+  },
+  "unsupported": {
+    "button": "Открыть телеграм бот",
+    "content": "В настоящее время мы не поддерживаем мобильные устройства. Пожалуйста, используйте телеграм-бот."
+  }
+}
