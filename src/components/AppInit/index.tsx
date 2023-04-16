@@ -2,16 +2,20 @@ import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import i18next from 'i18next';
 import { Theme } from '@/constants/settings';
 import { AppDispatch } from '@/store/store';
 import { getMyProfile } from '@/store/actions/users';
 import { refreshAction } from '@/store/actions/login';
 import { isPrefersDark } from '@/helpers/utils';
 
+const languages = ['en', 'ru', 'uk'];
+
 export default function AppInit() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const theme = useSelector((state: any) => state.themeReducer.theme);
+  const language = useSelector((state: any) => state.languageReducer.language);
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
 
@@ -73,6 +77,10 @@ export default function AppInit() {
       document.body.classList.add('dark-theme');
     }
   }, [theme]);
+
+  useEffect(() => {
+    i18next.changeLanguage(languages[language]).then();
+  }, [language]);
 
   return null;
 }
