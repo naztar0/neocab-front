@@ -40,6 +40,7 @@ $section-border-light: #e0e0e0;
       > div {
         display: flex;
         flex-direction: column;
+        padding-right: 16%;
       }
 
       &:not(:first-child)::before {
