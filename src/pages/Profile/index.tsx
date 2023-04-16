@@ -10,7 +10,6 @@ import Layout from '@/components/Layout';
 import Avatar from '@/components/Avatar';
 import StudentProfileData from '@/components/StudentProfileData';
 import { setUserCover } from '@/store/actions/users';
-import defaultCover from '@/assets/images/default_cover.jpg';
 import { IMAGES_URL } from '@/config';
 import './index.scss';
 
@@ -49,7 +48,7 @@ export default function Profile() {
         <div className="cover">
           {!isLoading ? (
             <img
-              src={profileData.cover ? IMAGES_URL + profileData.cover : defaultCover}
+              src={profileData.cover ? IMAGES_URL + profileData.cover : '/images/default_cover.jpg'}
               alt="cover"
             />
           ) : (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { colorChar, utfChar } from '@/helpers/utils';
-import defaultAvatar from '@/assets/images/default_avatar.jpg';
 import { Theme } from '@/constants/settings';
 import { IMAGES_URL } from '@/config';
 
@@ -44,7 +43,7 @@ export default function Avatar({
       </div>
     );
   }
-  return <img src={defaultAvatar} alt="avatar" style={style} />;
+  return <img src="/images/default_avatar.png" alt="avatar" style={style} />;
 }
 
 type TAvatar = {
