@@ -84,7 +84,7 @@ export default function RecordBook() {
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (
-          <Tooltip title={toMarkNational(record.mark)} placement="top">
+          <Tooltip title={t(`record_book.marks.${toMarkNational(record.mark)}`)} placement="top">
             <span>{toMark5(record.mark)}</span>
           </Tooltip>
         )
@@ -101,7 +101,7 @@ export default function RecordBook() {
             <span className="debt"><Trans i18nKey="record_book.debt" /></span>
           </Tooltip>
         ) : (
-          <Tooltip title={toMarkNational(record.mark)} placement="top">
+          <Tooltip title={t(`record_book.marks.${toMarkNational(record.mark)}`)} placement="top">
             <span>{record.mark}</span>
           </Tooltip>
         )
@@ -116,7 +116,7 @@ export default function RecordBook() {
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (
-          <Tooltip title={toMarkNational(record.mark)} placement="top">
+          <Tooltip title={t(`record_book.marks.${toMarkNational(record.mark)}`)} placement="top">
             <span>{toMarkEcts(record.mark)}</span>
           </Tooltip>
         )
