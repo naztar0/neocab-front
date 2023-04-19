@@ -31,6 +31,7 @@ function App() {
           <AppInit />
           <Helmet defaultTitle="NeoCab" titleTemplate="%s ∣ NeoCab" />
           <Routes>
+            <Route path="/" />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/attendance" element={<Attendance />} />
