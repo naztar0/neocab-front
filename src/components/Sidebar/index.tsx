@@ -1,19 +1,17 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as Icons from '@ant-design/icons';
 import { Layout as LayoutAntd, Menu } from 'antd';
-import { SiderTheme } from 'antd/lib/layout/Sider';
-import { useTranslation } from 'react-i18next';
-import { Theme } from '@/constants/settings';
+import { useTranslation, Trans } from 'react-i18next';
+import AboutModal from '@/components/AboutModal';
 import './index.scss';
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
-  const theme = useSelector((state: any) => state.themeReducer.theme);
   const [selected, setSelected] = useState('');
+  const [aboutModalOpen, setAboutModalOpen] = useState(false);
 
   useEffect(() => {
     const path = location.pathname.split('/')[1];
@@ -74,16 +72,19 @@ export default function Sidebar() {
       width={250}
       breakpoint="lg"
       collapsedWidth="0"
-      theme={Theme[theme].toLowerCase() as SiderTheme}
     >
       <Menu
-        theme="light"
         mode="inline"
         selectedKeys={[selected]}
-        style={{ height: '100%' }}
         items={items}
         onSelect={(item) => navigate(`/${item.key}`)}
       />
+      <div className="about">
+        <button type="button" onClick={() => setAboutModalOpen(true)}>
+          <span><Trans i18nKey="common.menu.about" /></span>
+        </button>
+      </div>
+      <AboutModal open={aboutModalOpen} setOpen={setAboutModalOpen} />
     </LayoutAntd.Sider>
   );
 }
