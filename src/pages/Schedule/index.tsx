@@ -56,7 +56,7 @@ export default function Schedule() {
 
   return (
     <Layout>
-      <Helmet title={t('common.menu.schedule')} />
+      <Helmet title={t('common.menu.schedule') as string} />
       <div className="substrate subject-table">
         <Spin spinning={isLoading} size="large">
           <Calendar locale={locale} />
