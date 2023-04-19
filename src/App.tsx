@@ -19,6 +19,7 @@ import Settings from '@/pages/Settings';
 import Help from '@/pages/Help';
 import Privacy from '@/pages/Privacy';
 import Unsupported from '@/pages/Unsupported';
+import NotFound from '@/pages/NotFound';
 import './styles/global.scss';
 import './styles/antd.scss';
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/help" element={<Help />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/unsupported" element={<Unsupported />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </ConfigProvider>
