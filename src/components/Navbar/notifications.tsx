@@ -40,6 +40,16 @@ export default function Notifications() {
   const [lastNotification, setLastNotification] = useState<number | null>(null);
 
   useEffect(() => {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission().then((result) => {
+        if (result === 'denied') {
+          message.error(t('navbar.allow_notifications')).then();
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     if (profileData) {
       dispatch(getUserNotifications({ user: profileData.id }));
     }

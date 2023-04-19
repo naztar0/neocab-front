@@ -1,7 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
 import i18next from 'i18next';
 import { Theme } from '@/constants/settings';
 import { AppDispatch } from '@/store/store';
@@ -18,16 +17,6 @@ export default function AppInit() {
   const language = useSelector((state: any) => state.languageReducer.language);
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
-
-  const requestNotificationPermission = useCallback(() => {
-    if (Notification.permission === 'default') {
-      Notification.requestPermission().then((result) => {
-        if (result === 'denied') {
-          message.error('You have to allow notifications to receive updates').then();
-        }
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const link: HTMLAnchorElement | null = document.querySelector("link[rel~='icon']");
