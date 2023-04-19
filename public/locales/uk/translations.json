@@ -1,4 +1,7 @@
 {
+  "about": {
+    "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+  },
   "attendance": {
     "attendances": "{{date}}: {{count}} відвідувань",
     "date": "Дата",
@@ -70,6 +73,7 @@
       "specialization": "Спеціалізація"
     },
     "menu": {
+      "about": "Про сайт",
       "attendance": "Відвідуваність",
       "help": "Допомога",
       "login": "Вхід",
@@ -112,9 +116,14 @@
       "input_password": "Будь ласка, введіть свій пароль!",
       "long_first_time_login": "Перший раз вхід може зайняти до хвилини",
       "wrong_credentials": "Неправильна адреса електронної пошти або пароль"
+    },
+    "terms": {
+      "accept": "Прийняти",
+      "content": "Увага! NeoCab використовує файли cookie, щоб забезпечити необхідну функціональність сайту, покращити ваш досвід та проаналізувати наш трафік. Використовуючи наш сайт, ви погоджуєтесь на використання нами файлів cookie та з нашою <link_>Політикою Конфіденційності</link_>"
     }
   },
   "navbar": {
+    "allow_notifications": "Ви повинні дозволити сповіщення, щоб отримувати повідомлення",
     "logout": "Вийти",
     "new_notification": "Нове сповіщення!",
     "notifications": "Повідомлення",
@@ -170,6 +179,12 @@
     "essay": "Реферат",
     "exam": "Екзамен",
     "mark": "Бал",
+    "marks": {
+      "excellent": "Відмінно",
+      "fail": "Незадовільно",
+      "good": "Добре",
+      "satisfactory": "Задовільно"
+    },
     "national": "Нац",
     "subject": "Дисципліна",
     "test": "РГЗ"

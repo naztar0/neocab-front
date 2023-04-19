@@ -1,4 +1,7 @@
 {
+  "about": {
+    "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
+  },
   "attendance": {
     "attendances": "{{date}}: {{count}} attendances",
     "date": "Date",
@@ -70,6 +73,7 @@
       "specialization": "Specialization"
     },
     "menu": {
+      "about": "About",
       "attendance": "Attendance",
       "help": "Help",
       "login": "Login",
@@ -112,9 +116,14 @@
       "input_password": "Please input your password!",
       "long_first_time_login": "For the first time it may take up to a minute to login",
       "wrong_credentials": "Wrong email or password"
+    },
+    "terms": {
+      "accept": "Accept",
+      "content": "Notice! NeoCab uses cookies to provide necessary website functionality, improve your experience and analyze our traffic. By using our website, you agree to our use of cookies and to our <link_>Privacy Policy</link_>"
     }
   },
   "navbar": {
+    "allow_notifications": "You have to allow notifications to receive updates",
     "logout": "Logout",
     "new_notification": "New notification!",
     "notifications": "Notifications",
@@ -170,6 +179,12 @@
     "essay": "essay",
     "exam": "Exam",
     "mark": "Mark",
+    "marks": {
+      "excellent": "Excellent",
+      "fail": "Fail",
+      "good": "Good",
+      "satisfactory": "Satisfactory"
+    },
     "national": "Nat",
     "subject": "Subject",
     "test": "Test"
