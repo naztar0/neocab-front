@@ -7,8 +7,7 @@ import { AppDispatch } from '@/store/store';
 import { getMyProfile } from '@/store/actions/users';
 import { refreshAction } from '@/store/actions/login';
 import { isPrefersDark } from '@/helpers/utils';
-
-const languages = ['en', 'ru', 'uk'];
+import { appLanguages, tokenRefreshTime } from '@/constants/appInit';
 
 export default function AppInit() {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,6 +16,13 @@ export default function AppInit() {
   const language = useSelector((state: any) => state.languageReducer.language);
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
+
+  const refreshToken = useCallback(() => {
+    if (Number(localStorage.getItem('last_refresh') || 0) + tokenRefreshTime < Date.now()) {
+      localStorage.setItem('last_refresh', Date.now().toString());
+      setTimeout(() => dispatch(refreshAction()), 60 * 1000);
+    }
+  }, []);
 
   useEffect(() => {
     const link: HTMLAnchorElement | null = document.querySelector("link[rel~='icon']");
@@ -34,8 +40,7 @@ export default function AppInit() {
     const token = localStorage.getItem('token');
     if (token && userId) {
       dispatch(getMyProfile({ user: +userId }));
-      dispatch(refreshAction());
-      requestNotificationPermission();
+      refreshToken();
       if (document.location.pathname === '/') {
         navigate('/profile');
       }
@@ -68,7 +73,7 @@ export default function AppInit() {
   }, [theme]);
 
   useEffect(() => {
-    i18next.changeLanguage(languages[language]).then();
+    i18next.changeLanguage(appLanguages[language]).then();
   }, [language]);
 
   return null;
