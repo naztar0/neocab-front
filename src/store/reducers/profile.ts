@@ -22,9 +22,6 @@ export const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getMyProfile.fulfilled, (state, action) => {
       state.profile = action.payload;
-      if (state.profile && state.image) {
-        state.profile.image = state.image;
-      }
       state.isLoading = false;
     });
     builder.addCase(getMyProfile.rejected, (state) => {
@@ -47,7 +44,5 @@ export const profileSlice = createSlice({
     });
   },
 });
-
-export const { setUserProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;
