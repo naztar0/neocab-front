@@ -5,7 +5,7 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   message,
   Form,
@@ -14,6 +14,7 @@ import {
   Spin,
   Divider,
 } from 'antd';
+import cookies from 'js-cookie';
 import { Helmet } from 'react-helmet';
 import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
@@ -42,6 +43,7 @@ export default function Login() {
   const [isLoginViaCabinet, setIsLoginViaCabinet] = useState(false);
   const [checkCabinetLogin, setCheckCabinetLogin] = useState(false);
   const [cabinetCredentials, setCabinetCredentials] = useState({ email: '', password: '' });
+  const [termsAccepted, setTermsAccepted] = useState(cookies.get('termsAccepted') || false);
 
   const checkCabinetLoginRef = useRef(checkCabinetLogin);
   checkCabinetLoginRef.current = checkCabinetLogin;
@@ -116,6 +118,11 @@ export default function Login() {
     dispatch(loginViaCabinet(values));
   }, []);
 
+  const onAccept = useCallback(() => {
+    cookies.set('termsAccepted', '1');
+    setTermsAccepted(true);
+  }, []);
+
   return (
     <div className="login-page">
       <Helmet title={t('common.menu.login') as string} />
@@ -161,6 +168,16 @@ export default function Login() {
           </button>
         </div>
       </Spin>
+      {!termsAccepted && (
+        <div className="terms">
+          <Button type="primary" onClick={onAccept}>
+            <span><Trans i18nKey="login.terms.accept" /></span>
+          </Button>
+          <p>
+            <Trans i18nKey="login.terms.content" components={{ link_: <Link to="/privacy" /> }} />
+          </p>
+        </div>
+      )}
     </div>
   );
 }
