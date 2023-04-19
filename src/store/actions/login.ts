@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import responseHandler from '@/store/actions/config';
 import {
   loginViaAzureRequest,
   loginViaCabinetRequest,
@@ -31,13 +32,13 @@ export const getAzureLoginUrl = createAsyncThunk(
 export const logoutAction = createAsyncThunk(
   'logout_action',
   async () => (
-    await logoutRequest()
+    await responseHandler(logoutRequest())
   ).data,
 );
 
 export const refreshAction = createAsyncThunk(
   'refresh_action',
   async () => (
-    await refreshRequest()
+    await responseHandler(refreshRequest())
   ).data,
 );
