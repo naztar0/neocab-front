@@ -50,7 +50,9 @@ export default function AppInit() {
   }, []);
 
   useEffect(() => {
-    if (!isLoginLoading && !localStorage.getItem('token')) {
+    if (!isLoginLoading
+      && !localStorage.getItem('token')
+      && !document.location.pathname.includes('login')) {
       navigate('/login');
     }
   }, [isLoginLoading]);
