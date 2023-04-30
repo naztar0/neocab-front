@@ -9,4 +9,5 @@ export const getAxiosInstance = () => axios.create({
 
 export const getAxiosInstanceNoAuth = () => axios.create({
   baseURL: API_URL,
+  withCredentials: true,
 });
