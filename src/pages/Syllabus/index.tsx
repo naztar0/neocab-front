@@ -52,11 +52,12 @@ export default function Rating() {
       key: 'subject',
       dataIndex: 'subject',
       title: t('syllabus.subject'),
-      render: (value, record) => (
+      render: (value, record, index) => (
         <SubjectData
           title={record.subject.title}
           professor={getProfessorName(record.subject)}
           department={record.subject.department?.name}
+          color={colorsMain[0][index]}
         />
       ),
       sorter: (a, b) => a.subject.title.localeCompare(b.subject.title),
@@ -91,53 +92,7 @@ export default function Rating() {
       ),
       sorter: (a, b) => a.hours.localeCompare(b.hours),
     },
-  ], [t]);
-
-  const syllabusDataSource = useMemo(() => (
-    syllabusData?.map((data, index) => ({ key: index, ...data }))
-  ), [syllabusData]);
-
-  const colors1: string[] = useMemo(() => {
-    const colors: string[] = [];
-    for (let i = 0; i < syllabusData.length; i++) {
-      colors.push(`hsl(${(i * 360) / syllabusData.length}deg 100% 50% / 60%)`);
-    }
-    return colors;
-  }, [syllabusData]);
-
-  const colors2: string[] = useMemo(() => {
-    const colors: string[] = [];
-    for (let i = 0; i < syllabusData.length; i++) {
-      colors.push(`hsl(${(i * 360) / syllabusData.length}, 50%, 20%)`);
-    }
-    return colors;
-  }, [syllabusData]);
-
-  const creditsChart = useMemo(() => ({
-    labels: syllabusData?.map((data) => data.subject.title),
-    datasets: [
-      {
-        label: t('syllabus.credits'),
-        data: syllabusData?.map((data) => data.credit),
-        backgroundColor: colors1,
-        borderColor: colors2,
-        borderWidth: 1,
-      },
-    ],
-  }), [syllabusData, colors1, colors2, t]);
-
-  const hoursChart = useMemo(() => ({
-    labels: syllabusData?.map((data) => data.subject.title),
-    datasets: [
-      {
-        label: t('syllabus.hours'),
-        data: syllabusData?.map((data) => data.hours),
-        backgroundColor: colors1,
-        borderColor: colors2,
-        borderWidth: 1,
-      },
-    ],
-  }), [syllabusData, colors1, colors2, t]);
+  ], [t, colorsMain]);
 
   return (
     <Layout>

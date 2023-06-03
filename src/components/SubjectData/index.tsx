@@ -7,12 +7,18 @@ interface Props {
   title: string,
   professor: string | null,
   department: string | null,
+  color?: string,
 }
 
-export default function SubjectData({ title, professor, department }: Props) {
+export default function SubjectData({
+  title, professor, department, color,
+}: Props) {
   return (
     <div className="row-data">
-      <span className="subject-name">{title}</span>
+      <div className="subject-name">
+        {color && (<div className="bookmark" style={{ borderLeftColor: color, borderRightColor: color }} />)}
+        <span>{title}</span>
+      </div>
       <div>
         {professor && (<span className="professor">{professor}</span>)}
         {department && (
@@ -24,3 +30,7 @@ export default function SubjectData({ title, professor, department }: Props) {
     </div>
   );
 }
+
+SubjectData.defaultProps = {
+  color: null,
+};
