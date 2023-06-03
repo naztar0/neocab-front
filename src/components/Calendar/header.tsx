@@ -67,7 +67,7 @@ export default function Header({ locale }: { locale: Locale }) {
         </Button>
       </Tooltip>
     ))
-  ) as unknown as JSX.Element, [groupScheduleData]);
+  ) as unknown as React.JSX.Element, [groupScheduleData]);
 
   return (
     <div className="header">

@@ -28,11 +28,13 @@ import {
   dateFormat,
   apiDateFormat,
   mainColor,
+  startColorDark,
+  startColorLight,
   historyLimit,
 } from '@/constants/attendance';
 import { timeFormat } from '@/constants/schedule';
 import { Role } from '@/constants/profile';
-import { getProfessorName, formatDate } from '@/helpers/utils';
+import { getProfessorName } from '@/helpers/utils';
 import './index.scss';
 
 export default function Attendance() {
@@ -83,7 +85,7 @@ export default function Attendance() {
       dataIndex: 'date',
       title: t('attendance.date'),
       render: (value, data) => (
-        <span className="date">{`${formatDate(data.date)} ${data.schedule_subject.time}`}</span>
+        <span className="date">{`${format(new Date(data.date), dateFormat)} ${data.schedule_subject.time}`}</span>
       ),
     },
   ], [t]);
@@ -129,13 +131,13 @@ export default function Attendance() {
       t('attendance.labels.months.december'),
     ],
     weekdays: [
+      t('attendance.labels.weekdays.sunday'),
       t('attendance.labels.weekdays.monday'),
       t('attendance.labels.weekdays.tuesday'),
       t('attendance.labels.weekdays.wednesday'),
       t('attendance.labels.weekdays.thursday'),
       t('attendance.labels.weekdays.friday'),
       t('attendance.labels.weekdays.saturday'),
-      t('attendance.labels.weekdays.sunday'),
     ],
     legend: {
       less: t('attendance.labels.legend.less') as string,
@@ -165,9 +167,9 @@ export default function Attendance() {
             <ActivityCalendar
               loading={isLoading}
               data={daysData}
-              weekStart={0}
+              weekStart={1}
               fontSize={12}
-              color={mainColor}
+              theme={{ light: [startColorLight, mainColor], dark: [startColorDark, mainColor] }}
               colorScheme={theme === Theme.Dark ? 'dark' : 'light'}
               labels={labels}
               showWeekdayLabels
@@ -180,7 +182,7 @@ export default function Attendance() {
               renderBlock={(block, activity) => (
                 <Tooltip title={t(
                   'attendance.attendances',
-                  { date: formatDate(activity.date), count: activity.count },
+                  { date: format(new Date(activity.date), dateFormat), count: activity.count },
                 )}
                 >
                   {block}

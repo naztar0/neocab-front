@@ -49,6 +49,10 @@ export default function Login() {
   checkCabinetLoginRef.current = checkCabinetLogin;
 
   const getMsLoginUrl = useCallback(() => {
+    if (cookies.get('termsAccepted') !== '1') {
+      message.warning(t('login.messages.terms_not_accepted'), 5).then();
+      return;
+    }
     dispatch(getAzureLoginUrl());
   }, []);
 
@@ -113,6 +117,10 @@ export default function Login() {
   }, []);
 
   const onSubmit = useCallback((values: { email: string; password: string }) => {
+    if (cookies.get('termsAccepted') !== '1') {
+      message.warning(t('login.messages.terms_not_accepted'), 5).then();
+      return;
+    }
     setIsLoginViaCabinet(true);
     setCabinetCredentials(values);
     dispatch(loginViaCabinet(values));

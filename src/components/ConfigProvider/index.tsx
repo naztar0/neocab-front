@@ -58,8 +58,10 @@ export default function ConfigProvider({ children }: { children: React.ReactNode
         supportedLngs: ['en', 'ru', 'uk'],
         debug: true,
         fallbackLng: 'uk',
+        ns: ['translations', 'about', 'privacy'],
+        defaultNS: 'translations',
         backend: {
-          loadPath: '/locales/{{lng}}/translations.json',
+          loadPath: '/locales/{{lng}}/{{ns}}.json',
         },
         react: { useSuspense: true },
       });

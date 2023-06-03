@@ -6,6 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 10% 1rem 2% !important;
+  cursor: default;
 
   .chart {
     display: flex;
@@ -13,23 +14,37 @@
     align-items: center;
 
     .chart-title {
-      font-size: 38px;
+      font-size: 36px;
       font-weight: 600;
       position: relative;
       top: 50%;
       line-height: 0;
-    }
 
-    canvas {
-      width: 300px !important;
-      height: 300px !important;
-
-      @media (max-width: 1024px) {
-        width: 200px !important;
-        height: 200px !important;
+      @media (max-width: 1200px) {
+        font-size: 28px;
+      }
+      @media (max-width: 768px) {
+        font-size: 20px;
       }
     }
 
+    canvas {
+      width: 250px !important;
+      height: 250px !important;
+
+      @media (max-width: 1440px) {
+        width: 240px !important;
+        height: 240px !important;
+      }
+      @media (max-width: 1200px) {
+        width: 200px !important;
+        height: 200px !important;
+      }
+      @media (max-width: 768px) {
+        width: 150px !important;
+        height: 150px !important;
+      }
+    }
   }
 
   .legend {
@@ -38,7 +53,7 @@
     justify-content: space-between;
     width: 20%;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       display: none;
     }
 
@@ -47,6 +62,11 @@
       flex-direction: row;
       align-items: center;
       margin-bottom: 5px;
+      transition: all 0.15s ease-out;
+
+      &:hover {
+        transform: scale(1.035);
+      }
 
       .legend-color {
         width: 14px;
@@ -64,14 +84,22 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1440px) {
     justify-content: space-around;
     padding: 1rem !important;
   }
-
+  @media (max-width: 1200px) {
+    padding: 1rem 5% !important;
+  }
   @media (max-width: 425px) {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+.bookmark {
+  @media (min-width: 1201px) {
+    display: none;
   }
 }
 

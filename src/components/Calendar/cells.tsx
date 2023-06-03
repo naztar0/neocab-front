@@ -8,6 +8,7 @@ import {
 } from 'date-fns';
 import EventsAzure from '@/components/Calendar/eventsAzure';
 import EventsCustom from '@/components/Calendar/eventsCustom';
+import Timeline from '@/components/Calendar/timeline';
 import { ScheduleType } from '@/constants/schedule';
 import './index.scss';
 
@@ -29,7 +30,7 @@ export default function Cells() {
   const rows: JSX.Element[] = useMemo(() => {
     const data = [];
     const today = new Date();
-    let days = [];
+    let days = [<Timeline />];
     let day = startDate;
 
     while (day < endDate) {
@@ -51,5 +52,5 @@ export default function Cells() {
     return data;
   }, [startDate, endDate, calendarWeekDays, scheduleType, azureScheduleData, groupScheduleSubjects]);
 
-  return rows as unknown as JSX.Element;
+  return rows as unknown as React.JSX.Element;
 }

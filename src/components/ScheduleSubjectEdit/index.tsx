@@ -13,7 +13,7 @@ import {
   MessageOutlined,
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import {
   dayNames,
   timeFormat,
@@ -80,7 +80,9 @@ export default function ScheduleSubjectEdit({
           onChange={() => onChange({ subject: scheduleSubject?.id })}
         >
           {dayNames.map((day, index) => (
-            <Select.Option value={index + 1} key={day}>{day}</Select.Option>
+            <Select.Option value={index + 1} key={day}>
+              <Trans i18nKey={`attendance.labels.weekdays.${day}`} />
+            </Select.Option>
           ))}
         </Select>
       </Form.Item>
