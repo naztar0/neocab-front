@@ -28,6 +28,8 @@ import {
   dateFormat,
   apiDateFormat,
   mainColor,
+  startColorDark,
+  startColorLight,
   historyLimit,
 } from '@/constants/attendance';
 import { timeFormat } from '@/constants/schedule';
@@ -129,13 +131,13 @@ export default function Attendance() {
       t('attendance.labels.months.december'),
     ],
     weekdays: [
+      t('attendance.labels.weekdays.sunday'),
       t('attendance.labels.weekdays.monday'),
       t('attendance.labels.weekdays.tuesday'),
       t('attendance.labels.weekdays.wednesday'),
       t('attendance.labels.weekdays.thursday'),
       t('attendance.labels.weekdays.friday'),
       t('attendance.labels.weekdays.saturday'),
-      t('attendance.labels.weekdays.sunday'),
     ],
     legend: {
       less: t('attendance.labels.legend.less') as string,
@@ -165,9 +167,9 @@ export default function Attendance() {
             <ActivityCalendar
               loading={isLoading}
               data={daysData}
-              weekStart={0}
+              weekStart={1}
               fontSize={12}
-              color={mainColor}
+              theme={{ light: [startColorLight, mainColor], dark: [startColorDark, mainColor] }}
               colorScheme={theme === Theme.Dark ? 'dark' : 'light'}
               labels={labels}
               showWeekdayLabels
