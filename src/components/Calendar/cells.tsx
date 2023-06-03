@@ -51,5 +51,5 @@ export default function Cells() {
     return data;
   }, [startDate, endDate, calendarWeekDays, scheduleType, azureScheduleData, groupScheduleSubjects]);
 
-  return rows as unknown as JSX.Element;
+  return rows as unknown as React.JSX.Element;
 }
