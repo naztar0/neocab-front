@@ -3,6 +3,7 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  useRef,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Icons from '@ant-design/icons';
@@ -38,6 +39,10 @@ export default function Notifications() {
 
   const [currentNotification, setCurrentNotification] = useState<number | null>(null);
   const [lastNotification, setLastNotification] = useState<number | null>(null);
+  const [requestTimeout, setRequestTimeout] = useState<Array<NodeJS.Timeout>>([]);
+
+  const requestTimeoutRef = useRef(requestTimeout);
+  requestTimeoutRef.current = requestTimeout;
 
   useEffect(() => {
     if (Notification.permission === 'default') {
@@ -55,9 +60,15 @@ export default function Notifications() {
     }
   }, [profileData, dataSwitch]);
 
+  const safeTimeoutCallback = useCallback(() => {
+    dispatch(getUserNotifications({ user: profileData.id }));
+    requestTimeoutRef.current.forEach((timeout) => clearTimeout(timeout));
+    setRequestTimeout([]);
+  }, [profileData]);
+
   useEffect(() => {
     if (profileData) {
-      setTimeout(() => dispatch(getUserNotifications({ user: profileData.id })), updateInterval);
+      setRequestTimeout([...requestTimeoutRef.current, setTimeout(safeTimeoutCallback, updateInterval)]);
     }
   }, [profileData, notificationsData]);
 
