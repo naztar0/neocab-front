@@ -1,0 +1,31 @@
+@import "src/styles/variables";
+
+.basic {
+  display: flex;
+  flex-direction: row;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin: 1.25rem 0 0 1.5rem;
+
+    .name {
+      font-size: 1.25rem;
+    }
+
+    .email {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+  }
+}
+
+.dark-theme {
+  .basic {
+    .info {
+      .email {
+        color: $text-light;
+      }
+    }
+  }
+}

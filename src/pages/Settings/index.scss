@@ -1,0 +1,29 @@
+@import "src/styles/variables";
+
+.settings-table {
+  tr {
+    .icon {
+      margin-right: 10px;
+    }
+
+    &:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .select,
+  .button {
+    width: 100%;
+  }
+
+  .button {
+    text-align: start;
+    padding-left: 11px;
+  }
+}
+
+.dark-theme {
+
+}

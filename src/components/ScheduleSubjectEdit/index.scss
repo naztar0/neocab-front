@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+.subject-days {
+  .date-time {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+
+    > * {
+      margin-left: 10px;
+    }
+
+    .notes-btn {
+      margin-left: 0;
+    }
+
+    .day {
+      width: 100px;
+    }
+  }
+}

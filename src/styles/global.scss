@@ -1,0 +1,224 @@
+@import "variables";
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 100;
+  src: url("src/assets/fonts/Rubik/Rubik-Light.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 400;
+  src: url("src/assets/fonts/Rubik/Rubik-Regular.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 600;
+  src: url("src/assets/fonts/Rubik/Rubik-Medium.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 700;
+  src: url("src/assets/fonts/Rubik/Rubik-Bold.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 900;
+  src: url("src/assets/fonts/Rubik/Rubik-Black.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 100;
+  font-style: italic;
+  src: url("src/assets/fonts/Rubik/Rubik-LightItalic.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-style: italic;
+  src: url("src/assets/fonts/Rubik/Rubik-Italic.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 600;
+  font-style: italic;
+  src: url("src/assets/fonts/Rubik/Rubik-MediumItalic.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-style: italic;
+  src: url("src/assets/fonts/Rubik/Rubik-BoldItalic.ttf");
+}
+@font-face {
+  font-family: "Rubik";
+  font-weight: 900;
+  font-style: italic;
+  src: url("src/assets/fonts/Rubik/Rubik-BlackItalic.ttf");
+}
+
+:root {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  width: 100% !important;
+  height: auto !important;
+  font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif !important;
+  background: $bg-root-light;
+
+  &::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 13px;
+  }
+  &::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-track {
+    background: $bg-root-light;
+  }
+  &::-webkit-scrollbar-thumb,
+  *::-webkit-scrollbar-thumb {
+    background: $black25;
+    border: 3px transparent solid;
+    border-radius: 99px;
+    background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb:hover,
+  *::-webkit-scrollbar-thumb:hover {
+    background: $black10;
+    background-clip: content-box;
+  }
+
+  &.dark-theme {
+    background: $bg-root-dark;
+
+    &::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-track {
+      background: $bg-root-dark;
+    }
+    &::-webkit-scrollbar-thumb,
+    *::-webkit-scrollbar-thumb {
+      background: $white25;
+      background-clip: content-box;
+    }
+    &::-webkit-scrollbar-thumb:hover,
+    *::-webkit-scrollbar-thumb:hover {
+      background: $white10;
+      background-clip: content-box;
+    }
+  }
+
+  //noinspection CssInvalidPropertyValue
+  @supports (overflow-y: overlay) {
+    overflow-y: overlay;
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &.dark-theme {
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+    }
+  }
+}
+
+a {
+  font-weight: 500;
+  color: $blue-light;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: $blue-dark;
+  }
+}
+
+.pd-0 {
+  padding: 0 !important;
+}
+
+.title {
+  font-size: calc(0.75rem + 0.5vw);
+  font-weight: 600;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $text-dark;
+  opacity: 75%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: $bg-root-light;
+  color: $text-dark;
+  margin-left: 250px;
+  margin-top: $header-height;
+  min-height: calc(100vh - $header-height) !important;
+
+  h2 {
+    color: $text-dark;
+  }
+
+  @media (max-width: 991px) {
+    margin-left: 0;
+  }
+}
+
+.substrate {
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  background: $bg-substrate-light;
+
+  &:first-child, &.row {
+    margin-top: 0;
+  }
+
+  .empty-table {
+    margin-top: 24px;
+
+    .icon-big {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+
+  .table-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.dark-theme {
+  .container {
+    background: $bg-root-dark;
+    color: $text-light;
+  }
+
+  .substrate {
+    background: $bg-substrate-dark;
+  }
+
+  .value {
+    color: $text-light;
+  }
+}

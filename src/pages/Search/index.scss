@@ -1,0 +1,56 @@
+@import "src/styles/variables";
+
+.search-group {
+  width: 100%;
+}
+
+.search-select, .sort-select {
+  width: 160px;
+}
+
+.search-input {
+  width: calc(100% - 160px);
+}
+
+.sort-button {
+  width: fit-content;
+}
+
+.current-step {
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-dark;
+  text-align: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  min-width: 50%;
+  color: $text-dark;
+  cursor: pointer;
+  font-weight: 500;
+
+  .name {
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: opacity 0.3s;
+  }
+}
+
+.user-modal {
+  width: 100% !important;
+  max-width: 1400px !important;
+  padding: 0 25px !important;
+}
+
+.dark-theme {
+  .current-step {
+    color: $text-light;
+  }
+
+  .user-info {
+    color: $text-light;
+  }
+}

@@ -1,0 +1,13 @@
+@import "src/styles/variables";
+
+.subject-table {
+  .row-data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .e-c {
+    line-height: 1.2;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+
+.subject-table {
+  .subject-name {
+    font-size: 16px;
+    font-weight: 500;
+
+    + div {
+      color: $black50;
+      font-size: 12px;
+
+      .professor {
+        margin-right: 8px;
+      }
+
+      .department {
+        background: $black10;
+        border-radius: 5px;
+        padding: 0 5px;
+        letter-spacing: 0.75px;
+      }
+    }
+  }
+}
+
+.dark-theme {
+  .subject-table {
+    .subject-name {
+      + div {
+        color: $white50;
+
+        .department {
+          background: $white10;
+        }
+      }
+    }
+  }
+}

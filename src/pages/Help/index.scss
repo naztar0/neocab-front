@@ -1,0 +1,28 @@
+@import "src/styles/variables";
+@import "src/styles/components/subjectTable";
+
+.collapse {
+  &.expand {
+    min-height: 200px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.help-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dark-theme {
+}
