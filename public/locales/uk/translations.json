@@ -1,7 +1,4 @@
 {
-  "about": {
-    "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
-  },
   "attendance": {
     "attendances": "{{date}}: {{count}} відвідувань",
     "date": "Дата",
@@ -115,6 +112,7 @@
       "input_email": "Будь ласка, введіть свою електронну адресу!",
       "input_password": "Будь ласка, введіть свій пароль!",
       "long_first_time_login": "Перший раз вхід може зайняти до хвилини",
+      "terms_not_accepted": "Ви повинні прийняти умови користування щоб продовжити",
       "wrong_credentials": "Неправильна адреса електронної пошти або пароль"
     },
     "terms": {

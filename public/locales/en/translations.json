@@ -1,7 +1,4 @@
 {
-  "about": {
-    "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium."
-  },
   "attendance": {
     "attendances": "{{date}}: {{count}} attendances",
     "date": "Date",
@@ -115,6 +112,7 @@
       "input_email": "Please input your email!",
       "input_password": "Please input your password!",
       "long_first_time_login": "For the first time it may take up to a minute to login",
+      "terms_not_accepted": "You must accept the terms of use to continue",
       "wrong_credentials": "Wrong email or password"
     },
     "terms": {
