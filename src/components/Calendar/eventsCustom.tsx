@@ -55,5 +55,5 @@ export default function EventsCustom({ events, day }: { events: ScheduleSubject[
     return data;
   }, [events, day, calendarStartHour, calendarEndHour, calendarWeekDays]);
 
-  return cols as unknown as JSX.Element;
+  return cols as unknown as React.JSX.Element;
 }
