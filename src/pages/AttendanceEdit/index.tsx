@@ -42,7 +42,6 @@ import { setUserAttendance } from '@/store/actions/users';
 import { getGroupSchedules } from '@/store/actions/schedules';
 import { getGroupUsers, getGroupAttendance } from '@/store/actions/groups';
 import {
-  formatDate,
   getDay,
   getProfessorName,
 } from '@/helpers/utils';
@@ -164,7 +163,7 @@ export default function AttendanceEdit() {
       dataIndex: 'date',
       title: t('attendance.edit.date'),
       render: (value, data) => (
-        <span className="date">{formatDate(data.date)}</span>
+        <span className="date">{format(new Date(data.date), dateFormat)}</span>
       ),
       onCell: (data) => ({
         onClick: () => onTableClick(data),
