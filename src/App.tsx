@@ -17,6 +17,7 @@ const Rating = lazy(() => import('@/pages/Rating'));
 const Schedule = lazy(() => import('@/pages/Schedule'));
 const ScheduleEdit = lazy(() => import('@/pages/ScheduleEdit'));
 const Syllabus = lazy(() => import('@/pages/Syllabus'));
+const AcademicPerformance = lazy(() => import('@/pages/AcademicPerformance'));
 const Search = lazy(() => import('@/pages/Search'));
 const Settings = lazy(() => import('@/pages/Settings'));
 const Help = lazy(() => import('@/pages/Help'));
@@ -24,6 +25,7 @@ const Privacy = lazy(() => import('@/pages/Privacy'));
 const Unsupported = lazy(() => import('@/pages/Unsupported'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
+/* eslint-disable max-len */
 function App() {
   return (
     <Provider store={setupStore()}>
@@ -42,6 +44,7 @@ function App() {
             <Route path="/schedule" element={<Suspense fallback={<div />}><Schedule /></Suspense>} />
             <Route path="/schedule/edit" element={<Suspense fallback={<div />}><ScheduleEdit /></Suspense>} />
             <Route path="/syllabus" element={<Suspense fallback={<div />}><Syllabus /></Suspense>} />
+            <Route path="/academic-performance" element={<Suspense fallback={<div />}><AcademicPerformance /></Suspense>} />
             <Route path="/search" element={<Suspense fallback={<div />}><Search /></Suspense>} />
             <Route path="/settings" element={<Suspense fallback={<div />}><Settings /></Suspense>} />
             <Route path="/help" element={<Suspense fallback={<div />}><Help /></Suspense>} />
