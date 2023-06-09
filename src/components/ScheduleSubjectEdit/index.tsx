@@ -81,7 +81,7 @@ export default function ScheduleSubjectEdit({
         >
           {dayNames.map((day, index) => (
             <Select.Option value={index + 1} key={day}>
-              <Trans i18nKey={`attendance.labels.weekdays.${day}`} />
+              <Trans i18nKey={`common.labels.weekdays.${day}`} />
             </Select.Option>
           ))}
         </Select>
