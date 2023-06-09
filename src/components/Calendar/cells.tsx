@@ -27,10 +27,10 @@ export default function Cells() {
     groupScheduleData?.find((e) => e.week === week)?.schedule_subjects || []
   ), [groupScheduleData, week]);
 
-  const rows: JSX.Element[] = useMemo(() => {
+  const rows: React.JSX.Element[] = useMemo(() => {
     const data = [];
     const today = new Date();
-    let days = [<Timeline />];
+    let days = [<Timeline key={0} />];
     let day = startDate;
 
     while (day < endDate) {
