@@ -50,6 +50,11 @@ export default function Sidebar() {
       label: t('common.menu.syllabus'),
     },
     {
+      key: 'academic-performance',
+      icon: <Icons.LineChartOutlined className="icon" />,
+      label: t('common.menu.academic_performance'),
+    },
+    {
       key: 'search',
       icon: <Icons.SearchOutlined className="icon" />,
       label: t('common.menu.search'),
