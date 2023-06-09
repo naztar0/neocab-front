@@ -18,6 +18,12 @@ export function yearToSemester(year: number, prev = false): number {
     - (prev && yearToSemester(year) > 1 ? 1 : 0) : 0;
 }
 
+export function semesterToYear(semester: number, current: number): number {
+  return semester ? new Date().getFullYear()
+    - Math.floor(current / 2) + Math.floor((semester + 1) / 2)
+    - (semester % 2 === 0 ? 0 : 1) : 0;
+}
+
 export function shortDepartmentName(name: string): string {
   if (!name) return '';
   const str = name.replace(/(-| +і +| +та +| +й +| +ім\..+)/ig, ' ').trim().split(' ');
