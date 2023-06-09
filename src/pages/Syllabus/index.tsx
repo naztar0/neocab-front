@@ -20,6 +20,7 @@ const chartOptions = {
   cutout: '83%',
   responsive: true,
   borderRadius: 99,
+  borderWidth: 0,
   spacing: 20,
 };
 
