@@ -46,6 +46,10 @@ const chartOptions = {
     x: {
       display: false,
     },
+    y: {
+      min: 0,
+      max: 100,
+    },
   },
 };
 
@@ -184,6 +188,8 @@ export default function RecordBook() {
     ],
   }), [recordBookData, colorsMain, t]);
 
+  const marksLength = useMemo(() => recordBookData?.filter((data) => Number(data.mark)).length || 0, [recordBookData]);
+
   return (
     <Layout>
       <Helmet title={t('common.menu.record_book') as string} />
@@ -204,7 +210,7 @@ export default function RecordBook() {
           )}
         />
       </div>
-      {isChartRegistered && (
+      {isChartRegistered && marksLength > 4 && (
         <div className="substrate record-book-charts">
           <div className="chart">
             <Bar data={markChart} options={chartOptions} />
@@ -219,7 +225,7 @@ export default function RecordBook() {
                 </span>
               ))}
             </div>
-            <div className="title-labels">
+            <div className="title-labels" style={marksLength < 8 ? { left: `-${(8 - marksLength) * 10}px` } : {}}>
               {recordBookData?.filter((data) => Number(data.mark)).map((data, index) => (
                 <span
                   className="title"
