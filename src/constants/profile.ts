@@ -5,6 +5,11 @@ export enum Role {
   Admin = 'admin',
 }
 
+export enum PaymentType {
+  Budget = 'budget',
+  Contract = 'contract',
+}
+
 export enum Locale {
   En = 'en',
   Ru = 'ru',
