@@ -1,4 +1,12 @@
 {
+  "academic_performance": {
+    "attendances": "Attendances",
+    "attendances_count": "Attendances",
+    "rating_percentage": "Rating percentage",
+    "rating_position": "Rating position",
+    "rating_position_and_percentage": "Rating position & percentage",
+    "record_book_average_mark": "Record book average mark"
+  },
   "attendance": {
     "attendances": "{{date}}: {{count}} attendances",
     "date": "Date",
@@ -21,30 +29,7 @@
         "less": "Less",
         "more": "More"
       },
-      "months": {
-        "april": "Apr",
-        "august": "Aug",
-        "december": "Dec",
-        "february": "Feb",
-        "january": "Jan",
-        "july": "Jul",
-        "june": "Jun",
-        "march": "Mar",
-        "may": "May",
-        "november": "Nov",
-        "october": "Oct",
-        "september": "Sep"
-      },
-      "total_count": "Total count",
-      "weekdays": {
-        "friday": "Fri",
-        "monday": "Mon",
-        "saturday": "Sat",
-        "sunday": "Sun",
-        "thursday": "Thu",
-        "tuesday": "Tue",
-        "wednesday": "Wed"
-      }
+      "total_count": "Total count"
     },
     "last_attendances": "Last attendances",
     "most_visited_subjects": "Most visited subjects",
@@ -69,8 +54,34 @@
       "speciality": "Speciality",
       "specialization": "Specialization"
     },
+    "labels": {
+      "months": {
+        "april": "Apr",
+        "august": "Aug",
+        "december": "Dec",
+        "february": "Feb",
+        "january": "Jan",
+        "july": "Jul",
+        "june": "Jun",
+        "march": "Mar",
+        "may": "May",
+        "november": "Nov",
+        "october": "Oct",
+        "september": "Sep"
+      },
+      "weekdays": {
+        "friday": "Fri",
+        "monday": "Mon",
+        "saturday": "Sat",
+        "sunday": "Sun",
+        "thursday": "Thu",
+        "tuesday": "Tue",
+        "wednesday": "Wed"
+      }
+    },
     "menu": {
       "about": "About",
+      "academic_performance": "Performance",
       "attendance": "Attendance",
       "help": "Help",
       "login": "Login",
