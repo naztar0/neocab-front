@@ -4,6 +4,7 @@ import {
   Button,
   Popover,
 } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
 import { useTranslation, Trans } from 'react-i18next';
 import Avatar from '@/components/Avatar';
 import { logoutAction } from '@/store/actions/login';
@@ -24,7 +25,15 @@ export default function Profile() {
 
   return (
     <Popover
-      content={<Button onClick={logout} loading={isLoginLoading}><Trans i18nKey="navbar.logout" /></Button>}
+      content={(
+        <Button
+          onClick={logout}
+          loading={isLoginLoading}
+          icon={<LogoutOutlined />}
+        >
+          <span><Trans i18nKey="navbar.logout" /></span>
+        </Button>
+      )}
       placement="bottomRight"
       title={t('navbar.profile')}
       trigger="click"
