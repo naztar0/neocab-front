@@ -25,6 +25,10 @@ export const fetchUserAttendance = async (user: number) => getAxiosInstance().ge
   `/api/users/${user}/attendance`,
 );
 
+export const fetchUserAcademicPerformance = async (user: number) => getAxiosInstance().get(
+  `/api/users/${user}/academic-performance`,
+);
+
 export const postSyncUserPhoto = async (user: number) => getAxiosInstance().post(
   `/api/users/${user}/photo`,
 );
