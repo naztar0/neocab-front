@@ -6,6 +6,7 @@ import {
   fetchUserRating,
   fetchUserSyllabus,
   fetchUserAttendance,
+  fetchUserAcademicPerformance,
   fetchUsers,
   postSyncUserPhoto,
   postUserCover,
@@ -58,6 +59,13 @@ export const getUserAttendance = createAsyncThunk(
   'get_user_attendance',
   async ({ user }: { user: number }) => (
     await responseHandler(fetchUserAttendance(user))
+  ).data,
+);
+
+export const getUserAcademicPerformance = createAsyncThunk(
+  'get_user_academic_performance',
+  async ({ user }: { user: number }) => (
+    await responseHandler(fetchUserAcademicPerformance(user))
   ).data,
 );
 
