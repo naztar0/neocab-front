@@ -21,6 +21,7 @@ const AcademicPerformance = lazy(() => import('@/pages/AcademicPerformance'));
 const Search = lazy(() => import('@/pages/Search'));
 const Settings = lazy(() => import('@/pages/Settings'));
 const Help = lazy(() => import('@/pages/Help'));
+const Contract = lazy(() => import('@/pages/Contract'));
 const Privacy = lazy(() => import('@/pages/Privacy'));
 const Unsupported = lazy(() => import('@/pages/Unsupported'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
@@ -48,6 +49,7 @@ function App() {
             <Route path="/search" element={<Suspense fallback={<div />}><Search /></Suspense>} />
             <Route path="/settings" element={<Suspense fallback={<div />}><Settings /></Suspense>} />
             <Route path="/help" element={<Suspense fallback={<div />}><Help /></Suspense>} />
+            <Route path="/contract" element={<Suspense fallback={<div />}><Contract /></Suspense>} />
             <Route path="/privacy" element={<Suspense fallback={<div />}><Privacy /></Suspense>} />
             <Route path="/unsupported" element={<Suspense fallback={<div />}><Unsupported /></Suspense>} />
             <Route path="*" element={<Suspense fallback={<div />}><NotFound /></Suspense>} />
