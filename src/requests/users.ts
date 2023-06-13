@@ -21,6 +21,10 @@ export const fetchUserSyllabus = async (user: number, semester: number) => getAx
   `/api/users/${user}/syllabus/${semester}`,
 );
 
+export const fetchUserContract = async (user: number) => getAxiosInstance().get(
+  `/api/users/${user}/contract`,
+);
+
 export const fetchUserAttendance = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/attendance`,
 );
