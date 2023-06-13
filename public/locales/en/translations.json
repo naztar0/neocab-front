@@ -83,8 +83,10 @@
       "about": "About",
       "academic_performance": "Performance",
       "attendance": "Attendance",
+      "contract": "Contract",
       "help": "Help",
       "login": "Login",
+      "logout": "Logout",
       "profile": "Profile",
       "rating": "Rating",
       "record_book": "Record book",
@@ -99,6 +101,15 @@
       "incorrect_value": "Incorrect value",
       "something_went_wrong": "Something went wrong"
     }
+  },
+  "contract": {
+    "amount": "Amount, ₴",
+    "current_price": "<b>Current cost:</b> {{ price }} UAH",
+    "date": "Date",
+    "id": "Transaction ID",
+    "semester": "Semester",
+    "title": "<b>Contract</b> <u><id>{{ title }}</id></u> <b>dated</b> {{ created_at }} <b>No.</b>",
+    "total_paid": "<b>Total paid:</b> {{ total }} ₴"
   },
   "help": {
     "add_question": "Add question",
@@ -133,7 +144,6 @@
   },
   "navbar": {
     "allow_notifications": "You have to allow notifications to receive updates",
-    "logout": "Logout",
     "new_notification": "New notification!",
     "notifications": "Notifications",
     "profile": "Profile",

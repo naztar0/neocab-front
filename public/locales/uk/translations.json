@@ -83,8 +83,10 @@
       "about": "Про сайт",
       "academic_performance": "Успішність",
       "attendance": "Відвідуваність",
+      "contract": "Контракт",
       "help": "Допомога",
       "login": "Вхід",
+      "logout": "Вийти",
       "profile": "Профіль",
       "rating": "Рейтинг",
       "record_book": "Залікова книжка",
@@ -99,6 +101,15 @@
       "incorrect_value": "Невірне значення",
       "something_went_wrong": "Щось пішло не так"
     }
+  },
+  "contract": {
+    "amount": "Сплачено, грн",
+    "current_price": "<b>Поточна вартість:</b> {{ price }} грн.",
+    "date": "Дата",
+    "id": "Транзакція",
+    "semester": "Семестр",
+    "title": "<b>Договір</b> <u><id>{{ title }}</id></u> <b>від</b> {{ created_at }}",
+    "total_paid": "<b>Всього оплачено:</b> {{ total }} грн."
   },
   "help": {
     "add_question": "Додати питання",
@@ -133,7 +144,6 @@
   },
   "navbar": {
     "allow_notifications": "Ви повинні дозволити сповіщення, щоб отримувати повідомлення",
-    "logout": "Вийти",
     "new_notification": "Нове сповіщення!",
     "notifications": "Повідомлення",
     "profile": "Профіль",

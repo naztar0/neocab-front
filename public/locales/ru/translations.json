@@ -83,8 +83,10 @@
       "about": "О сайте",
       "academic_performance": "Успеваемость",
       "attendance": "Посещаемость",
+      "contract": "Контракт",
       "help": "Помощь",
       "login": "Вход",
+      "logout": "Выйти",
       "profile": "Профиль",
       "rating": "Рейтинг",
       "record_book": "Зачетная книжка",
@@ -99,6 +101,15 @@
       "incorrect_value": "Неверное значение",
       "something_went_wrong": "Что-то пошло не так"
     }
+  },
+  "contract": {
+    "amount": "Оплачено, грн",
+    "current_price": "<b>Текущая стоимость:</b> {{ price }} грн.",
+    "date": "Дата",
+    "id": "Транзакция",
+    "semester": "Семестр",
+    "title": "<b>Договор</b> <u><id>{{ title }}</id></u> <b>от</b> {{ created_at }}",
+    "total_paid": "<b>Всего оплачено:</b> {{ total }} грн."
   },
   "help": {
     "add_question": "Добавить вопрос",
@@ -133,7 +144,6 @@
   },
   "navbar": {
     "allow_notifications": "Вы должны разрешить уведомления, чтобы получать оповещения",
-    "logout": "Выйти",
     "new_notification": "Новое уведомление!",
     "notifications": "Уведомления",
     "profile": "Профиль",
