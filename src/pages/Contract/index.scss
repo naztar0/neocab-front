@@ -1,0 +1,46 @@
+@import "src/styles/variables";
+
+.contract-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+    margin: 10px;
+    color: $black75;
+    text-align: center;
+
+    b {
+      font-weight: 600;
+    }
+    u {
+      text-decoration-thickness: 1px;
+    }
+  }
+  .contract-title {
+    color: $black50;
+    background: $black075;
+    padding: 5px;
+    margin: 0;
+    border-radius: 5px;
+    font-size: 18px;
+
+    .help {
+      cursor: help;
+    }
+  }
+}
+
+.dark-theme {
+  .contract-data {
+    p {
+      color: $white75;
+    }
+    .contract-title {
+      color: $white50;
+      background: $white075;
+    }
+  }
+}
