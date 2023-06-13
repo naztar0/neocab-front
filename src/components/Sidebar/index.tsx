@@ -60,11 +60,6 @@ export default function Sidebar() {
       label: t('common.menu.search'),
     },
     {
-      key: 'settings',
-      icon: <Icons.SettingOutlined className="icon" />,
-      label: t('common.menu.settings'),
-    },
-    {
       key: 'help',
       icon: <Icons.QuestionCircleOutlined className="icon" />,
       label: t('common.menu.help'),
