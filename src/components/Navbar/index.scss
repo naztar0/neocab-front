@@ -126,6 +126,10 @@ header {
   }
 }
 
+a.nav-link {
+  text-decoration: none;
+}
+
 .dark-theme {
   header {
     background: $bg-substrate-dark;
