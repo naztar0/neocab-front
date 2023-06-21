@@ -76,16 +76,12 @@ export default function Profile() {
             )}
           </div>
           <div className="info">
-            {!isLoading ? (
-              <>
-                <span className="name">
-                  {`${profileData.last_name} ${profileData.first_name} ${profileData.middle_name}`}
-                </span>
-                <a className="email" href={`mailto:${profileData.email}`}>{profileData.email}</a>
-              </>
-            ) : (
-              <Skeleton paragraph={{ rows: 1 }} style={{ width: '250px' }} active />
-            )}
+            <Skeleton loading={isLoading} paragraph={{ rows: 1 }} style={{ width: '250px' }} active>
+              <span className="name">
+                {`${profileData?.last_name} ${profileData?.first_name} ${profileData?.middle_name}`}
+              </span>
+              <a className="email" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+            </Skeleton>
           </div>
         </div>
       </div>
