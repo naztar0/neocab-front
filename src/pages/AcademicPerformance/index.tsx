@@ -9,14 +9,17 @@ import { Spin } from 'antd';
 import { Helmet } from 'react-helmet';
 import {
   Chart,
+  Filler,
   ArcElement,
   Tooltip as ChartTooltip,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  ScriptableContext,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { hex } from 'chroma-js';
 import { Trans, useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/Layout';
@@ -65,6 +68,16 @@ const chartOptions3 = {
   },
 };
 
+const getGradient = (chartContext: ScriptableContext<'line'> & CanvasRenderingContext2D, color: string) => {
+  const { chart } = chartContext;
+  const { ctx, chartArea } = chart;
+  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+  gradient.addColorStop(1, hex(color).alpha(0.25).css());
+  gradient.addColorStop(0.5, hex(color).alpha(0.1).css());
+  gradient.addColorStop(0.025, hex(color).alpha(0).css());
+  return gradient;
+};
+
 export default function AcademicPerformance() {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
@@ -78,10 +91,10 @@ export default function AcademicPerformance() {
   const [isChartRegistered, setIsChartRegistered] = useState(false);
 
   useEffect(() => {
-    Chart.register(ArcElement, ChartTooltip, CategoryScale, LinearScale, PointElement, LineElement);
+    Chart.register(ArcElement, Filler, ChartTooltip, CategoryScale, LinearScale, PointElement, LineElement);
     setIsChartRegistered(true);
     return () => {
-      Chart.unregister(ArcElement, ChartTooltip, CategoryScale, LinearScale, PointElement, LineElement);
+      Chart.unregister(ArcElement, Filler, ChartTooltip, CategoryScale, LinearScale, PointElement, LineElement);
     };
   }, []);
 
@@ -140,6 +153,12 @@ export default function AcademicPerformance() {
         tension: 0.4,
         backgroundColor: colorsMain[0][0],
         borderColor: colorsMain[0][1],
+        fill: {
+          target: 'start',
+          above: (
+            (ctx: ScriptableContext<'line'> & CanvasRenderingContext2D) => getGradient(ctx, colorsMain[0][0])
+          ) as any,
+        },
       },
     ],
   }), [academicPerformanceData, formatMonthDate, t]);
@@ -158,6 +177,12 @@ export default function AcademicPerformance() {
         tension: 0.4,
         backgroundColor: colorsMain[0][0],
         borderColor: colorsMain[0][1],
+        fill: {
+          target: 'start',
+          above: (
+            (ctx: ScriptableContext<'line'> & CanvasRenderingContext2D) => getGradient(ctx, colorsMain[0][0])
+          ) as any,
+        },
       },
     ],
   }), [academicPerformanceData, semesterToMonthYear, t]);
@@ -176,6 +201,12 @@ export default function AcademicPerformance() {
         tension: 0.4,
         backgroundColor: colorsMain[0][0],
         borderColor: colorsMain[0][1],
+        fill: {
+          target: 'start',
+          above: (
+            (ctx: ScriptableContext<'line'> & CanvasRenderingContext2D) => getGradient(ctx, colorsMain[0][0])
+          ) as any,
+        },
       },
       {
         label: t('academic_performance.rating_position'),
@@ -186,6 +217,12 @@ export default function AcademicPerformance() {
         tension: 0.4,
         backgroundColor: colorsMain[1][0],
         borderColor: colorsMain[1][1],
+        fill: {
+          target: 'start',
+          above: (
+            (ctx: ScriptableContext<'line'> & CanvasRenderingContext2D) => getGradient(ctx, colorsMain[1][0])
+          ) as any,
+        },
       },
     ],
   }), [academicPerformanceData, semesterToMonthYear, t]);
