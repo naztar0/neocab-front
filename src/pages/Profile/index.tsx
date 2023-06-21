@@ -50,7 +50,7 @@ export default function Profile() {
         <div className="cover">
           {!isLoading ? (
             <img
-              src={profileData.cover ? IMAGES_URL + profileData.cover : '/images/default_cover.jpg'}
+              src={profileData?.cover ? `${IMAGES_URL}${profileData?.cover}` : '/images/default_cover.jpg'}
               alt="cover"
             />
           ) : (
@@ -67,8 +67,8 @@ export default function Profile() {
             {!isLoading ? (
               <Avatar
                 size={160}
-                avatar={profileData.image}
-                username={profileData.first_name}
+                avatar={profileData?.image}
+                username={profileData?.first_name}
                 mono
               />
             ) : (
