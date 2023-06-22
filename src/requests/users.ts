@@ -21,8 +21,16 @@ export const fetchUserSyllabus = async (user: number, semester: number) => getAx
   `/api/users/${user}/syllabus/${semester}`,
 );
 
+export const fetchUserContract = async (user: number) => getAxiosInstance().get(
+  `/api/users/${user}/contract`,
+);
+
 export const fetchUserAttendance = async (user: number) => getAxiosInstance().get(
   `/api/users/${user}/attendance`,
+);
+
+export const fetchUserAcademicPerformance = async (user: number) => getAxiosInstance().get(
+  `/api/users/${user}/academic-performance`,
 );
 
 export const postSyncUserPhoto = async (user: number) => getAxiosInstance().post(

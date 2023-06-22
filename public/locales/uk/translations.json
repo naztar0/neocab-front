@@ -1,4 +1,12 @@
 {
+  "academic_performance": {
+    "attendances": "Відвідування",
+    "attendances_count": "Відвідувань",
+    "rating_percentage": "Відсоток в рейтингу",
+    "rating_position": "Позиція в рейтингу",
+    "rating_position_and_percentage": "Позиція та відсоток у рейтингу",
+    "record_book_average_mark": "Середня оцінка залікової книжки"
+  },
   "attendance": {
     "attendances": "{{date}}: {{count}} відвідувань",
     "date": "Дата",
@@ -21,30 +29,7 @@
         "less": "Менше",
         "more": "Більше"
       },
-      "months": {
-        "april": "Квіт",
-        "august": "Сер",
-        "december": "Гру",
-        "february": "Лют",
-        "january": "Січ",
-        "july": "Лип",
-        "june": "Чер",
-        "march": "Бер",
-        "may": "Трав",
-        "november": "Лис",
-        "october": "Жов",
-        "september": "Вер"
-      },
-      "total_count": "Загальна кількість",
-      "weekdays": {
-        "friday": "Пт",
-        "monday": "Пн",
-        "saturday": "Сб",
-        "sunday": "Нд",
-        "thursday": "Чт",
-        "tuesday": "Вт",
-        "wednesday": "Ср"
-      }
+      "total_count": "Загальна кількість"
     },
     "last_attendances": "Останні відвідування",
     "most_visited_subjects": "Найбільш відвідувані дисципліни",
@@ -69,11 +54,39 @@
       "speciality": "Спеціальність",
       "specialization": "Спеціалізація"
     },
+    "labels": {
+      "months": {
+        "april": "Квіт",
+        "august": "Сер",
+        "december": "Гру",
+        "february": "Лют",
+        "january": "Січ",
+        "july": "Лип",
+        "june": "Чер",
+        "march": "Бер",
+        "may": "Трав",
+        "november": "Лис",
+        "october": "Жов",
+        "september": "Вер"
+      },
+      "weekdays": {
+        "friday": "Пт",
+        "monday": "Пн",
+        "saturday": "Сб",
+        "sunday": "Нд",
+        "thursday": "Чт",
+        "tuesday": "Вт",
+        "wednesday": "Ср"
+      }
+    },
     "menu": {
       "about": "Про сайт",
+      "academic_performance": "Успішність",
       "attendance": "Відвідуваність",
+      "contract": "Контракт",
       "help": "Допомога",
       "login": "Вхід",
+      "logout": "Вийти",
       "profile": "Профіль",
       "rating": "Рейтинг",
       "record_book": "Залікова книжка",
@@ -88,6 +101,15 @@
       "incorrect_value": "Невірне значення",
       "something_went_wrong": "Щось пішло не так"
     }
+  },
+  "contract": {
+    "amount": "Сплачено, грн",
+    "current_price": "<b>Поточна вартість:</b> {{ price }} грн.",
+    "date": "Дата",
+    "id": "Транзакція",
+    "semester": "Семестр",
+    "title": "<b>Договір</b> <u><id>{{ title }}</id></u> <b>від</b> {{ created_at }}",
+    "total_paid": "<b>Всього оплачено:</b> {{ total }} грн."
   },
   "help": {
     "add_question": "Додати питання",
@@ -122,7 +144,6 @@
   },
   "navbar": {
     "allow_notifications": "Ви повинні дозволити сповіщення, щоб отримувати повідомлення",
-    "logout": "Вийти",
     "new_notification": "Нове сповіщення!",
     "notifications": "Повідомлення",
     "profile": "Профіль",

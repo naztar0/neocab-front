@@ -5,7 +5,9 @@ import {
   fetchUserRecordBook,
   fetchUserRating,
   fetchUserSyllabus,
+  fetchUserContract,
   fetchUserAttendance,
+  fetchUserAcademicPerformance,
   fetchUsers,
   postSyncUserPhoto,
   postUserCover,
@@ -54,10 +56,24 @@ export const getUserSyllabus = createAsyncThunk(
   ).data,
 );
 
+export const getUserContract = createAsyncThunk(
+  'get_user_contract',
+  async ({ user }: { user: number }) => (
+    await responseHandler(fetchUserContract(user))
+  ).data,
+);
+
 export const getUserAttendance = createAsyncThunk(
   'get_user_attendance',
   async ({ user }: { user: number }) => (
     await responseHandler(fetchUserAttendance(user))
+  ).data,
+);
+
+export const getUserAcademicPerformance = createAsyncThunk(
+  'get_user_academic_performance',
+  async ({ user }: { user: number }) => (
+    await responseHandler(fetchUserAcademicPerformance(user))
   ).data,
 );
 

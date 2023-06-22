@@ -1,4 +1,12 @@
 {
+  "academic_performance": {
+    "attendances": "Посещения",
+    "attendances_count": "Посещений",
+    "rating_percentage": "Процент в рейтинге",
+    "rating_position": "Позиция в рейтинге",
+    "rating_position_and_percentage": "Позиция и процент в рейтинге",
+    "record_book_average_mark": "Средняя оценка зачетной книжки"
+  },
   "attendance": {
     "attendances": "{{date}}: {{count}} посещений",
     "date": "Дата",
@@ -21,30 +29,7 @@
         "less": "Меньше",
         "more": "Больше"
       },
-      "months": {
-        "april": "Апр",
-        "august": "Авг",
-        "december": "Дек",
-        "february": "Фев",
-        "january": "Янв",
-        "july": "Июл",
-        "june": "Июн",
-        "march": "Мар",
-        "may": "Май",
-        "november": "Ноя",
-        "october": "Окт",
-        "september": "Сен"
-      },
-      "total_count": "Общее количество",
-      "weekdays": {
-        "friday": "Пт",
-        "monday": "Пн",
-        "saturday": "Сб",
-        "sunday": "Вс",
-        "thursday": "Чт",
-        "tuesday": "Вт",
-        "wednesday": "Ср"
-      }
+      "total_count": "Общее количество"
     },
     "last_attendances": "Последние посещения",
     "most_visited_subjects": "Наиболее посещаемые дисциплины",
@@ -69,11 +54,39 @@
       "speciality": "Специальность",
       "specialization": "Специализация"
     },
+    "labels": {
+      "months": {
+        "april": "Апр",
+        "august": "Авг",
+        "december": "Дек",
+        "february": "Фев",
+        "january": "Янв",
+        "july": "Июл",
+        "june": "Июн",
+        "march": "Мар",
+        "may": "Май",
+        "november": "Ноя",
+        "october": "Окт",
+        "september": "Сен"
+      },
+      "weekdays": {
+        "friday": "Пт",
+        "monday": "Пн",
+        "saturday": "Сб",
+        "sunday": "Вс",
+        "thursday": "Чт",
+        "tuesday": "Вт",
+        "wednesday": "Ср"
+      }
+    },
     "menu": {
       "about": "О сайте",
+      "academic_performance": "Успеваемость",
       "attendance": "Посещаемость",
+      "contract": "Контракт",
       "help": "Помощь",
       "login": "Вход",
+      "logout": "Выйти",
       "profile": "Профиль",
       "rating": "Рейтинг",
       "record_book": "Зачетная книжка",
@@ -88,6 +101,15 @@
       "incorrect_value": "Неверное значение",
       "something_went_wrong": "Что-то пошло не так"
     }
+  },
+  "contract": {
+    "amount": "Оплачено, грн",
+    "current_price": "<b>Текущая стоимость:</b> {{ price }} грн.",
+    "date": "Дата",
+    "id": "Транзакция",
+    "semester": "Семестр",
+    "title": "<b>Договор</b> <u><id>{{ title }}</id></u> <b>от</b> {{ created_at }}",
+    "total_paid": "<b>Всего оплачено:</b> {{ total }} грн."
   },
   "help": {
     "add_question": "Добавить вопрос",
@@ -122,7 +144,6 @@
   },
   "navbar": {
     "allow_notifications": "Вы должны разрешить уведомления, чтобы получать оповещения",
-    "logout": "Выйти",
     "new_notification": "Новое уведомление!",
     "notifications": "Уведомления",
     "profile": "Профиль",

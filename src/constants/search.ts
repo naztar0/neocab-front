@@ -15,7 +15,7 @@ export enum OrderType {
 
 export const defaultPagePerPage = { page: 1, perPage: 25 };
 export const pageSizeOptions = [10, 25, 50, 100];
-export const searchPattern = /^[0-9a-zA-Zа-яА-ЯґҐєЄіІїЇ' ]+$/;
+export const searchPattern = /^[0-9a-zA-Zа-яА-ЯґҐєЄіІїЇ' -]+$/;
 export const searchPatternString = String(searchPattern).slice(1, -1);
 
 export interface DataType {

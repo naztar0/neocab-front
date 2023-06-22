@@ -55,6 +55,7 @@ export default function AttendanceEdit() {
   const groupUsers: Pagination<User> = useSelector((state: any) => state.userReducer.users);
   // eslint-disable-next-line max-len
   const attendanceData: Pagination<AttendanceGroup> = useSelector((state: any) => state.attendanceReducer.attendance);
+  const isAttendanceLoading: boolean = useSelector((state: any) => state.attendanceReducer.isLoading);
   const isGroupSchedulesLoading: boolean = useSelector((state: any) => state.scheduleReducer.isLoading);
   const isGroupUsersLoading: boolean = useSelector((state: any) => state.userReducer.isLoading);
 
@@ -74,16 +75,21 @@ export default function AttendanceEdit() {
 
   useEffect(() => {
     if (profileData?.role === Role.Headman) {
-      dispatch(getGroupAttendance({ group: profileData.group_id, ...pagePerPage }));
       dispatch(getGroupSchedules({ group: profileData.group_id }));
       dispatch(getGroupUsers({ group: profileData.group_id }));
     }
   }, [profileData]);
 
   useEffect(() => {
+    if (profileData?.role === Role.Headman) {
+      dispatch(getGroupAttendance({ group: profileData.group_id, params: pagePerPage }));
+    }
+  }, [profileData, pagePerPage]);
+
+  useEffect(() => {
     if (profileData?.role === Role.Headman && reloadAttendanceData) {
       setReloadAttendanceData(false);
-      dispatch(getGroupAttendance({ group: profileData.group_id, ...pagePerPage }));
+      dispatch(getGroupAttendance({ group: profileData.group_id, params: pagePerPage }));
     }
   }, [profileData, reloadAttendanceData, pagePerPage]);
 
@@ -99,7 +105,7 @@ export default function AttendanceEdit() {
     attendanceData?.data?.slice(-historyLimitAdmin).map((data, index) => ({ ...data, key: index })) || []
   ), [attendanceData]);
 
-  const isLoading = isGroupSchedulesLoading || isGroupUsersLoading;
+  const isLoading = isAttendanceLoading || isGroupSchedulesLoading || isGroupUsersLoading;
 
   const sendAttendance = useCallback(({ target }: CheckboxChangeEvent) => {
     if (!attendanceSS || !attendanceDate) {

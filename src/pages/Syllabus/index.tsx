@@ -20,6 +20,7 @@ const chartOptions = {
   cutout: '83%',
   responsive: true,
   borderRadius: 99,
+  borderWidth: 0,
   spacing: 20,
 };
 
@@ -46,6 +47,15 @@ export default function Rating() {
   const syllabusData: Syllabus[] = useSelector((state: any) => state.syllabusReducer.syllabus);
 
   const [semester, setSemester] = useState(yearToSemester(profileData?.year ?? 0));
+  const [isChartRegistered, setIsChartRegistered] = useState(false);
+
+  useEffect(() => {
+    Chart.register(ArcElement, ChartTooltip);
+    setIsChartRegistered(true);
+    return () => {
+      Chart.unregister(ArcElement, ChartTooltip);
+    };
+  }, []);
 
   useEffect(() => {
     if (profileData) {
@@ -58,10 +68,6 @@ export default function Rating() {
       dispatch(getUserSyllabus({ user: profileData.id, semester }));
     }
   }, [semester]);
-
-  if (!Object.keys(Chart.instances).length) {
-    Chart.register(ArcElement, ChartTooltip);
-  }
 
   const syllabusDataSource = useMemo(() => (
     syllabusData?.map((data, index) => ({ key: index, ...data }))
@@ -85,7 +91,6 @@ export default function Rating() {
         data: syllabusData?.filter((data) => Number(data.credit)).map((data) => data.credit),
         backgroundColor: colorsMain[0],
         borderColor: colorsMain[1],
-        borderWidth: 1,
       },
     ],
   }), [syllabusData, colorsMain, t]);
@@ -98,7 +103,6 @@ export default function Rating() {
         data: syllabusData?.filter((data) => Number(data.hours)).map((data) => data.hours),
         backgroundColor: colorsMain[0],
         borderColor: colorsMain[1],
-        borderWidth: 1,
       },
     ],
   }), [syllabusData, colorsMain, t]);
@@ -112,7 +116,6 @@ export default function Rating() {
           syllabusData?.filter((data) => data.control === 'credit').length],
         backgroundColor: colorsMono[0],
         borderColor: colorsMono[1],
-        borderWidth: 1,
       },
     ],
   }), [syllabusData, colorsMain, t]);
@@ -185,40 +188,42 @@ export default function Rating() {
           )}
         />
       </div>
-      <div className="substrate charts">
-        <div className="legend">
-          {syllabusData?.map((data, index) => (
-            <div className="legend-item" key={data.subject.id}>
-              <div className="legend-color" style={{ backgroundColor: colorsMain[0][index] }} />
-              <span className="legend-name">{data.subject.title}</span>
+      {isChartRegistered && (
+        <div className="substrate syllabus-charts">
+          <div className="legend">
+            {syllabusData?.map((data, index) => (
+              <div className="legend-item" key={data.subject.id}>
+                <div className="legend-color" style={{ backgroundColor: colorsMain[0][index] }} />
+                <span className="legend-name">{data.subject.title}</span>
+              </div>
+            ))}
+          </div>
+          <div className="chart">
+            <span className="chart-title">
+              <Trans i18nKey="syllabus.credits" />
+            </span>
+            <div>
+              <Doughnut data={creditsChart} options={chartOptions} />
             </div>
-          ))}
-        </div>
-        <div className="chart">
-          <span className="chart-title">
-            <Trans i18nKey="syllabus.credits" />
-          </span>
-          <div>
-            <Doughnut data={creditsChart} height={300} options={chartOptions} />
+          </div>
+          <div className="chart">
+            <span className="chart-title">
+              <Trans i18nKey="syllabus.hours" />
+            </span>
+            <div>
+              <Doughnut data={hoursChart} options={chartOptions} />
+            </div>
+          </div>
+          <div className="chart">
+            <span className="chart-title">
+              <Trans i18nKey="syllabus.control" />
+            </span>
+            <div>
+              <Doughnut data={controlChart} options={chartOptions} />
+            </div>
           </div>
         </div>
-        <div className="chart">
-          <span className="chart-title">
-            <Trans i18nKey="syllabus.hours" />
-          </span>
-          <div>
-            <Doughnut data={hoursChart} height={300} options={chartOptions} />
-          </div>
-        </div>
-        <div className="chart">
-          <span className="chart-title">
-            <Trans i18nKey="syllabus.control" />
-          </span>
-          <div>
-            <Doughnut data={controlChart} height={300} options={chartOptions} />
-          </div>
-        </div>
-      </div>
+      )}
     </Layout>
   );
 }

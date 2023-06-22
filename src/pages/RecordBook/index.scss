@@ -4,6 +4,59 @@
 .debt {
   color: $yellow-light;
 }
+.record-book-charts {
+  padding-top: 28px;
+
+  canvas {
+    position: relative;
+    z-index: 1;
+  }
+
+  .chart {
+    height: 400px;
+    position: relative;
+
+    .mark-labels {
+      position: absolute;
+      width: 100%;
+      justify-content: space-around;
+      display: flex;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      padding-left: 34px;
+
+      .mark {
+        width: 48px;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+      }
+    }
+    .title-labels {
+      position: absolute;
+      width: 100%;
+      justify-content: space-around;
+      display: flex;
+      bottom: 0;
+      left: 0;
+      padding-left: 34px;
+
+      .title {
+        margin-left: -8.5%;
+        width: 0;
+        rotate: -90deg;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        @media (max-width: 1365px) {
+          margin-left: -10%;
+        }
+      }
+    }
+  }
+}
 
 .dark-theme {
 

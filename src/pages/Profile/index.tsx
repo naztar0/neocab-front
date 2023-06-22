@@ -50,7 +50,7 @@ export default function Profile() {
         <div className="cover">
           {!isLoading ? (
             <img
-              src={profileData.cover ? IMAGES_URL + profileData.cover : '/images/default_cover.jpg'}
+              src={profileData?.cover ? `${IMAGES_URL}${profileData?.cover}` : '/images/default_cover.jpg'}
               alt="cover"
             />
           ) : (
@@ -67,8 +67,8 @@ export default function Profile() {
             {!isLoading ? (
               <Avatar
                 size={160}
-                avatar={profileData.image}
-                username={profileData.first_name}
+                avatar={profileData?.image}
+                username={profileData?.first_name}
                 mono
               />
             ) : (
@@ -76,16 +76,12 @@ export default function Profile() {
             )}
           </div>
           <div className="info">
-            {!isLoading ? (
-              <>
-                <span className="name">
-                  {`${profileData.last_name} ${profileData.first_name} ${profileData.middle_name}`}
-                </span>
-                <a className="email" href={`mailto:${profileData.email}`}>{profileData.email}</a>
-              </>
-            ) : (
-              <Skeleton paragraph={{ rows: 1 }} style={{ width: '250px' }} active />
-            )}
+            <Skeleton loading={isLoading} paragraph={{ rows: 1 }} style={{ width: '250px' }} active>
+              <span className="name">
+                {`${profileData?.last_name} ${profileData?.first_name} ${profileData?.middle_name}`}
+              </span>
+              <a className="email" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+            </Skeleton>
           </div>
         </div>
       </div>

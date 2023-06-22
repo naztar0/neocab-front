@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store';
 import AppInit from '@/components/AppInit';
 import ConfigProvider from '@/components/ConfigProvider';
-import Login from '@/pages/Login';
-import Profile from '@/pages/Profile';
-import Attendance from '@/pages/Attendance';
-import AttendanceEdit from '@/pages/AttendanceEdit';
-import RecordBook from '@/pages/RecordBook';
-import Rating from '@/pages/Rating';
-import Schedule from '@/pages/Schedule';
-import ScheduleEdit from '@/pages/ScheduleEdit';
-import Syllabus from '@/pages/Syllabus';
-import Search from '@/pages/Search';
-import Settings from '@/pages/Settings';
-import Help from '@/pages/Help';
-import Privacy from '@/pages/Privacy';
-import Unsupported from '@/pages/Unsupported';
-import NotFound from '@/pages/NotFound';
 import './styles/global.scss';
 import './styles/antd.scss';
 
+const Login = lazy(() => import('@/pages/Login'));
+const Profile = lazy(() => import('@/pages/Profile'));
+const Attendance = lazy(() => import('@/pages/Attendance'));
+const AttendanceEdit = lazy(() => import('@/pages/AttendanceEdit'));
+const RecordBook = lazy(() => import('@/pages/RecordBook'));
+const Rating = lazy(() => import('@/pages/Rating'));
+const Schedule = lazy(() => import('@/pages/Schedule'));
+const ScheduleEdit = lazy(() => import('@/pages/ScheduleEdit'));
+const Syllabus = lazy(() => import('@/pages/Syllabus'));
+const AcademicPerformance = lazy(() => import('@/pages/AcademicPerformance'));
+const Search = lazy(() => import('@/pages/Search'));
+const Settings = lazy(() => import('@/pages/Settings'));
+const Help = lazy(() => import('@/pages/Help'));
+const Contract = lazy(() => import('@/pages/Contract'));
+const Privacy = lazy(() => import('@/pages/Privacy'));
+const Unsupported = lazy(() => import('@/pages/Unsupported'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
+
+/* eslint-disable max-len */
 function App() {
   return (
     <Provider store={setupStore()}>
@@ -32,21 +36,23 @@ function App() {
           <Helmet defaultTitle="NeoCab" titleTemplate="%s ∣ NeoCab" />
           <Routes>
             <Route path="/" />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/attendance" element={<Attendance />} />
-            <Route path="/attendance/edit" element={<AttendanceEdit />} />
-            <Route path="/record-book" element={<RecordBook />} />
-            <Route path="/rating" element={<Rating />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/schedule/edit" element={<ScheduleEdit />} />
-            <Route path="/syllabus" element={<Syllabus />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/help" element={<Help />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/unsupported" element={<Unsupported />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/login" element={<Suspense fallback={<div />}><Login /></Suspense>} />
+            <Route path="/profile" element={<Suspense fallback={<div />}><Profile /></Suspense>} />
+            <Route path="/attendance" element={<Suspense fallback={<div />}><Attendance /></Suspense>} />
+            <Route path="/attendance/edit" element={<Suspense fallback={<div />}><AttendanceEdit /></Suspense>} />
+            <Route path="/record-book" element={<Suspense fallback={<div />}><RecordBook /></Suspense>} />
+            <Route path="/rating" element={<Suspense fallback={<div />}><Rating /></Suspense>} />
+            <Route path="/schedule" element={<Suspense fallback={<div />}><Schedule /></Suspense>} />
+            <Route path="/schedule/edit" element={<Suspense fallback={<div />}><ScheduleEdit /></Suspense>} />
+            <Route path="/syllabus" element={<Suspense fallback={<div />}><Syllabus /></Suspense>} />
+            <Route path="/academic-performance" element={<Suspense fallback={<div />}><AcademicPerformance /></Suspense>} />
+            <Route path="/search" element={<Suspense fallback={<div />}><Search /></Suspense>} />
+            <Route path="/settings" element={<Suspense fallback={<div />}><Settings /></Suspense>} />
+            <Route path="/help" element={<Suspense fallback={<div />}><Help /></Suspense>} />
+            <Route path="/contract" element={<Suspense fallback={<div />}><Contract /></Suspense>} />
+            <Route path="/privacy" element={<Suspense fallback={<div />}><Privacy /></Suspense>} />
+            <Route path="/unsupported" element={<Suspense fallback={<div />}><Unsupported /></Suspense>} />
+            <Route path="*" element={<Suspense fallback={<div />}><NotFound /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </ConfigProvider>

@@ -50,7 +50,7 @@ export default function StudentProfileData({ isLoading, user }: Props) {
       <div className="student-profile-data col">
         {profileRowTitles.map((title, index) => (
           <div className="item" key={title[0] as string}>
-            {!isLoading ? (
+            <Skeleton loading={isLoading} paragraph={{ rows: 1 }} active>
               <div>
                 <div className="label">
                   {title[1]}
@@ -58,15 +58,13 @@ export default function StudentProfileData({ isLoading, user }: Props) {
                 </div>
                 <span className="value">{profileRowValues[index]}</span>
               </div>
-            ) : (
-              <Skeleton paragraph={{ rows: 1 }} active />
-            )}
+            </Skeleton>
           </div>
         ))}
       </div>
       <div className="student-profile-data row">
         {profileColTitles.map((title, index) => (
-          !isLoading ? (
+          <Skeleton key={title} className="skeleton" loading={isLoading} paragraph={{ rows: 0 }} active>
             <div className="item" key={title}>
               <div>
                 <div className="title">
@@ -77,9 +75,8 @@ export default function StudentProfileData({ isLoading, user }: Props) {
                 </div>
               </div>
             </div>
-          ) : (
-            <Skeleton key={title} paragraph={{ rows: 0 }} active style={!index ? { marginTop: '20px' } : {}} />
-          )))}
+          </Skeleton>
+        ))}
       </div>
     </>
   );

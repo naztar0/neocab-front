@@ -88,6 +88,10 @@ $section-border-light: #e0e0e0;
         border-radius: 2px;
       }
     }
+
+    .skeleton:first-child {
+      margin-top: 10px;
+    }
   }
 }
 

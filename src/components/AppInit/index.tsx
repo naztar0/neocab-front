@@ -63,7 +63,6 @@ export default function AppInit() {
     }
   }, [authData]);
 
-  /* eslint-disable eqeqeq */
   useEffect(() => {
     document.body.classList.remove('light-theme');
     document.body.classList.remove('dark-theme');
