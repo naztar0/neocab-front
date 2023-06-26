@@ -79,6 +79,16 @@ $border-radius-base: 5px;
 .ant-drawer-content {
   background: $bg-substrate-dark !important;
 }
+.ant-drawer-content-wrapper {
+  max-width: 100%;
+}
+
+.mobile {
+  .ant-btn-sm,
+  .ant-select-selector {
+    font-size: 13px;
+  }
+}
 
 .dark-theme {
   @import "antd.dark";
