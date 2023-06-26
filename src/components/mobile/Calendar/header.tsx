@@ -8,19 +8,15 @@ import {
   Space,
 } from 'antd';
 import {
-  addWeeks,
   format,
-  subWeeks,
 } from 'date-fns';
 import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import {
-  setCurrentMonth,
   setScheduleType,
   setWeek,
 } from '@/store/reducers/schedule';
 import {
-  BtnType,
   yearFormat,
   ScheduleType,
 } from '@/constants/schedule';
@@ -28,6 +24,7 @@ import { Role } from '@/constants/profile';
 import './index.scss';
 
 export default function Header({ locale }: { locale: Locale }) {
+  // noinspection DuplicatedCode
   const dispatch = useDispatch<AppDispatch>();
   useTranslation();
 
@@ -36,15 +33,6 @@ export default function Header({ locale }: { locale: Locale }) {
   const scheduleType: ScheduleType = useSelector((state: any) => state.scheduleReducer.scheduleType);
   const currentMonth = new Date(useSelector((state: any) => state.scheduleReducer.currentMonth));
   const week: number = useSelector((state: any) => state.scheduleReducer.week);
-
-  const changeWeekHandle = useCallback((btnType: BtnType) => {
-    if (btnType === 'prev') {
-      dispatch(setCurrentMonth(subWeeks(currentMonth, 1).toJSON()));
-    }
-    if (btnType === 'next') {
-      dispatch(setCurrentMonth(addWeeks(currentMonth, 1).toJSON()));
-    }
-  }, [currentMonth]);
 
   const weekSchedule = useMemo(() => {
     if (!groupScheduleData.length) return null;
