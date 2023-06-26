@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   setMinutes,
+  addMinutes,
   differenceInMinutes,
   format,
 } from 'date-fns';
-import dayjs from 'dayjs';
 import { useTranslation, Trans } from 'react-i18next';
-import { getDay, formatName } from '@/helpers/utils';
+import { getDay, parseHM, formatName } from '@/helpers/utils';
 import {
   customSubjectDuration,
   timeFormat,
@@ -17,11 +17,11 @@ export default function EventsCustom({ events, day }: { events: ScheduleSubject[
   useTranslation();
   const result = events
     .filter((e) => getDay(day) === e.day)
-    .sort((a, b) => (dayjs(a.time, timeFormat) > dayjs(b.time, timeFormat) ? 1 : -1))
+    .sort((a, b) => (parseHM(a.time) > parseHM(b.time) ? 1 : -1))
     .map((event) => {
       const eventEnd = setMinutes(
         day,
-        differenceInMinutes(dayjs(event.time, timeFormat).add(customSubjectDuration, 'minute').toDate(), day),
+        differenceInMinutes(addMinutes(parseHM(event.time), customSubjectDuration), day),
       );
       return (
         <div className="event" key={event.id}>

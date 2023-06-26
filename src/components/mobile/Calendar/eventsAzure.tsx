@@ -5,7 +5,6 @@ import {
   isSameDay,
   format,
 } from 'date-fns';
-import dayjs from 'dayjs';
 import { useTranslation, Trans } from 'react-i18next';
 import { getDate } from '@/helpers/utils';
 import {
@@ -17,7 +16,7 @@ export default function EventsCustom({ events, day }: { events: CalendarEvent[],
   useTranslation();
   const result = events
     .filter((e) => isSameDay(day, getDate(e.start)))
-    .sort((a, b) => (dayjs(getDate(a.start), timeFormat) > dayjs(getDate(b.start), timeFormat) ? 1 : -1))
+    .sort((a, b) => (getDate(a.start) > getDate(b.start) ? 1 : -1))
     .map((event) => {
       const eventStart = getDate(event.start);
       const eventEnd = getDate(event.end);
