@@ -1,0 +1,32 @@
+@import "src/styles/variables";
+
+.schedules-table {
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.schedule-subject {
+  display: flex;
+  flex-direction: column;
+
+  .subject-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      min-width: 32px;
+    }
+  }
+}
+
+.dark-theme {
+
+}

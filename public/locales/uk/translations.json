@@ -103,13 +103,15 @@
     }
   },
   "contract": {
-    "amount": "Сплачено, грн",
+    "amount": "Сплачено, грн.",
     "current_price": "<b>Поточна вартість:</b> {{ price }} грн.",
+    "current_price_short": "Поточна вартість, грн.",
     "date": "Дата",
     "id": "Транзакція",
     "semester": "Семестр",
     "title": "<b>Договір</b> <u><id>{{ title }}</id></u> <b>від</b> {{ created_at }}",
-    "total_paid": "<b>Всього оплачено:</b> {{ total }} грн."
+    "total_paid": "<b>Всього оплачено:</b> {{ total }} грн.",
+    "total_paid_short": "Всього оплачено, грн."
   },
   "help": {
     "add_question": "Додати питання",
@@ -229,6 +231,7 @@
     },
     "edit_schedule": "Редагувати",
     "join": "Приєднатися",
+    "no_subjects": "Нема пар",
     "teams": "Teams"
   },
   "search": {

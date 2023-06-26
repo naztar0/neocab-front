@@ -1,0 +1,129 @@
+@import '@/styles/variables.scss';
+
+$time-width: 50px;
+$time-height: 85px;
+$border-radius: 8px;
+
+.calendar {
+  width: 100%;
+  user-select: none;
+
+  .table-title {
+    text-transform: capitalize;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  .days {
+    display: flex;
+    flex-direction: column;
+
+    .day {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 0 4px 10px;
+      color: $black50;
+
+      &.today {
+        color: $white;
+        border-radius: $border-radius;
+        background: $blue-light2;
+        padding-top: 8px;
+        margin-top: 12px;
+      }
+      .month {
+        text-transform: capitalize;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .number {
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 5px;
+      }
+      .name {
+        font-size: 12px;
+        margin-left: 5px;
+      }
+    }
+
+    .event {
+      background: $blue-light3;
+      line-height: normal;
+      border-radius: $border-radius;
+      color: $blue-dark4;
+      display: flex;
+      flex-direction: row;
+      margin-top: 5px;
+
+      .ui {
+        width: 4px;
+        margin: 8px 0 8px 8px;
+        background: repeating-linear-gradient(48deg, $blue-light3, $blue-light3 2px, $blue-dark5 2px, $blue-dark5 4px);
+        border-radius: $border-radius;
+      }
+
+      .content {
+        padding: 8px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        width: 100%;
+
+        .title {
+          font-size: 13px;
+        }
+        .time {
+          margin-top: 4px;
+          font-size: 10px;
+          opacity: 0.92;
+        }
+        .organizer {
+          margin-top: 5px;
+          font-size: 12px;
+          opacity: 0.8;
+        }
+        .notes {
+          margin-top: 5px;
+          font-size: 12px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .schedule-type {
+    width: fit-content;
+  }
+  .schedule-edit {
+    color: $blue-dark;
+    border-radius: 0;
+  }
+}
+
+.dark-theme {
+  .calendar {
+    .days {
+      color: $white50;
+
+      .day {
+        color: $white50;
+
+        &.today {
+          color: $blue-lighter;
+          background: $white075;
+        }
+      }
+
+      .event {
+        background: $blue-dark3;
+        color: $blue-light2;
+
+        .ui {
+          background: repeating-linear-gradient(48deg, $blue-dark3, $blue-dark3 2px, $blue-dark5 2px, $blue-dark5 4px);
+        }
+      }
+    }
+  }
+}
