@@ -75,6 +75,17 @@ export function getDay(date: Date): number {
   return date.getDay() || 7;
 }
 
+export function parseHM(time: string) {
+  const now = new Date();
+  if (!time) {
+    now.setHours(0, 0, 0, 0);
+    return now;
+  }
+  const [h, m] = time.split(':');
+  now.setHours(+h, +m, 0, 0);
+  return now;
+}
+
 export function formatName(user: User | null): string {
   if (!user) return '';
   const fn = user.first_name ? user.first_name[0] : '';
