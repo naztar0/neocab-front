@@ -104,12 +104,14 @@
   },
   "contract": {
     "amount": "Amount, ₴",
-    "current_price": "<b>Current cost:</b> {{ price }} UAH",
+    "current_price": "<b>Current cost:</b> {{ price }} ₴",
+    "current_price_short": "Current cost, ₴",
     "date": "Date",
     "id": "Transaction ID",
     "semester": "Semester",
     "title": "<b>Contract</b> <u><id>{{ title }}</id></u> <b>dated</b> {{ created_at }} <b>No.</b>",
-    "total_paid": "<b>Total paid:</b> {{ total }} ₴"
+    "total_paid": "<b>Total paid:</b> {{ total }} ₴",
+    "total_paid_short": "Total paid, ₴"
   },
   "help": {
     "add_question": "Add question",
@@ -229,6 +231,7 @@
     },
     "edit_schedule": "Edit",
     "join": "Join",
+    "no_subjects": "No subjects",
     "teams": "Teams"
   },
   "search": {
