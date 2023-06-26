@@ -3,30 +3,30 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store';
-import AppInit from '@/components/AppInit';
-import ConfigProvider from '@/components/ConfigProvider';
+import AppInit from '@/components/common/AppInit';
+import ConfigProvider from '@/components/common/ConfigProvider';
 import './styles/global.scss';
 import './styles/antd.scss';
 
-const Login = lazy(() => import('@/pages/Login'));
-const Profile = lazy(() => import('@/pages/Profile'));
-const Attendance = lazy(() => import('@/pages/Attendance'));
-const AttendanceEdit = lazy(() => import('@/pages/AttendanceEdit'));
-const RecordBook = lazy(() => import('@/pages/RecordBook'));
-const Rating = lazy(() => import('@/pages/Rating'));
-const Schedule = lazy(() => import('@/pages/Schedule'));
-const ScheduleEdit = lazy(() => import('@/pages/ScheduleEdit'));
-const Syllabus = lazy(() => import('@/pages/Syllabus'));
-const AcademicPerformance = lazy(() => import('@/pages/AcademicPerformance'));
-const Search = lazy(() => import('@/pages/Search'));
-const Settings = lazy(() => import('@/pages/Settings'));
-const Help = lazy(() => import('@/pages/Help'));
-const Contract = lazy(() => import('@/pages/Contract'));
-const Privacy = lazy(() => import('@/pages/Privacy'));
-const Unsupported = lazy(() => import('@/pages/Unsupported'));
-const NotFound = lazy(() => import('@/pages/NotFound'));
+const Login = lazy(() => import('@/pages/common/Login'));
+const Privacy = lazy(() => import('@/pages/common/Privacy'));
+const NotFound = lazy(() => import('@/pages/common/NotFound'));
+const Profile = lazy(() => import('@/pages/desktop/Profile'));
+const Attendance = lazy(() => import('@/pages/desktop/Attendance'));
+const AttendanceEdit = lazy(() => import('@/pages/desktop/AttendanceEdit'));
+const RecordBook = lazy(() => import('@/pages/desktop/RecordBook'));
+const Rating = lazy(() => import('@/pages/desktop/Rating'));
+const Schedule = lazy(() => import('@/pages/desktop/Schedule'));
+const ScheduleEdit = lazy(() => import('@/pages/desktop/ScheduleEdit'));
+const Syllabus = lazy(() => import('@/pages/desktop/Syllabus'));
+const AcademicPerformance = lazy(() => import('@/pages/desktop/AcademicPerformance'));
+const Search = lazy(() => import('@/pages/desktop/Search'));
+const Settings = lazy(() => import('@/pages/desktop/Settings'));
+const Help = lazy(() => import('@/pages/desktop/Help'));
+const Contract = lazy(() => import('@/pages/desktop/Contract'));
 
 /* eslint-disable max-len */
+// noinspection DuplicatedCode
 function App() {
   return (
     <Provider store={setupStore()}>
@@ -51,7 +51,6 @@ function App() {
             <Route path="/help" element={<Suspense fallback={<div />}><Help /></Suspense>} />
             <Route path="/contract" element={<Suspense fallback={<div />}><Contract /></Suspense>} />
             <Route path="/privacy" element={<Suspense fallback={<div />}><Privacy /></Suspense>} />
-            <Route path="/unsupported" element={<Suspense fallback={<div />}><Unsupported /></Suspense>} />
             <Route path="*" element={<Suspense fallback={<div />}><NotFound /></Suspense>} />
           </Routes>
         </BrowserRouter>

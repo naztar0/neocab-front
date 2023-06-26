@@ -1,0 +1,41 @@
+@import "src/styles/variables";
+
+.subject-data {
+  .item {
+    display: flex;
+    align-items: center;
+
+    :not(:first-child) {
+      margin-top: 5px;
+    }
+    .title {
+      flex: 1;
+    }
+    .value {
+      flex: 1;
+      font-size: calc(0.75rem + 0.5vw);
+    }
+  }
+}
+.contract-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  b {
+    font-weight: 600;
+  }
+  u {
+    text-decoration-thickness: 1px;
+  }
+}
+
+.dark-theme {
+  .contract-data {
+    .contract-title {
+      color: $white50;
+      background: $white075;
+    }
+  }
+}
