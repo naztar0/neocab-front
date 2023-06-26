@@ -4,12 +4,10 @@ import {
   setMinutes,
   differenceInMinutes,
 } from 'date-fns';
-import dayjs from 'dayjs';
-import { getDay, formatName } from '@/helpers/utils';
+import { getDay, parseHM, formatName } from '@/helpers/utils';
 import {
   shiftCoefficient,
   customSubjectDuration,
-  timeFormat,
 } from '@/constants/schedule';
 import './index.scss';
 
@@ -21,9 +19,9 @@ export default function EventsCustom({ events, day }: { events: ScheduleSubject[
   const cols = useMemo(() => {
     const data = [];
     for (let i = calendarStartHour; i <= calendarEndHour; i++) {
-      const event = events.find((e) => getDay(day) === e.day && dayjs(e.time, timeFormat).hour() === i);
+      const event = events.find((e) => getDay(day) === e.day && parseHM(e.time).getHours() === i);
       if (event) {
-        const eventStart = setMinutes(day, dayjs(event.time, timeFormat).minute());
+        const eventStart = setMinutes(day, parseHM(event.time).getMinutes());
         const eventHeight = customSubjectDuration * shiftCoefficient;
         const eventTop = differenceInMinutes(eventStart, setMinutes(eventStart, 0)) * shiftCoefficient;
         data.push(
