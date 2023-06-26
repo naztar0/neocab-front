@@ -10,7 +10,7 @@ import {
 } from 'date-fns';
 import { Trans, useTranslation } from 'react-i18next';
 import { getDate } from '@/helpers/utils';
-import {shiftCoefficient, timeFormat} from '@/constants/schedule';
+import { shiftCoefficient, timeFormat } from '@/constants/schedule';
 import './index.scss';
 
 export default function EventsAzure({ events, day }: { events: CalendarEvent[], day: Date }) {
