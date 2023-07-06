@@ -17,6 +17,7 @@ import { PaymentType } from '@/constants/profile';
 import './index.scss';
 
 export default function Profile() {
+  // noinspection DuplicatedCode
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
@@ -72,7 +73,7 @@ export default function Profile() {
       arrow={false}
     >
       <Button shape="circle" className="avatar">
-        <Avatar size={36} avatar={profileData?.image} username={profileData?.first_name} mono />
+        <Avatar size={32} avatar={profileData?.image} username={profileData?.first_name} mono />
       </Button>
     </Dropdown>
   );

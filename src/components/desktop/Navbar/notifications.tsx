@@ -31,6 +31,7 @@ import { truncate } from '@/helpers/utils';
 import './index.scss';
 
 export default function Notifications() {
+  // noinspection DuplicatedCode
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);

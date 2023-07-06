@@ -1,0 +1,166 @@
+@import 'src/styles/variables';
+
+header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  width: calc(100% - 48px);
+  z-index: 99;
+  top: 0;
+  background: $bg-substrate-light;
+  height: $header-height;
+  border-bottom: 1px solid $black10;
+  user-select: none;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo {
+    margin-left: 8px;
+    margin-top: -6px;
+    height: 36px;
+    transition: all 0.5s ease-out;
+
+    g * {
+      opacity: 0.8;
+      transition: opacity 0.1s ease-in;
+    }
+
+    g *:hover {
+      opacity: 1;
+    }
+  }
+
+  .search {
+    margin-left: 250px;
+    position: absolute;
+    width: 260px !important;
+
+    input {
+      height: 32px;
+      background-color: $bg-root-light;
+      border: none;
+      caret-color: $black50;
+      font-weight: 100;
+    }
+
+    button {
+      background-color: $bg-root-light;
+      border: none;
+      height: 32px;
+    }
+
+    @media (max-width: 660px) {
+      margin-left: 20px;
+      position: initial;
+    }
+
+    @media (max-width: 500px) {
+      display: none;
+    }
+  }
+
+  .notification {
+    margin-right: 20px;
+    height: $header-icon-size !important;
+    width: $header-icon-size !important;
+
+    span {
+      font-size: 18px !important;
+      color: $black50 !important;
+    }
+  }
+
+  sup {
+    right: 20px !important;
+  }
+
+  .avatar {
+    height: $header-icon-size;
+    padding: 0;
+    background: none;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.notifications {
+  max-width: 320px;
+
+  li {
+    padding: 8px 0 !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    &.unread {
+      opacity: 100%;
+    }
+
+    .status {
+      margin-right: 6px;
+    }
+
+    .date-time {
+      font-size: 10px;
+      color: $black50;
+    }
+
+    &:first-child {
+      padding-top: 0 !important;
+    }
+
+    &:last-child {
+        padding-bottom: 0 !important;
+    }
+  }
+}
+
+a.nav-link {
+  text-decoration: none;
+}
+
+.dark-theme {
+  header {
+    background: $bg-substrate-dark;
+    border-bottom: 1px solid $white10;
+
+    .logo {
+      filter: invert(1);
+    }
+
+    .search {
+      input {
+        background-color: $bg-root-dark;
+        caret-color: $white50;
+      }
+
+      button {
+        background-color: $bg-root-dark;
+        color: $white50 !important;
+      }
+    }
+
+    .notification {
+      span {
+        color: $white50 !important;
+      }
+    }
+  }
+
+  .notifications li {
+    .date-time {
+      color: $white50 !important;
+    }
+  }
+}

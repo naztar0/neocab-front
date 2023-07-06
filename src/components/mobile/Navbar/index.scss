@@ -6,12 +6,12 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
-  width: calc(100% - 48px);
+  padding: 0 12px;
+  width: calc(100% - 24px);
   z-index: 99;
   top: 0;
   background: $bg-substrate-light;
-  height: $header-height;
+  height: $header-height-mobile;
   border-bottom: 1px solid $black10;
   user-select: none;
 
@@ -21,55 +21,21 @@ header {
     align-items: center;
   }
 
+  .trigger {
+
+  }
+
   .logo {
     margin-left: 8px;
     margin-top: -6px;
-    height: 36px;
-    transition: all 0.5s ease-out;
-
-    g * {
-      opacity: 0.8;
-      transition: opacity 0.1s ease-in;
-    }
-
-    g *:hover {
-      opacity: 1;
-    }
-  }
-
-  .search {
-    margin-left: 250px;
-    position: absolute;
-    width: 260px !important;
-
-    input {
-      height: 32px;
-      background-color: $bg-root-light;
-      border: none;
-      caret-color: $black50;
-      font-weight: 100;
-    }
-
-    button {
-      background-color: $bg-root-light;
-      border: none;
-      height: 32px;
-    }
-
-    @media (max-width: 660px) {
-      margin-left: 20px;
-      position: initial;
-    }
-
-    @media (max-width: 500px) {
-      display: none;
-    }
+    height: 28px;
+    opacity: 0.8;
   }
 
   .notification {
     margin-right: 20px;
-    height: $header-icon-size !important;
-    width: $header-icon-size !important;
+    height: $header-icon-size-mobile !important;
+    width: $header-icon-size-mobile !important;
 
     span {
       font-size: 18px !important;
@@ -82,7 +48,7 @@ header {
   }
 
   .avatar {
-    height: 36px;
+    height: $header-icon-size-mobile;
     padding: 0;
     background: none;
     border: none;
