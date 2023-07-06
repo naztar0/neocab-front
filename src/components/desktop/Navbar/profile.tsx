@@ -17,6 +17,7 @@ import { PaymentType } from '@/constants/profile';
 import './index.scss';
 
 export default function Profile() {
+  // noinspection DuplicatedCode
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);

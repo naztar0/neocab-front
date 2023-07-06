@@ -7,6 +7,7 @@ import AboutModal from '@/components/common/AboutModal';
 import './index.scss';
 
 export default function Sidebar() {
+  // noinspection DuplicatedCode
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();

@@ -5,8 +5,8 @@ import {
   message,
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import Notifications from '@/components/common/Navbar/notifications';
-import Profile from '@/components/common/Navbar/profile';
+import Notifications from '@/components/desktop/Navbar/notifications';
+import Profile from '@/components/desktop/Navbar/profile';
 import {
   searchPattern,
   searchPatternString,
