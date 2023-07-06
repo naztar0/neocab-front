@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout as LayoutAntd } from 'antd';
-import Navbar from '@/components/common/Navbar';
-import Sidebar from '@/components/common/Sidebar';
+import Navbar from '@/components/desktop/Navbar';
+import Sidebar from '@/components/desktop/Sidebar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
