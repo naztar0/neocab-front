@@ -223,6 +223,9 @@ a {
 
 .mobile {
   &.container {
+    margin-left: 0;
+    margin-top: $header-height-mobile;
+    min-height: calc(100vh - $header-height-mobile) !important;
     padding: 0;
   }
   .substrate{
@@ -231,7 +234,11 @@ a {
     border-radius: 20px;
   }
   .table-title {
-    padding-left: 45px;
+    padding-left: 8px;
+
+    .title {
+      font-size: 18px;
+    }
   }
 }
 
