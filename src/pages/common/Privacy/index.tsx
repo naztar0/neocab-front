@@ -71,7 +71,7 @@ export default function Privacy() {
       <Button
         onClick={() => { window.location.href = '/'; }}
         icon={<ArrowLeftOutlined />}
-        type="ghost"
+        type="text"
       >
         <span><Trans ns="privacy" i18nKey="back" /></span>
       </Button>

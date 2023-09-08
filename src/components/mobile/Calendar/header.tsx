@@ -44,7 +44,8 @@ export default function Header({ locale }: { locale: Locale }) {
       <Tooltip title={item.description} key={item.week} placement="leftBottom">
         <Button
           size="small"
-          type="ghost"
+          type="text"
+          className="no-bg"
           onClick={() => dispatch(setWeek(item.week))}
         >
           {item.week}

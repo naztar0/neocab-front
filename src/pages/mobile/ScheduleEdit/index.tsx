@@ -202,7 +202,8 @@ export default function ScheduleEdit() {
           <div className="subject-data">
             <SubjectData title={data.title} professor={getProfessorName(data)} department={data.department?.name} />
             <Button
-              type="ghost"
+              type="text"
+              shape="circle"
               icon={addScheduleSubjectId !== data.id ? <PlusOutlined /> : <MinusOutlined />}
               onClick={() => setAddScheduleSubjectId(addScheduleSubjectId !== data.id ? data.id : null)}
             />

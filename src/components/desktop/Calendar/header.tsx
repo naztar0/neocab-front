@@ -61,7 +61,8 @@ export default function Header({ locale }: { locale: Locale }) {
     groupScheduleData.map((item) => (
       <Tooltip title={item.description} key={item.week} placement="leftBottom">
         <Button
-          type="ghost"
+          type="text"
+          className="no-bg"
           onClick={() => dispatch(setWeek(item.week))}
         >
           {item.week}
