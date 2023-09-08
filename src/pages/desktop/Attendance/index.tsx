@@ -152,7 +152,7 @@ export default function Attendance() {
   return (
     <Layout>
       <Helmet title={t('common.menu.attendance') as string} />
-      {(profileData?.role === Role.Headman || profileData?.role === Role.Admin) && (
+      {(profileData?.role === Role.Headman) && (
         <div className="attendance-title">
           <span className="title">
             <Trans i18nKey="common.menu.attendance" />
