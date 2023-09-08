@@ -20,6 +20,7 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 import { Helmet } from 'react-helmet';
+import ReactMarkdown from 'react-markdown';
 import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/mobile/Layout';
@@ -152,7 +153,7 @@ export default function Help() {
                 key={faq.id}
                 extra={profileData?.role === Role.Admin ? getActions(faq.id) : null}
               >
-                <p>{faq.answer}</p>
+                <p><ReactMarkdown>{faq.answer}</ReactMarkdown></p>
               </Collapse.Panel>
             ))}
           </Collapse>
