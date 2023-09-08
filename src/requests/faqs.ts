@@ -1,5 +1,9 @@
 import { getAxiosInstance } from '@/requests/config';
 
+export const fetchFullFaqs = async () => getAxiosInstance().get(
+  '/api/faq-items',
+);
+
 export const fetchFaqs = async (lang: string) => getAxiosInstance().get(
   `/api/faq-items/${lang}`,
 );
