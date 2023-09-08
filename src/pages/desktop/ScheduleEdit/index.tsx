@@ -141,19 +141,19 @@ export default function ScheduleEdit() {
   const columns: ColumnsType<Schedule> = useMemo(() => [
     {
       dataIndex: 'week',
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="week">{data.week}</span>
       ),
     },
     {
       dataIndex: 'description',
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="description">{data.description}</span>
       ),
     },
     {
       dataIndex: 'actions',
-      render: (value, data) => (
+      render: (_, data) => (
         <div className="actions">
           <Button
             shape="circle"
@@ -197,7 +197,7 @@ export default function ScheduleEdit() {
   const subjectsColumns: ColumnsType<Subject> = useMemo(() => [
     {
       dataIndex: 'name',
-      render: (value, data) => (
+      render: (_, data) => (
         <div className="schedule-subject">
           <div className="subject-data">
             <SubjectData title={data.title} professor={getProfessorName(data)} department={data.department?.name} />

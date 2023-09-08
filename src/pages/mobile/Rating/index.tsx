@@ -64,7 +64,7 @@ export default function Rating() {
       key: 'position',
       dataIndex: 'position',
       title: '№',
-      render: (value, record, index) => (
+      render: (_, record, index) => (
         <>
           <span>{index + 1}</span>
           <span className="student-id">{record.user?.student_id || record.student_id}</span>
@@ -75,7 +75,7 @@ export default function Rating() {
       key: 'student',
       dataIndex: 'student',
       title: t('rating.student'),
-      render: (value, record, index) => {
+      render: (_, record, index) => {
         const percent = ((index + 1) * 100) / ratingData.length;
         const probability = percent > 50 ? '0%' : (percent > 45 ? t('rating.high_probability') : '100%');
         return (
@@ -111,7 +111,7 @@ export default function Rating() {
       key: 'group',
       dataIndex: 'group',
       title: t('rating.group'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.user?.group.name ?? record.group}</span>
       ),
       sorter: (a, b) => (a.user?.group.name ?? a.group).localeCompare(b.user?.group.name ?? b.group),
@@ -120,7 +120,7 @@ export default function Rating() {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: t('rating.mark'),
-      render: (value, record) => (
+      render: (_, record) => (
         <Tooltip title={record.comment} placement="left">
           <span>{record.mark}</span>
         </Tooltip>

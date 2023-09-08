@@ -89,7 +89,7 @@ export default function RecordBook() {
       key: 'subject',
       dataIndex: 'subject',
       title: t('record_book.subject'),
-      render: (value, record) => (
+      render: (_, record) => (
         <SubjectData
           title={record.syllabus.subject.title}
           professor={getProfessorName(record.syllabus.subject)}
@@ -102,7 +102,7 @@ export default function RecordBook() {
       key: 'credit',
       dataIndex: 'credit',
       title: t('record_book.credits'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.syllabus.credit}</span>
       ),
       sorter: (a, b) => parseFloat(a.syllabus.credit) - parseFloat(b.syllabus.credit),
@@ -111,7 +111,7 @@ export default function RecordBook() {
       key: 'control',
       dataIndex: 'control',
       title: t('record_book.control'),
-      render: (value, record) => (
+      render: (_, record) => (
         <div className="row-data e-c">
           <span>{record.syllabus.control ? t(`record_book.${record.syllabus.control}`) : '-'}</span>
           <span>{record.syllabus.individual_task ? t(`record_book.${record.syllabus.individual_task}`) : '-'}</span>
@@ -123,7 +123,7 @@ export default function RecordBook() {
       key: 'mark_5',
       dataIndex: 'mark_5',
       title: t('record_book.national'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (
@@ -138,7 +138,7 @@ export default function RecordBook() {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: t('record_book.mark'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <Tooltip title={formatDate(record.debt_date)} placement="top">
             <span className="debt"><Trans i18nKey="record_book.debt" /></span>
@@ -155,7 +155,7 @@ export default function RecordBook() {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
       title: t('record_book.ects'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (

@@ -155,7 +155,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'subject',
       title: t('attendance.edit.subject'),
-      render: (value, data) => (
+      render: (_, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
           professor={getProfessorName(data.schedule_subject.subject)}
@@ -169,7 +169,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'date',
       title: t('attendance.edit.date'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="date">{format(new Date(data.date), dateFormat)}</span>
       ),
       onCell: (data) => ({
@@ -179,7 +179,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'time',
       title: t('attendance.edit.time'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="time">{data.schedule_subject.time}</span>
       ),
       onCell: (data) => ({

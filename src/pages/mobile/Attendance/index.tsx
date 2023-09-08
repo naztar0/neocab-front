@@ -69,7 +69,7 @@ export default function Attendance() {
     {
       dataIndex: 'subject',
       title: t('attendance.subject'),
-      render: (value, data) => (
+      render: (_, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
           professor={getProfessorName(data.schedule_subject.subject)}
@@ -80,7 +80,7 @@ export default function Attendance() {
     {
       dataIndex: 'date',
       title: t('attendance.date'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="date">{`${format(new Date(data.date), dateFormat)} ${data.schedule_subject.time}`}</span>
       ),
     },
