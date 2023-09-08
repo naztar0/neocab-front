@@ -26,6 +26,7 @@ import { AppDispatch } from '@/store/store';
 import Layout from '@/components/mobile/Layout';
 // noinspection DuplicatedCode
 import {
+  getFullFaqs,
   getFaqs,
   addFaq,
   editFaq,
@@ -44,14 +45,20 @@ export default function Help() {
   const isLoading: boolean = useSelector((state: any) => state.faqReducer.isLoading);
   const dataSwitch: boolean = useSelector((state: any) => state.faqReducer.dataSwitch);
   const faqsData: FaqItem[] = useSelector((state: any) => state.faqReducer.faqs);
+  const fullFaqsData: FullFaqItem[] = useSelector((state: any) => state.faqReducer.fullFaqs);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editType, setEditType] = useState<FaqEditType | null>();
   const [currentFaq, setCurrentFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    dispatch(getFaqs({ lang: languages[language] }));
-  }, [dataSwitch]);
+    if (profileData) {
+      dispatch(getFaqs({ lang: languages[language] }));
+      if (profileData?.role === Role.Admin) {
+        dispatch(getFullFaqs());
+      }
+    }
+  }, [dataSwitch, profileData]);
 
   const inputContent = useMemo(() => [
     {
@@ -126,6 +133,16 @@ export default function Help() {
     </div>
   ), []);
 
+  const fieldsValues = useMemo(() => (
+    inputContent.map((field) => ({
+      name: field.qName,
+      value: fullFaqsData.find((faq) => faq.id === currentFaq)?.[field.qName as keyof FullFaqItem],
+    })).concat(inputContent.map((field) => ({
+      name: field.aName,
+      value: fullFaqsData.find((faq) => faq.id === currentFaq)?.[field.aName as keyof FullFaqItem],
+    })))
+  ), [currentFaq, fullFaqsData]);
+
   return (
     <Layout>
       <Helmet title={t('common.menu.help') as string} />
@@ -164,6 +181,8 @@ export default function Help() {
           closable
           onClose={() => {
             setDrawerOpen(false);
+            setEditType(null);
+            setCurrentFaq(null);
           }}
           open={drawerOpen}
         >
@@ -171,6 +190,7 @@ export default function Help() {
             layout="vertical"
             requiredMark={false}
             onFinish={onSave}
+            fields={fieldsValues}
           >
             {inputContent.map((item) => (
               <div className="input-content" key={item.qName}>
