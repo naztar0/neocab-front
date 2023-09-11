@@ -1,12 +1,14 @@
-@import "variables";
-
-$component-background: $bg-substrate-dark;
-$popover-color: $white10;
-$layout-header-background: $bg-substrate-dark;
-$menu-item-selected: $blue-dark2;
-
+.ant-table {
+  .ant-table-thead tr th,
+  .ant-table-tbody tr td {
+    border-bottom: 1px solid var(--white07) !important;
+  }
+}
+.ant-btn-primary {
+  background: var(--primary-dark1) !important;
+}
 .ant-menu {
-  border-right: 1px solid $white10 !important;
+  border-right: 1px solid var(--white10) !important;
 
   li:not(.ant-menu-item-selected) {
     opacity: 25%;
@@ -18,11 +20,30 @@ $menu-item-selected: $blue-dark2;
   }
 
   .ant-menu-item-selected {
-    background-color: $menu-item-selected !important;
+    background-color: var(--primary-dark5) !important;
+    color: var(--primary-dark1) !important;
+
+    &:after {
+      border-inline-end-color: var(--primary-dark1) !important;
+    }
   }
 }
 
+.ant-drawer-content {
+  background: var(--bg-substrate-dark) !important;
+}
+.ant-collapse {
+  background: var(--white04) !important;
+}
 .ant-layout-sider-zero-width-trigger {
-  background: $bg-substrate-dark !important;
-  box-shadow: 5px 5px 15px -5px $black;
+  background: var(--bg-substrate-dark) !important;
+  box-shadow: 5px 5px 15px -5px var(--black);
+}
+.ant-list {
+  .ant-list-item {
+    border-block-end: var(--white10) 1px solid !important;
+  }
+}
+.ant-popover-inner {
+  background-color: var(--grey12) !important;
 }
