@@ -1,5 +1,5 @@
 export const mainColor = '#646cff';
-export const startColorLight = '#e8e6f2';
+export const startColorLight = '#d7d5e0';
 export const startColorDark = '#292929';
 export const dateFormat = 'dd.MM.yyyy';
 export const apiDateFormat = 'yyyy-MM-dd';
