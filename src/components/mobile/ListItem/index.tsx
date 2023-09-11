@@ -21,7 +21,7 @@ export default function ListItem({
             {icon}
             <span className="title">{title}</span>
           </div>
-          <span className="value">{value}</span>
+          <span className="data">{value}</span>
         </div>
       </Skeleton>
     </div>
