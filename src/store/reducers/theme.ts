@@ -23,6 +23,7 @@ export const themeSlice = createSlice({
   reducers: {
     toggleTheme: (state) => {
       state.theme = state.theme === Theme.Light ? Theme.Dark : Theme.Light;
+      cookies.set('theme', state.theme.toString());
     },
     setTheme: (state, action) => {
       state.theme = action.payload;
