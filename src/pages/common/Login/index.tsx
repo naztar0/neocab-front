@@ -13,6 +13,7 @@ import {
   Button,
   Spin,
   Divider,
+  FloatButton,
 } from 'antd';
 import cookies from 'js-cookie';
 import { Helmet } from 'react-helmet';
@@ -20,10 +21,12 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as MsLoginLight } from '@/assets/images/ms_signin_light.svg';
 import { ReactComponent as MsLoginDark } from '@/assets/images/ms_signin_dark.svg';
+import { ReactComponent as Logo } from '@/assets/images/logo_mini.svg';
+import { ReactComponent as RoutineIcon } from '@/assets/icons/routine.svg';
 import { Theme } from '@/constants/settings';
 import { getAzureLoginUrl, loginViaAzure, loginViaCabinet } from '@/store/actions/login';
 import { clearError } from '@/store/reducers/login';
-import { ReactComponent as Logo } from '@/assets/images/logo_mini.svg';
+import { toggleTheme } from '@/store/reducers/theme';
 import './index.scss';
 
 export default function Login() {
@@ -186,6 +189,7 @@ export default function Login() {
           </p>
         </div>
       )}
+      <FloatButton className="toggle-theme" icon={<RoutineIcon />} onClick={() => dispatch(toggleTheme())} />
     </div>
   );
 }
