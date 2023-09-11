@@ -68,7 +68,7 @@ body {
   width: 100% !important;
   height: auto !important;
   font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif !important;
-  background: $bg-root-light;
+  background: var(--bg-root-light);
 
   &::-webkit-scrollbar,
   *::-webkit-scrollbar {
@@ -76,36 +76,36 @@ body {
   }
   &::-webkit-scrollbar-track,
   *::-webkit-scrollbar-track {
-    background: $bg-root-light;
+    background: var(--bg-root-light);
   }
   &::-webkit-scrollbar-thumb,
   *::-webkit-scrollbar-thumb {
-    background: $black25;
+    background: var(--black25);
     border: 3px transparent solid;
     border-radius: 99px;
     background-clip: content-box;
   }
   &::-webkit-scrollbar-thumb:hover,
   *::-webkit-scrollbar-thumb:hover {
-    background: $black10;
+    background: var(--black10);
     background-clip: content-box;
   }
 
   &.dark-theme {
-    background: $bg-root-dark;
+    background: var(--bg-root-dark);
 
     &::-webkit-scrollbar-track,
     *::-webkit-scrollbar-track {
-      background: $bg-root-dark;
+      background: var(--bg-root-dark);
     }
     &::-webkit-scrollbar-thumb,
     *::-webkit-scrollbar-thumb {
-      background: $white25;
+      background: var(--white25);
       background-clip: content-box;
     }
     &::-webkit-scrollbar-thumb:hover,
     *::-webkit-scrollbar-thumb:hover {
-      background: $white10;
+      background: var(--white10);
       background-clip: content-box;
     }
   }
@@ -127,21 +127,23 @@ body {
 
 a {
   font-weight: 500;
-  color: $blue-light;
+  color: var(--text-link);
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
-    color: $blue-dark;
+    color: var(--primary-dark1);
   }
 }
 
 .pd-0 {
   padding: 0 !important;
 }
-
 .no-bg {
   background: none !important;
+}
+.no-select {
+  user-select: none;
 }
 
 .title {
@@ -152,7 +154,7 @@ a {
 .value {
   font-size: 1rem;
   font-weight: 400;
-  color: $text-dark;
+  color: var(--text-dark);
   opacity: 75%;
 }
 
@@ -160,14 +162,14 @@ a {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  background: $bg-root-light;
-  color: $text-dark;
+  background: var(--bg-root-light);
+  color: var(--text-dark);
   margin-left: 250px;
-  margin-top: $header-height;
-  min-height: calc(100vh - $header-height) !important;
+  margin-top: var(--header-height);
+  min-height: calc(100vh - var(--header-height)) !important;
 
   h2 {
-    color: $text-dark;
+    color: var(--text-dark);
   }
 
   @media (max-width: 991px) {
@@ -179,7 +181,7 @@ a {
   padding: 1rem;
   border-radius: 10px;
   margin-top: 1.5rem;
-  background: $bg-substrate-light;
+  background: var(--bg-substrate-light);
 
   &:first-child, &.row {
     margin-top: 0;
@@ -212,6 +214,93 @@ a {
   margin-top: 20px;
 }
 
+.color-white {
+  color: var(--white);
+}
+.color-white-90 {
+  color: var(--white90);
+}
+.color-white-75 {
+  color: var(--white75);
+}
+.color-white-50 {
+  color: var(--white50);
+}
+.color-white-25 {
+  color: var(--white25);
+}
+.color-white-10 {
+  color: var(--white10);
+}
+
+.color-black {
+  color: var(--black);
+}
+.color-black-90 {
+  color: var(--black90);
+}
+.color-black-75 {
+  color: var(--black75);
+}
+.color-black-50 {
+  color: var(--black50);
+}
+.color-black-25 {
+  color: var(--black25);
+}
+.color-black-10 {
+  color: var(--black10);
+}
+
+.bg-white {
+  background: var(--white);
+}
+.bg-white-75 {
+  background: var(--white75);
+}
+.bg-white-50 {
+  background: var(--white50);
+}
+.bg-white-25 {
+  background: var(--white25);
+}
+.bg-white-10 {
+  background: var(--white10);
+}
+.bg-white-07 {
+  background: var(--white07);
+}
+
+.bg-black {
+  background: var(--black);
+}
+.bg-black-75 {
+  background: var(--black75);
+}
+.bg-black-50 {
+  background: var(--black50);
+}
+.bg-black-25 {
+  background: var(--black25);
+}
+.bg-black-10 {
+  background: var(--black10);
+}
+.bg-black-07 {
+  background: var(--black07);
+}
+
+.font-size-12 {
+  font-size: 12px;
+}
+.font-size-16 {
+  font-size: 16px;
+}
+
+.text-dark {
+  color: var(--text-dark);
+}
+
 .mobile-table thead span,
 .mobile-table tbody span {
   font-size: 12px !important;
@@ -228,8 +317,8 @@ a {
 .mobile {
   &.container {
     margin-left: 0;
-    margin-top: $header-height-mobile;
-    min-height: calc(100vh - $header-height-mobile) !important;
+    margin-top: var(--header-height-mobile);
+    min-height: calc(100vh - var(--header-height-mobile)) !important;
     padding: 0;
   }
   .substrate{
@@ -248,15 +337,95 @@ a {
 
 .dark-theme {
   .container {
-    background: $bg-root-dark;
-    color: $text-light;
+    background: var(--bg-root-dark);
+    color: var(--text-light);
   }
 
   .substrate {
-    background: $bg-substrate-dark;
+    background: var(--bg-substrate-dark);
   }
 
   .value {
-    color: $text-light;
+    color: var(--text-light);
+  }
+
+  .color-white {
+    color: var(--black);
+  }
+  .color-white-90 {
+    color: var(--black90);
+  }
+  .color-white-75 {
+    color: var(--black75);
+  }
+  .color-white-50 {
+    color: var(--black50);
+  }
+  .color-white-25 {
+    color: var(--black25);
+  }
+  .color-white-10 {
+    color: var(--black10);
+  }
+
+  .color-black {
+    color: var(--white);
+  }
+  .color-black-90 {
+    color: var(--white90);
+  }
+  .color-black-75 {
+    color: var(--white75);
+  }
+  .color-black-50 {
+    color: var(--white50);
+  }
+  .color-black-25 {
+    color: var(--white25);
+  }
+  .color-black-10 {
+    color: var(--white10);
+  }
+
+  .bg-white {
+    background: var(--black);
+  }
+  .bg-white-75 {
+    background: var(--black75);
+  }
+  .bg-white-50 {
+    background: var(--black50);
+  }
+  .bg-white-25 {
+    background: var(--black25);
+  }
+  .bg-white-10 {
+    background: var(--black10);
+  }
+  .bg-white-07 {
+    background: var(--black07);
+  }
+
+  .bg-black {
+    background: var(--white);
+  }
+  .bg-black-75 {
+    background: var(--white75);
+  }
+  .bg-black-50 {
+    background: var(--white50);
+  }
+  .bg-black-25 {
+    background: var(--white25);
+  }
+  .bg-black-10 {
+    background: var(--white10);
+  }
+  .bg-black-07 {
+    background: var(--white07);
+  }
+
+  .text-dark {
+    color: var(--text-light);
   }
 }

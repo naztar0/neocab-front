@@ -1,5 +1,3 @@
-@import "src/styles/variables";
-
 .profile.basic {
   display: flex;
   flex-direction: column;
@@ -24,8 +22,7 @@
       margin-top: 10px;
       font-size: 0.875rem;
       font-weight: 400;
-      color: $text-dark;
-      opacity: 25%;
+      opacity: 50%;
       transition: opacity 0.2s ease-in-out;
 
       &:hover {
@@ -56,10 +53,8 @@
     bottom: 20px;
     right: 20px;
     padding: 2px 8px;
-    background: $white25;
     border: 1px solid white;
     border-radius: 10px;
-    color: $text-light;
     width: fit-content;
     height: fit-content;
     font-size: 0.75rem;
@@ -76,7 +71,7 @@
   object-fit: cover;
 
   img {
-    border: 6px solid $bg-substrate-light;
+    border: 6px solid var(--bg-substrate-light);
   }
 }
 .misc {
@@ -88,23 +83,9 @@
 }
 
 .dark-theme {
-  .basic {
-    .info {
-      .email {
-        color: $text-light;
-      }
-    }
-  }
-  .cover {
-    button {
-      background: $black25;
-      border: 1px solid $black;
-      color: $text-light;
-    }
-  }
   .profile-avatar {
     img {
-      border: 6px solid $bg-substrate-dark;
+      border: 6px solid var(--bg-substrate-dark);
     }
   }
 }

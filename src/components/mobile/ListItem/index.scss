@@ -1,14 +1,10 @@
-@import "src/styles/variables";
-
-$section-dark: #131617;
-$section-border-dark: #535657;
-$section-light: #fcfcfc;
-$section-border-light: #e0e0e0;
-
 .mobile-list {
+  --section-light: var(--grey98);
+  --section-border-light: var(--grey75);
+
   display: flex;
-  background: $section-light;
-  border: 1px solid $section-border-light;
+  background: var(--section-light);
+  border: 1px solid var(--section-border-light);
   border-radius: 10px;
   width: 100%;
   cursor: default;
@@ -44,7 +40,7 @@ $section-border-light: #e0e0e0;
         flex-direction: column;
         padding: 16px 0;
 
-        >.value {
+        >.data {
           margin-top: 10px;
         }
       }
@@ -55,8 +51,8 @@ $section-border-light: #e0e0e0;
       display: block;
       height: 0;
       width: 100%;
-      background: $section-border-light;
-      border: 1px solid $section-border-light;
+      background: var(--section-border-light);
+      border: 1px solid var(--section-border-light);
       border-radius: 2px;
     }
 
@@ -68,13 +64,16 @@ $section-border-light: #e0e0e0;
 
 .dark-theme {
   .mobile-list {
-    background: $section-dark;
-    border: 1px solid $section-border-dark;
+    --section-dark: var(--black25);
+    --section-border-dark: var(--grey35);
+
+    background: var(--section-dark);
+    border: 1px solid var(--section-border-dark);
 
     .item {
       &:not(:last-child)::after {
-        background: $section-border-dark;
-        border: 1.5px solid $section-border-dark;
+        background: var(--section-border-dark);
+        border: 1.5px solid var(--section-border-dark);
       }
     }
   }

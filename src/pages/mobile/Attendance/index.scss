@@ -1,5 +1,3 @@
-@import "src/styles/variables";
-
 .activity-calendar {
   width: fit-content;
   height: min-content;
@@ -10,15 +8,6 @@
   &::-webkit-scrollbar {
     height: 0;
     display: none;
-  }
-
-  .attendance-modal {
-    display: flex;
-    flex-direction: column;
-
-    .time {
-      color: $white75;
-    }
   }
 
   article > svg {
@@ -33,8 +22,4 @@
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0.75rem 0.5rem 0.5rem;
-}
-
-.dark-theme {
-
 }

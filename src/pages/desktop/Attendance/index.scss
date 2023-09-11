@@ -1,20 +1,9 @@
-@import "src/styles/variables";
-
 .activity-calendar {
   width: fit-content;
   height: min-content;
   padding: 16px 20px 16px 45px !important;
   overflow-x: auto;
   max-width: 100%;
-
-  .attendance-modal {
-    display: flex;
-    flex-direction: column;
-
-    .time {
-      color: $white75;
-    }
-  }
 
   article > svg {
     min-width: 600px;
@@ -50,8 +39,4 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-left: 5px;
-}
-
-.dark-theme {
-
 }

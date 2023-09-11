@@ -1,4 +1,3 @@
-@import "src/styles/variables";
 @import "src/styles/components/subjectTable";
 
 .subject-data {
@@ -78,23 +77,10 @@
 
       .legend-name {
         margin-left: 20px;
-        color: $text-dark;
         font-size: 11px;
         line-height: 14px;
         text-overflow: ellipsis;
         overflow: hidden;
-      }
-    }
-  }
-}
-
-.dark-theme {
-  .syllabus-charts {
-    .legend {
-      .legend-item {
-        .legend-name {
-          color: $text-light;
-        }
       }
     }
   }

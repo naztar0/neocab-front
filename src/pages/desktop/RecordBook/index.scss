@@ -1,8 +1,7 @@
-@import "src/styles/variables";
 @import "src/styles/components/subjectTable";
 
 .debt {
-  color: $yellow-light;
+  color: var(--yellow-light);
 }
 .record-book-charts {
   padding-top: 28px;
@@ -56,8 +55,4 @@
       }
     }
   }
-}
-
-.dark-theme {
-
 }
