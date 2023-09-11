@@ -356,7 +356,7 @@ export default function Search() {
       key: 'name',
       dataIndex: 'name',
       render: (_, record) => (
-        <div className="user-info" key={record.id}>
+        <div className="user-info text-dark" key={record.id}>
           <Avatar size={32} avatar={record.image} username={record.first_name} />
           <span className="name">{`${record.last_name} ${record.first_name} ${record.middle_name}`}</span>
         </div>

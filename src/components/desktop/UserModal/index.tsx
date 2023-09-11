@@ -49,7 +49,7 @@ export default function UserModal({
               <span className="role">
                 <Trans i18nKey={`profile.roles.${user.role}`} />
               </span>
-              <a className="email" href={`mailto:${user.email}`}>{user.email}</a>
+              <a className="email color-black" href={`mailto:${user.email}`}>{user.email}</a>
             </>
           ) : (
             <Skeleton paragraph={{ rows: 1 }} style={{ width: '250px' }} active />

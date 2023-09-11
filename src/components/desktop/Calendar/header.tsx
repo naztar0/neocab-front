@@ -96,7 +96,7 @@ export default function Header({ locale }: { locale: Locale }) {
           onClick={() => changeWeekHandle('next')}
         />
       </div>
-      <div className="col col-center">
+      <div className="col col-center color-black-75">
         <span>{format(currentMonth, dateFormat, { locale })}</span>
       </div>
       <div className="col col-end">

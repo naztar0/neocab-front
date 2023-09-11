@@ -197,7 +197,7 @@ export default function Rating() {
             {syllabusData?.map((data, index) => (
               <div className="legend-item" key={data.subject.id}>
                 <div className="legend-color" style={{ backgroundColor: colorsMain[0][index] }} />
-                <span className="legend-name">{data.subject.title}</span>
+                <span className="legend-name color-black-75">{data.subject.title}</span>
               </div>
             ))}
           </div>

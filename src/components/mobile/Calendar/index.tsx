@@ -5,7 +5,7 @@ import './index.scss';
 
 export default function Calendar({ locale }: { locale: Locale }) {
   return (
-    <div className="calendar">
+    <div className="calendar color-black-90">
       <Header locale={locale} />
       <Cells locale={locale} />
     </div>

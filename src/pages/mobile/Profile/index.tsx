@@ -57,7 +57,7 @@ export default function Profile() {
             <span className="name">
               {profileData?.middle_name}
             </span>
-            <a className="email" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+            <a className="email text-dark" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
           </Skeleton>
         </div>
         <div className="misc">

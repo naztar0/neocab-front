@@ -118,7 +118,7 @@ export default function Notifications() {
     >
       <div>
         { item.read ? null : <Badge className="status" status="warning" /> }
-        <span className="date-time">{format(new Date(item.created_at), dateTimeFormat)}</span>
+        <span className="date-time color-black-50">{format(new Date(item.created_at), dateTimeFormat)}</span>
       </div>
       <span>{currentNotification === item.id ? item.text : truncate(item.text, truncateLimit)}</span>
     </List.Item>

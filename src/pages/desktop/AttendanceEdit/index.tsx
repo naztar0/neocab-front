@@ -131,10 +131,10 @@ export default function AttendanceEdit() {
     setAttendanceModal({
       title: (
         <div className="attendance-modal-title">
-          <div className="subject">
+          <div className="subject font-size-16">
             {record.schedule_subject.subject.title}
           </div>
-          <div className="date">
+          <div className="date color-black-75 font-size-12">
             {`${format(new Date(record.date), dateFormat)} ${record.schedule_subject.time}`}
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function AttendanceEdit() {
               name="students"
             >
               <List
-                className="attendance-students"
+                className="no-select"
                 size="small"
                 dataSource={groupUsers.data}
                 renderItem={(user) => (

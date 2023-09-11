@@ -47,14 +47,14 @@ export default function Rating() {
 
   useEffect(() => {
     setTimeout(() => {
-      const oldSelectors = document.getElementsByClassName('rating-me');
+      const oldSelectors = document.getElementsByClassName('bg-black-10');
       for (let i = 0; i < oldSelectors.length; i++) {
-        oldSelectors[i].classList.remove('rating-me');
+        oldSelectors[i].classList.remove('bg-black-10');
       }
       const ratingMe = document.getElementsByClassName('student-id');
       for (let i = 0; i < ratingMe.length; i++) {
         if (ratingMe[i].innerHTML === profileData.student_id.toString()) {
-          ratingMe[i].parentElement?.parentElement?.classList.add('rating-me');
+          ratingMe[i].parentElement?.parentElement?.classList.add('bg-black-10');
           ratingMe[i].parentElement?.parentElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }

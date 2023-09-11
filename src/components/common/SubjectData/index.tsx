@@ -19,11 +19,11 @@ export default function SubjectData({
         {color && (<div className="bookmark" style={{ borderLeftColor: color, borderRightColor: color }} />)}
         <span>{title}</span>
       </div>
-      <div>
+      <div className="color-black-50">
         {professor && (<span className="professor">{professor}</span>)}
         {department && (
           <Tooltip title={department} placement="right">
-            <span className="department">{shortDepartmentName(department)}</span>
+            <span className="department bg-black-10">{shortDepartmentName(department)}</span>
           </Tooltip>
         )}
       </div>

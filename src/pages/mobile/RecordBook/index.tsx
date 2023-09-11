@@ -133,11 +133,11 @@ export default function RecordBook() {
               value={(
                 <div className="subject-data">
                   <div className="item">
-                    <span className="title">{`📊 ${t('record_book.credits')}`}</span>
+                    <span className="title color-black-90">{`📊 ${t('record_book.credits')}`}</span>
                     <span className="value">{record.syllabus.credit}</span>
                   </div>
                   <div className="item">
-                    <span className="title">{`✏️ ${t('record_book.control')}`}</span>
+                    <span className="title color-black-90">{`✏️ ${t('record_book.control')}`}</span>
                     <span className="value">
                       {`${
                         record.syllabus.control ? t(`record_book.${record.syllabus.control}`) : '-'
@@ -147,7 +147,7 @@ export default function RecordBook() {
                     </span>
                   </div>
                   <div className="item">
-                    <span className="title">{`✅ ${t('record_book.mark')}`}</span>
+                    <span className="title color-black-90">{`✅ ${t('record_book.mark')}`}</span>
                     {record.debt_date ? (
                       <div className="debt">
                         <WarningOutlined />

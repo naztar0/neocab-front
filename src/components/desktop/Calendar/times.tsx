@@ -19,5 +19,5 @@ export default function Times() {
     return data;
   }, [calendarStartHour, calendarEndHour]);
 
-  return <div className="col times">{cols}</div>;
+  return <div className="col times color-black-50">{cols}</div>;
 }

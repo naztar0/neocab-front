@@ -77,14 +77,14 @@ export default function Contract() {
       <Helmet title={t('common.menu.contract') as string} />
       <div className="substrate contract-data">
         <Skeleton loading={isLoading} active paragraph={{ rows: 1 }}>
-          <p>
+          <p className="color-black-75">
             <Trans
               i18nKey="contract.current_price"
               components={{ b: <b />, u: <u /> }}
               values={{ price: formatPrice(contractData?.price) }}
             />
           </p>
-          <p className="contract-title">
+          <p className="contract-title color-black-50 bg-black-07">
             <Trans
               i18nKey="contract.title"
               components={{
@@ -98,7 +98,7 @@ export default function Contract() {
               }}
             />
           </p>
-          <p>
+          <p className="color-black-75">
             <Trans
               i18nKey="contract.total_paid"
               components={{ b: <b />, u: <u /> }}

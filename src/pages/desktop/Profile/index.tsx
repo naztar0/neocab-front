@@ -57,7 +57,7 @@ export default function Profile() {
             <Skeleton.Input active className="skeleton" />
           )}
           <Upload className="upload" {...props}>
-            <Button loading={isLoadingCover} disabled={isLoadingCover}>
+            <Button loading={isLoadingCover} disabled={isLoadingCover} className="bg-white-25">
               <span><Trans i18nKey="profile.edit_cover" /></span>
             </Button>
           </Upload>
@@ -80,7 +80,7 @@ export default function Profile() {
               <span className="name">
                 {`${profileData?.last_name} ${profileData?.first_name} ${profileData?.middle_name}`}
               </span>
-              <a className="email" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+              <a className="email text-dark" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
             </Skeleton>
           </div>
         </div>

@@ -132,11 +132,11 @@ export default function Rating() {
               value={(
                 <div className="subject-data">
                   <div className="item">
-                    <span className="title">{`📊 ${t('syllabus.credits')}`}</span>
+                    <span className="title color-black-90">{`📊 ${t('syllabus.credits')}`}</span>
                     <span className="value">{record.credit}</span>
                   </div>
                   <div className="item">
-                    <span className="title">{`✏️ ${t('syllabus.control')}`}</span>
+                    <span className="title color-black-90">{`✏️ ${t('syllabus.control')}`}</span>
                     <span className="value">
                       {`${
                         record.control ? t(`syllabus.${record.control}`) : '-'
@@ -146,7 +146,7 @@ export default function Rating() {
                     </span>
                   </div>
                   <div className="item">
-                    <span className="title">{`⏰ ${t('syllabus.hours')}`}</span>
+                    <span className="title color-black-90">{`⏰ ${t('syllabus.hours')}`}</span>
                     <span className="value">{record.hours}</span>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export default function Rating() {
             {syllabusData?.map((data, index) => (
               <div className="legend-item" key={data.subject.id}>
                 <div className="legend-color" style={{ backgroundColor: colorsMain[0][index] }} />
-                <span className="legend-name">{data.subject.title}</span>
+                <span className="legend-name color-black-75">{data.subject.title}</span>
               </div>
             ))}
           </div>
