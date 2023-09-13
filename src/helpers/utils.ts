@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 export function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 }
@@ -102,12 +104,11 @@ export function getProfessorName(
   return professor_name || '';
 }
 
-export const truncate = (str: string, length: number): string => {
-  if (str.length <= length) return str;
-  return `${str.substring(0, length)}...`;
-};
-
 export const isPrefersDark = (): boolean => {
   if (typeof window === 'undefined') return false;
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
+
+export const hueShift = (color: string, shift: number, alpha: number = 1): chroma.Color => (
+  chroma(color).set('hsl.h', chroma(color).get('hsl.h') + shift).alpha(alpha)
+);
