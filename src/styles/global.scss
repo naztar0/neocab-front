@@ -69,6 +69,8 @@ body {
   height: auto !important;
   font-family: Rubik, Inter, Avenir, Helvetica, Arial, sans-serif !important;
   background: var(--bg-root-light);
+  accent-color: var(--primary);
+  scrollbar-gutter: stable;
 
   &::-webkit-scrollbar,
   *::-webkit-scrollbar {
@@ -336,6 +338,10 @@ a {
 }
 
 .dark-theme {
+  body {
+      background: var(--bg-root-dark);
+  }
+
   .container {
     background: var(--bg-root-dark);
     color: var(--text-light);
