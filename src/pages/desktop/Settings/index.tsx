@@ -1,4 +1,7 @@
 import React, {
+  lazy,
+  Suspense,
+  useEffect,
   useState,
   useMemo,
   useCallback,
@@ -38,6 +41,8 @@ import {
 import { syncUserPhoto } from '@/store/actions/users';
 import './index.scss';
 
+const ExperimentalSettings = lazy(() => import('@/pages/desktop/Settings/experimental'));
+
 interface ElementTitle {
   text: string;
   icon: React.JSX.Element;
@@ -64,7 +69,19 @@ export default function Settings() {
   const [themeSelected, setThemeSelected] = useState(theme);
   const [languageSelected, setLanguageSelected] = useState(language);
   const [calendarWeekDaysSelected, setCalendarWeekDaysSelected] = useState(calendarWeekDays);
+  const [experimentalSettingsVisible, setExperimentalSettingsVisible] = useState(false);
 
+  useEffect(() => {
+    const eventListener = (event: KeyboardEvent) => {
+      if (event.shiftKey && event.code === 'KeyE') {
+        setExperimentalSettingsVisible(true);
+        document.removeEventListener('keydown', eventListener);
+      }
+    };
+    document.addEventListener('keydown', eventListener);
+  }, []);
+
+  // noinspection DuplicatedCode
   const settingsTitles = useMemo(() => [
     {
       text: t('settings.language'),
@@ -259,6 +276,13 @@ export default function Settings() {
           showHeader={false}
         />
       </div>
+      {experimentalSettingsVisible ? (
+        <Suspense fallback={<div />}>
+          <ExperimentalSettings />
+        </Suspense>
+      ) : (
+        <span className="experimental-tip color-black-10">Shift + E</span>
+      )}
     </Layout>
   );
 }
