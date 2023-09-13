@@ -1,6 +1,7 @@
-export const mainColor = '#646cff';
-export const startColorLight = '#d7d5e0';
-export const startColorDark = '#292929';
+export const saturationLight = 0.26;
+export const levelLight = 0.88;
+export const saturationDark = 0;
+export const levelDark = 0.16;
 export const dateFormat = 'dd.MM.yyyy';
 export const apiDateFormat = 'yyyy-MM-dd';
 export const historyLimit = 20;
