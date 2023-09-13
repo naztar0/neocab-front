@@ -20,7 +20,7 @@ import Layout from '@/components/desktop/Layout';
 import Semester from '@/components/common/Semester';
 import SubjectData from '@/components/common/SubjectData';
 import { getUserRecordBook } from '@/store/actions/users';
-import { colorsRange, colorsRangeLight } from '@/constants/recordBook';
+import { hueShiftRange, alphaRange, luminance } from '@/constants/recordBook';
 import {
   yearToSemester,
   toMark5,
@@ -28,6 +28,7 @@ import {
   toMarkEcts,
   formatDate,
   getProfessorName,
+  hueShift,
 } from '@/helpers/utils';
 import './index.scss';
 
@@ -58,6 +59,7 @@ export default function RecordBook() {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
+  const primaryColor: string = useSelector((state: any) => state.themeReducer.primaryColor);
   const isLoading: boolean = useSelector((state: any) => state.recordBookReducer.isLoading);
   const recordBookData: RecordBook[] = useSelector((state: any) => state.recordBookReducer.recordBook);
 
@@ -174,9 +176,15 @@ export default function RecordBook() {
 
   // noinspection DuplicatedCode
   const colorsMain = useMemo(() => [
-    chroma.scale(colorsRange).colors(recordBookData?.length),
-    chroma.scale(colorsRangeLight).colors(recordBookData?.length),
-  ], [recordBookData]);
+    chroma.scale([
+      hueShift(primaryColor, hueShiftRange[0][0], alphaRange[0][0]).luminance(luminance),
+      hueShift(primaryColor, hueShiftRange[0][1], alphaRange[0][1]).luminance(luminance),
+    ]).colors(recordBookData?.length),
+    chroma.scale([
+      hueShift(primaryColor, hueShiftRange[1][0], alphaRange[1][0]).luminance(luminance),
+      hueShift(primaryColor, hueShiftRange[1][1], alphaRange[1][1]).luminance(luminance),
+    ]).colors(recordBookData?.length),
+  ], [recordBookData, primaryColor]);
 
   const markChart = useMemo(() => ({
     labels: recordBookData?.filter((data) => Number(data.mark)).map((data) => data.syllabus.subject.title),
