@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   ConfigProvider as ConfigProviderAntd,
   theme as themeAntd,
@@ -37,17 +37,10 @@ const getAlgorithm = (theme: Theme) => {
   }
 };
 
-const themeToken = {
-  colorPrimary: '#646cff',
-  colorLink: '#646cff',
-  colorBgLayout: '#1a1d1f',
-  borderRadius: 5,
-  fontFamily: 'Rubik, Inter, Avenir, Helvetica, Arial, sans-serif',
-};
-
 export default function ConfigProvider({ children }: { children: React.ReactNode }) {
   const currTheme: Theme = useSelector((state: any) => state.themeReducer.theme);
   const currLanguage: Language = useSelector((state: any) => state.languageReducer.language);
+  const primaryColor: string = useSelector((state: any) => state.themeReducer.primaryColor);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -67,6 +60,14 @@ export default function ConfigProvider({ children }: { children: React.ReactNode
       });
     setIsLoaded(true);
   }, []);
+
+  const themeToken = useMemo(() => ({
+    colorPrimary: primaryColor || '',
+    colorLink: primaryColor || '',
+    colorBgLayout: '',
+    borderRadius: 5,
+    fontFamily: 'Rubik, Inter, Avenir, Helvetica, Arial, sans-serif',
+  }), [primaryColor]);
 
   return (
     <ConfigProviderAntd
