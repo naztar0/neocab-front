@@ -109,6 +109,14 @@ header {
       opacity: 100%;
     }
 
+    &:first-child {
+      padding-top: 0 !important;
+    }
+
+    &:last-child {
+      padding-bottom: 0 !important;
+    }
+
     .status {
       margin-right: 6px;
     }
@@ -117,12 +125,11 @@ header {
       font-size: 10px;
     }
 
-    &:first-child {
-      padding-top: 0 !important;
-    }
-
-    &:last-child {
-        padding-bottom: 0 !important;
+    .line-clamp {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
 }
