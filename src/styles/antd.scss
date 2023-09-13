@@ -1,7 +1,3 @@
-$layout-header-background: var(--bg-substrate-dark);
-$menu-icon-margin-right: 14px;
-$border-radius-base: 5px;
-
 .ant-table {
   background: none !important;
 
@@ -21,9 +17,6 @@ $border-radius-base: 5px;
       border-bottom: 1px solid var(--black10) !important;
     }
   }
-}
-.ant-btn-primary {
-  background: var(--primary) !important;
 }
 .ant-list {
   .ant-list-item {
@@ -83,7 +76,7 @@ $border-radius-base: 5px;
   min-width: 0 !important;
 }
 .ant-drawer-content {
-  background: var(--bg-substrate-lighter) !important;
+  background: var(--bg-substrate-light) !important;
 }
 .ant-drawer-content-wrapper {
   max-width: 100%;
