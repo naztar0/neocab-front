@@ -15,6 +15,7 @@ const getTheme = () => {
 
 const initialState = {
   theme: getTheme(),
+  primaryColor: cookies.get('primaryColor'),
 };
 
 export const themeSlice = createSlice({
@@ -28,9 +29,13 @@ export const themeSlice = createSlice({
     setTheme: (state, action) => {
       state.theme = action.payload;
     },
+    setPrimaryColor: (state, action) => {
+      state.primaryColor = action.payload;
+      cookies.set('primaryColor', action.payload);
+    },
   },
 });
 
-export const { toggleTheme, setTheme } = themeSlice.actions;
+export const { toggleTheme, setTheme, setPrimaryColor } = themeSlice.actions;
 
 export default themeSlice.reducer;
