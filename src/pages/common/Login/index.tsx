@@ -180,7 +180,7 @@ export default function Login() {
         </div>
       </Spin>
       {!termsAccepted && (
-        <div className="terms">
+        <div className="terms text-dark">
           <Button type="primary" onClick={onAccept}>
             <span><Trans i18nKey="login.terms.accept" /></span>
           </Button>
