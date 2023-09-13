@@ -9,6 +9,7 @@ import { refreshAction } from '@/store/actions/login';
 import { isPrefersDark } from '@/helpers/utils';
 import { appLanguages, tokenRefreshTime } from '@/constants/appInit';
 import { APP_MOBILE_URL, DEBUG } from '@/config';
+import { setPrimaryColor } from '@/store/reducers/theme';
 
 const isMobileWidth = window.innerWidth < 768;
 const isMobileHost = document.location.hostname.split('.')[0] === 'm';
@@ -17,6 +18,7 @@ export default function AppInit() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const theme = useSelector((state: any) => state.themeReducer.theme);
+  const primaryColor = useSelector((state: any) => state.themeReducer.primaryColor);
   const language = useSelector((state: any) => state.languageReducer.language);
   const authData = useSelector((state: any) => state.loginReducer.authorization);
   const isLoginLoading = useSelector((state: any) => state.loginReducer.isLoading);
@@ -25,6 +27,22 @@ export default function AppInit() {
     if (Number(localStorage.getItem('last_refresh') || 0) + tokenRefreshTime < Date.now()) {
       localStorage.setItem('last_refresh', Date.now().toString());
       setTimeout(() => dispatch(refreshAction()), 60 * 1000);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!primaryColor) {
+      const checkColor = () => setTimeout(() => {
+        const color = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+        if (color) {
+          dispatch(setPrimaryColor(color));
+        } else {
+          checkColor();
+        }
+      }, 10);
+      checkColor();
+    } else {
+      document.documentElement.style.setProperty('--primary', primaryColor);
     }
   }, []);
 
