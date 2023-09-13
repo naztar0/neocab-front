@@ -48,8 +48,7 @@
 
   --bg-root-light: #fff;
   --bg-root-dark: #111315;
-  --bg-substrate-lighter: color-mix(in srgb, var(--bg-root-light) 92%, var(--black));
-  --bg-substrate-light: color-mix(in srgb, var(--bg-root-light) 90%, var(--black));
+  --bg-substrate-light: color-mix(in srgb, var(--bg-root-light) 92%, var(--black));
   --bg-substrate-dark: color-mix(in srgb, var(--bg-root-dark) 95%, var(--grey75));
 
   --green-light: #52c41a;
