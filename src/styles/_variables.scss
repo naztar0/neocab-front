@@ -30,17 +30,17 @@
   --black75: color-mix(in srgb, var(--black), transparent 25%);
   --black90: color-mix(in srgb, var(--black), transparent 10%);
 
-  --primary-light1: color-mix(in srgb, var(--primary) 85%, var(--white)); /* blue-lighter */
-  --primary-light2: color-mix(in srgb, var(--primary) 70%, var(--white)); /* blue-light2 */
-  --primary-light3: color-mix(in srgb, var(--primary) 40%, var(--white)); /* blue-light4 */
-  --primary-light4: color-mix(in srgb, var(--primary) 25%, var(--white)); /* blue-light3 */
+  --primary-light1: color-mix(in srgb, var(--primary) 85%, var(--white));
+  --primary-light2: color-mix(in srgb, var(--primary) 70%, var(--white));
+  --primary-light3: color-mix(in srgb, var(--primary) 40%, var(--white));
+  --primary-light4: color-mix(in srgb, var(--primary) 25%, var(--white));
 
-  --primary-dark1: color-mix(in srgb, var(--primary) 88%, var(--black)); /* blue-dark */
-  --primary-dark2: color-mix(in srgb, var(--primary) 82%, var(--black)); /* blue-dark5 */
-  --primary-dark3: color-mix(in srgb, var(--primary) 48%, var(--grey15)); /* blue-dark4 */
-  --primary-dark4: color-mix(in srgb, var(--primary) 20%, var(--grey12)); /* blue-dark3 */
-  --primary-dark5: color-mix(in srgb, var(--primary) 14%, var(--grey07)); /* blue-dark2 */
-  --primary-dark6: color-mix(in srgb, var(--primary) 15%, var(--black)); /* blue-darker */
+  --primary-dark1: color-mix(in srgb, var(--primary) 88%, var(--black));
+  --primary-dark2: color-mix(in srgb, var(--primary) 82%, var(--black));
+  --primary-dark3: color-mix(in srgb, var(--primary) 48%, var(--grey15));
+  --primary-dark4: color-mix(in srgb, var(--primary) 20%, var(--grey12));
+  --primary-dark5: color-mix(in srgb, var(--primary) 14%, var(--grey07));
+  --primary-dark6: color-mix(in srgb, var(--primary) 15%, var(--black));
 
   --text-light: var(--white);
   --text-dark: var(--black75);
