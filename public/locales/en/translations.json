@@ -96,6 +96,7 @@
       "syllabus": "Syllabus"
     },
     "messages": {
+      "copied": "Copied",
       "fill_all_fields": "Please fill all fields",
       "fill_one_field": "Please fill at least one field",
       "incorrect_value": "Incorrect value",
@@ -254,10 +255,13 @@
       "mon_sat": "Mon - Sat",
       "mon_sun": "Mon - Sun"
     },
+    "experimental": "Experimental",
     "language": "Language",
     "messages": {
       "synced": "Synced successfully"
     },
+    "primary_color": "Primary color",
+    "reset": "Reset",
     "sync": "Synchronize",
     "sync_profile_photo": "Sync profile photo",
     "synced": "Synced successfully",

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  getFullFaqs,
   getFaqs,
   addFaq,
   editFaq,
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   faqs: [],
+  fullFaqs: [],
   isLoading: false,
   dataSwitch: false,
 };
@@ -17,6 +19,17 @@ export const faqSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getFullFaqs.fulfilled, (state, action) => {
+      state.fullFaqs = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getFullFaqs.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getFullFaqs.rejected, (state) => {
+      state.isLoading = false;
+    });
+
     builder.addCase(getFaqs.fulfilled, (state, action) => {
       state.faqs = action.payload;
       state.isLoading = false;

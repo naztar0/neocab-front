@@ -63,7 +63,7 @@ export default function Privacy() {
   }, []);
 
   return (
-    <div className="privacy-policy">
+    <div className="privacy-policy color-black-75">
       <Helmet title={t('title') as string} />
       <div className="head">
         <Logo className="logo" />
@@ -71,7 +71,7 @@ export default function Privacy() {
       <Button
         onClick={() => { window.location.href = '/'; }}
         icon={<ArrowLeftOutlined />}
-        type="ghost"
+        type="text"
       >
         <span><Trans ns="privacy" i18nKey="back" /></span>
       </Button>
@@ -87,12 +87,12 @@ export default function Privacy() {
             </ul>
           </div>
         </div>
-        <h1><Trans ns="privacy" i18nKey="title" /></h1>
-        <span className="updated"><Trans ns="privacy" i18nKey="updated" /></span>
+        <h1 className="text-dark"><Trans ns="privacy" i18nKey="title" /></h1>
+        <span className="updated color-black-50"><Trans ns="privacy" i18nKey="updated" /></span>
         <div className="content">
           {contents.map((item, index) => (
             <>
-              <h3 id={index.toString()}>{item.title}</h3>
+              <h3 id={index.toString()} className="text-dark">{item.title}</h3>
               {item.content}
               {item.paragraphs?.map((paragraph) => (
                 <>

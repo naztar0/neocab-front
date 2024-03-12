@@ -19,7 +19,7 @@ import {
   ScriptableContext,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { hex } from 'chroma-js';
+import chroma, { hex } from 'chroma-js';
 import { Trans, useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/desktop/Layout';
@@ -28,11 +28,14 @@ import { getUserAcademicPerformance } from '@/store/actions/users';
 import {
   yearToSemester,
   semesterToYear,
+  hueShift,
 } from '@/helpers/utils';
 import {
   months,
-  colorsMain,
   firstMonth,
+  colorSaturation,
+  colorLevel,
+  colorHueShift,
 } from '@/constants/academicPerformance';
 import { PaymentType } from '@/constants/profile';
 import './index.scss';
@@ -83,6 +86,7 @@ export default function AcademicPerformance() {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
+  const primaryColor: string = useSelector((state: any) => state.themeReducer.primaryColor);
   const isLoading: boolean = useSelector((state: any) => state.academicPerformanceReducer.isLoading);
   const academicPerformanceData: AcademicPerformance = useSelector(
     (state: any) => state.academicPerformanceReducer.data,
@@ -139,6 +143,17 @@ export default function AcademicPerformance() {
     }
     return res;
   }, [academicPerformanceData, t]);
+
+  const colorsMain = useMemo(() => [
+    [
+      chroma(primaryColor).set('hsl.s', colorSaturation).set('hsl.l', colorLevel).hex(),
+      primaryColor,
+    ],
+    [
+      hueShift(chroma(primaryColor).set('hsl.s', colorSaturation).set('hsl.l', colorLevel).hex(), colorHueShift).hex(),
+      hueShift(primaryColor, colorHueShift).hex(),
+    ],
+  ], [primaryColor]);
 
   const attendancesChart = useMemo(() => ({
     labels,

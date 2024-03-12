@@ -1,11 +1,9 @@
-@import "src/styles/variables";
-
 .settings-table {
-  tr {
-    .icon {
-      margin-right: 10px;
-    }
+  .icon {
+    margin-right: 10px;
+  }
 
+  tr {
     &:last-child {
       td {
         border-bottom: none;
@@ -22,8 +20,29 @@
     text-align: start;
     padding-left: 11px;
   }
+
+  .settings-item-types {
+    display: flex;
+    flex-direction: row;
+
+    :not(:first-child) {
+      margin-left: 10px;
+    }
+  }
 }
 
-.dark-theme {
+.experimental-tip {
+  height: 80px;
+  width: 300px;
+  margin: 50px auto;
+  cursor: default;
+  opacity: 40%;
+  font-weight: 600;
+  font-size: 64px;
+  text-align: center;
+  content-visibility: hidden;
 
+  &:hover {
+    content-visibility: visible;
+  }
 }

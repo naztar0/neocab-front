@@ -17,6 +17,7 @@ import ActivityCalendar, {
 } from 'react-activity-calendar';
 import { startOfYear, endOfYear, format } from 'date-fns';
 import dayjs from 'dayjs';
+import chroma from 'chroma-js';
 import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { getUserAttendance } from '@/store/actions/users';
@@ -27,9 +28,10 @@ import { Theme } from '@/constants/settings';
 import {
   dateFormat,
   apiDateFormat,
-  mainColor,
-  startColorDark,
-  startColorLight,
+  saturationLight,
+  saturationDark,
+  levelLight,
+  levelDark,
   historyLimit,
 } from '@/constants/attendance';
 import { timeFormat } from '@/constants/schedule';
@@ -43,6 +45,7 @@ export default function Attendance() {
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
   const theme: Theme = useSelector((state: any) => state.themeReducer.theme);
+  const primaryColor: string = useSelector((state: any) => state.themeReducer.primaryColor);
   const attendanceData: AttendanceResponse = useSelector((state: any) => state.attendanceReducer.attendance);
   const isLoading: boolean = useSelector((state: any) => state.attendanceReducer.isLoading);
 
@@ -75,7 +78,7 @@ export default function Attendance() {
     {
       dataIndex: 'subject',
       title: t('attendance.subject'),
-      render: (value, data) => (
+      render: (_, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
           professor={getProfessorName(data.schedule_subject.subject)}
@@ -86,7 +89,7 @@ export default function Attendance() {
     {
       dataIndex: 'date',
       title: t('attendance.date'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="date">{`${format(new Date(data.date), dateFormat)} ${data.schedule_subject.time}`}</span>
       ),
     },
@@ -96,14 +99,14 @@ export default function Attendance() {
     {
       dataIndex: 'subject',
       title: t('attendance.subject'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="subject">{data.title}</span>
       ),
     },
     {
       dataIndex: 'count',
       title: t('attendance.visits'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="count">{data.count}</span>
       ),
     },
@@ -149,10 +152,21 @@ export default function Attendance() {
     totalCount: t('attendance.labels.total_count') as string,
   }), [t]);
 
+  const activityCalendarTheme = useMemo(() => ({
+    light: [
+      chroma(primaryColor).set('hsl.s', saturationLight).set('hsl.l', levelLight).hex(),
+      primaryColor,
+    ] as [string, string],
+    dark: [
+      chroma(primaryColor).set('hsl.s', saturationDark).set('hsl.l', levelDark).hex(),
+      primaryColor,
+    ] as [string, string],
+  }), [primaryColor]);
+
   return (
     <Layout>
       <Helmet title={t('common.menu.attendance') as string} />
-      {(profileData?.role === Role.Headman || profileData?.role === Role.Admin) && (
+      {(profileData?.role === Role.Headman) && (
         <div className="attendance-title">
           <span className="title">
             <Trans i18nKey="common.menu.attendance" />
@@ -172,7 +186,7 @@ export default function Attendance() {
               data={daysData}
               weekStart={1}
               fontSize={12}
-              theme={{ light: [startColorLight, mainColor], dark: [startColorDark, mainColor] }}
+              theme={activityCalendarTheme}
               colorScheme={theme === Theme.Dark ? 'dark' : 'light'}
               labels={labels}
               showWeekdayLabels

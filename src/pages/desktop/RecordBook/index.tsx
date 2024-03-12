@@ -20,7 +20,7 @@ import Layout from '@/components/desktop/Layout';
 import Semester from '@/components/common/Semester';
 import SubjectData from '@/components/common/SubjectData';
 import { getUserRecordBook } from '@/store/actions/users';
-import { colorsRange, colorsRangeLight } from '@/constants/recordBook';
+import { hueShiftRange, alphaRange, luminance } from '@/constants/recordBook';
 import {
   yearToSemester,
   toMark5,
@@ -28,6 +28,7 @@ import {
   toMarkEcts,
   formatDate,
   getProfessorName,
+  hueShift,
 } from '@/helpers/utils';
 import './index.scss';
 
@@ -58,6 +59,7 @@ export default function RecordBook() {
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
   const profileData: Profile = useSelector((state: any) => state.profileReducer.profile);
+  const primaryColor: string = useSelector((state: any) => state.themeReducer.primaryColor);
   const isLoading: boolean = useSelector((state: any) => state.recordBookReducer.isLoading);
   const recordBookData: RecordBook[] = useSelector((state: any) => state.recordBookReducer.recordBook);
 
@@ -89,7 +91,7 @@ export default function RecordBook() {
       key: 'subject',
       dataIndex: 'subject',
       title: t('record_book.subject'),
-      render: (value, record) => (
+      render: (_, record) => (
         <SubjectData
           title={record.syllabus.subject.title}
           professor={getProfessorName(record.syllabus.subject)}
@@ -102,7 +104,7 @@ export default function RecordBook() {
       key: 'credit',
       dataIndex: 'credit',
       title: t('record_book.credits'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.syllabus.credit}</span>
       ),
       sorter: (a, b) => parseFloat(a.syllabus.credit) - parseFloat(b.syllabus.credit),
@@ -111,7 +113,7 @@ export default function RecordBook() {
       key: 'control',
       dataIndex: 'control',
       title: t('record_book.control'),
-      render: (value, record) => (
+      render: (_, record) => (
         <div className="row-data e-c">
           <span>{record.syllabus.control ? t(`record_book.${record.syllabus.control}`) : '-'}</span>
           <span>{record.syllabus.individual_task ? t(`record_book.${record.syllabus.individual_task}`) : '-'}</span>
@@ -123,7 +125,7 @@ export default function RecordBook() {
       key: 'mark_5',
       dataIndex: 'mark_5',
       title: t('record_book.national'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (
@@ -138,7 +140,7 @@ export default function RecordBook() {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: t('record_book.mark'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <Tooltip title={formatDate(record.debt_date)} placement="top">
             <span className="debt"><Trans i18nKey="record_book.debt" /></span>
@@ -155,7 +157,7 @@ export default function RecordBook() {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
       title: t('record_book.ects'),
-      render: (value, record) => (
+      render: (_, record) => (
         record.debt_date ? (
           <span className="debt"><WarningOutlined /></span>
         ) : (
@@ -174,9 +176,15 @@ export default function RecordBook() {
 
   // noinspection DuplicatedCode
   const colorsMain = useMemo(() => [
-    chroma.scale(colorsRange).colors(recordBookData?.length),
-    chroma.scale(colorsRangeLight).colors(recordBookData?.length),
-  ], [recordBookData]);
+    chroma.scale([
+      hueShift(primaryColor, hueShiftRange[0][0], alphaRange[0][0]).luminance(luminance),
+      hueShift(primaryColor, hueShiftRange[0][1], alphaRange[0][1]).luminance(luminance),
+    ]).colors(recordBookData?.length),
+    chroma.scale([
+      hueShift(primaryColor, hueShiftRange[1][0], alphaRange[1][0]).luminance(luminance),
+      hueShift(primaryColor, hueShiftRange[1][1], alphaRange[1][1]).luminance(luminance),
+    ]).colors(recordBookData?.length),
+  ], [recordBookData, primaryColor]);
 
   const markChart = useMemo(() => ({
     labels: recordBookData?.filter((data) => Number(data.mark)).map((data) => data.syllabus.subject.title),

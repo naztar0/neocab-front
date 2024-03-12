@@ -9,6 +9,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/desktop/Layout';
 import Avatar from '@/components/common/Avatar';
+import Email from '@/components/common/Email';
 import StudentProfileData from '@/components/desktop/StudentProfileData';
 import { setUserCover } from '@/store/actions/users';
 import { IMAGES_URL } from '@/config';
@@ -57,7 +58,7 @@ export default function Profile() {
             <Skeleton.Input active className="skeleton" />
           )}
           <Upload className="upload" {...props}>
-            <Button loading={isLoadingCover} disabled={isLoadingCover}>
+            <Button loading={isLoadingCover} disabled={isLoadingCover} className="bg-white-25">
               <span><Trans i18nKey="profile.edit_cover" /></span>
             </Button>
           </Upload>
@@ -80,7 +81,7 @@ export default function Profile() {
               <span className="name">
                 {`${profileData?.last_name} ${profileData?.first_name} ${profileData?.middle_name}`}
               </span>
-              <a className="email" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+              <Email email={profileData?.email} />
             </Skeleton>
           </div>
         </div>

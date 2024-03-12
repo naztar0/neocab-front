@@ -128,7 +128,7 @@ export default function Rating() {
       key: 'subject',
       dataIndex: 'subject',
       title: t('syllabus.subject'),
-      render: (value, record, index) => (
+      render: (_, record, index) => (
         <SubjectData
           title={record.subject.title}
           professor={getProfessorName(record.subject)}
@@ -142,7 +142,7 @@ export default function Rating() {
       key: 'credit',
       dataIndex: 'credit',
       title: t('syllabus.credits'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.credit}</span>
       ),
       sorter: (a, b) => a.credit.localeCompare(b.credit),
@@ -151,7 +151,7 @@ export default function Rating() {
       key: 'control',
       dataIndex: 'control',
       title: t('syllabus.control'),
-      render: (value, record) => (
+      render: (_, record) => (
         <div className="row-data e-c">
           <span>{record.control ? t(`syllabus.${record.control}`) : '-'}</span>
           <span>{record.individual_task ? t(`syllabus.${record.individual_task}`) : '-'}</span>
@@ -163,7 +163,7 @@ export default function Rating() {
       key: 'hours',
       dataIndex: 'hours',
       title: t('syllabus.hours'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.hours}</span>
       ),
       sorter: (a, b) => a.hours.localeCompare(b.hours),
@@ -197,7 +197,7 @@ export default function Rating() {
             {syllabusData?.map((data, index) => (
               <div className="legend-item" key={data.subject.id}>
                 <div className="legend-color" style={{ backgroundColor: colorsMain[0][index] }} />
-                <span className="legend-name">{data.subject.title}</span>
+                <span className="legend-name color-black-75">{data.subject.title}</span>
               </div>
             ))}
           </div>

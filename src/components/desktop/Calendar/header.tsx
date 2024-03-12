@@ -61,7 +61,8 @@ export default function Header({ locale }: { locale: Locale }) {
     groupScheduleData.map((item) => (
       <Tooltip title={item.description} key={item.week} placement="leftBottom">
         <Button
-          type="ghost"
+          type="text"
+          className="no-bg"
           onClick={() => dispatch(setWeek(item.week))}
         >
           {item.week}
@@ -95,7 +96,7 @@ export default function Header({ locale }: { locale: Locale }) {
           onClick={() => changeWeekHandle('next')}
         />
       </div>
-      <div className="col col-center">
+      <div className="col col-center color-black-75">
         <span>{format(currentMonth, dateFormat, { locale })}</span>
       </div>
       <div className="col col-end">

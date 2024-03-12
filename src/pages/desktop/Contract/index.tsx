@@ -38,7 +38,7 @@ export default function Contract() {
       key: 'date',
       dataIndex: 'date',
       title: t('contract.date'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{format(new Date(record.created_at), dateFormat)}</span>
       ),
       sorter: (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
@@ -47,7 +47,7 @@ export default function Contract() {
       key: 'semester',
       dataIndex: 'semester',
       title: t('contract.semester'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.semester}</span>
       ),
       sorter: (a, b) => a.semester - b.semester,
@@ -56,7 +56,7 @@ export default function Contract() {
       key: 'amount',
       dataIndex: 'amount',
       title: t('contract.amount'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{formatPrice(record.amount)}</span>
       ),
       sorter: (a, b) => a.amount - b.amount,
@@ -65,7 +65,7 @@ export default function Contract() {
       key: 'id',
       dataIndex: 'id',
       title: t('contract.id'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.id}</span>
       ),
       sorter: (a, b) => a.id - b.id,
@@ -77,14 +77,14 @@ export default function Contract() {
       <Helmet title={t('common.menu.contract') as string} />
       <div className="substrate contract-data">
         <Skeleton loading={isLoading} active paragraph={{ rows: 1 }}>
-          <p>
+          <p className="color-black-75">
             <Trans
               i18nKey="contract.current_price"
               components={{ b: <b />, u: <u /> }}
               values={{ price: formatPrice(contractData?.price) }}
             />
           </p>
-          <p className="contract-title">
+          <p className="contract-title color-black-50 bg-black-07">
             <Trans
               i18nKey="contract.title"
               components={{
@@ -98,7 +98,7 @@ export default function Contract() {
               }}
             />
           </p>
-          <p>
+          <p className="color-black-75">
             <Trans
               i18nKey="contract.total_paid"
               components={{ b: <b />, u: <u /> }}

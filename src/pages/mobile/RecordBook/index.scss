@@ -1,8 +1,7 @@
-@import "src/styles/variables";
 @import "src/styles/components/subjectTable";
 
 .debt {
-  color: $yellow-light;
+  color: var(--yellow-light);
   flex: 2;
 
   .debt-text {
@@ -79,8 +78,4 @@
       }
     }
   }
-}
-
-.dark-theme {
-
 }

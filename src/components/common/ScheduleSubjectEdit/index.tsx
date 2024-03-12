@@ -60,7 +60,7 @@ export default function ScheduleSubjectEdit({
       >
         <Button
           shape="circle"
-          type="ghost"
+          type="text"
           className="notes-btn"
           icon={<MessageOutlined />}
         />
@@ -89,14 +89,14 @@ export default function ScheduleSubjectEdit({
       {editScheduleSubjectId === scheduleSubject?.id || !scheduleSubject ? (
         <Button
           shape="circle"
-          type="ghost"
+          type="text"
           icon={<SaveOutlined />}
           htmlType="submit"
         />
       ) : (
         <Button
           shape="circle"
-          type="ghost"
+          type="text"
           icon={<DeleteOutlined />}
           onClick={() => onDelete(scheduleSubject?.id)}
         />

@@ -15,7 +15,13 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import cookies from 'js-cookie';
-import Icon, * as Icons from '@ant-design/icons';
+import Icon, {
+  GlobalOutlined,
+  DownCircleOutlined,
+  UpCircleOutlined,
+  InsertRowAboveOutlined,
+  SyncOutlined,
+} from '@ant-design/icons';
 import { Trans, useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as RoutineIcon } from '@/assets/icons/routine.svg';
@@ -65,10 +71,11 @@ export default function Settings() {
   const [languageSelected, setLanguageSelected] = useState(language);
   const [calendarWeekDaysSelected, setCalendarWeekDaysSelected] = useState(calendarWeekDays);
 
+  // noinspection DuplicatedCode
   const settingsTitles = useMemo(() => [
     {
       text: t('settings.language'),
-      icon: <Icons.GlobalOutlined className="icon" />,
+      icon: <GlobalOutlined className="icon" />,
     },
     {
       text: t('settings.theme'),
@@ -76,19 +83,19 @@ export default function Settings() {
     },
     {
       text: t('settings.calendar_start_hour'),
-      icon: <Icons.DownCircleOutlined className="icon" />,
+      icon: <DownCircleOutlined className="icon" />,
     },
     {
       text: t('settings.calendar_end_hour'),
-      icon: <Icons.UpCircleOutlined className="icon" />,
+      icon: <UpCircleOutlined className="icon" />,
     },
     {
       text: t('settings.calendar_week_days'),
-      icon: <Icons.InsertRowAboveOutlined className="icon" />,
+      icon: <InsertRowAboveOutlined className="icon" />,
     },
     {
       text: t('settings.sync_profile_photo'),
-      icon: <Icons.SyncOutlined className="icon" />,
+      icon: <SyncOutlined className="icon" />,
     },
   ], [t]);
 

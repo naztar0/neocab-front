@@ -24,10 +24,8 @@ import { AppDispatch } from '@/store/store';
 import {
   dateTimeFormat,
   historyLimit,
-  truncateLimit,
   updateInterval,
 } from '@/constants/notification';
-import { truncate } from '@/helpers/utils';
 import './index.scss';
 
 export default function Notifications() {
@@ -118,9 +116,9 @@ export default function Notifications() {
     >
       <div>
         { item.read ? null : <Badge className="status" status="warning" /> }
-        <span className="date-time">{format(new Date(item.created_at), dateTimeFormat)}</span>
+        <span className="date-time color-black-50">{format(new Date(item.created_at), dateTimeFormat)}</span>
       </div>
-      <span>{currentNotification === item.id ? item.text : truncate(item.text, truncateLimit)}</span>
+      <span className={currentNotification === item.id ? '' : 'line-clamp'}>{item.text}</span>
     </List.Item>
   ), [currentNotification]);
 

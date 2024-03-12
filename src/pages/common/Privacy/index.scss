@@ -1,10 +1,7 @@
-@import "src/styles/variables";
-
 .privacy-policy {
   margin: auto;
   padding: 20px;
   max-width: 800px;
-  color: $black75;
 
   .head {
     display: flex;
@@ -28,13 +25,11 @@
   h1 {
     font-size: 24px;
     font-weight: 700;
-    color: $text-dark;
     margin-bottom: 0;
   }
 
   .updated {
     font-size: 13px;
-    color: $black50;
     margin-bottom: 20px;
   }
 
@@ -81,7 +76,6 @@
       font-size: 20px;
       margin-top: 32px;
       margin-bottom: 10px;
-      color: $text-dark;
     }
 
     h4 {
@@ -98,18 +92,8 @@
 
 .dark-theme {
   .privacy-policy {
-    color: $white75;
-
     .logo {
       filter: invert(1);
-    }
-
-    .updated {
-      color: $white50;
-    }
-
-    h1, h3 {
-      color: $text-light;
     }
   }
 }

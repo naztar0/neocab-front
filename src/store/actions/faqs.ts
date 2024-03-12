@@ -1,11 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import responseHandler from '@/store/actions/config';
 import {
+  fetchFullFaqs,
   fetchFaqs,
   postFaq,
   patchFaq,
   deleteFaq,
 } from '@/requests/faqs';
+
+export const getFullFaqs = createAsyncThunk(
+  'get_full_faqs',
+  async () => (
+    await responseHandler(fetchFullFaqs())
+  ).data,
+);
 
 export const getFaqs = createAsyncThunk(
   'get_faqs',

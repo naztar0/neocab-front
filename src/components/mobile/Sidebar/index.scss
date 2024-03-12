@@ -1,15 +1,13 @@
-@import 'src/styles/variables';
-
 .sidebar {
   position: fixed !important;
-  padding-top: $header-height-mobile;
-  height: 100vh;
+  padding-top: var(--header-height-mobile);
+  height: 100dvh;
   z-index: 2;
   user-select: none;
-  background: $bg-substrate-light;
+  background: var(--bg-substrate-light);
 
   ul {
-    background: $bg-root-light;
+    background: var(--bg-root-light);
     height: calc(100% - 32px);
 
     li {
@@ -22,7 +20,7 @@
     height: 100%;
     padding-left: 32px;
     font-size: 12px;
-    background: $bg-root-light;
+    background: var(--bg-root-light);
     border-right: 1px solid rgba(5, 5, 5, 0.06);
     transition: background 0.3s;
 
@@ -32,7 +30,7 @@
     }
 
     span {
-      color: $black25;
+      color: var(--black25);
       cursor: pointer;
 
       &:hover {
@@ -49,15 +47,15 @@
 .dark-theme {
   .sidebar {
     ul {
-      background: $bg-substrate-dark;
+      background: var(--bg-substrate-dark);
     }
 
     .about {
-      background: $bg-substrate-dark;
+      background: var(--bg-substrate-dark);
       border-right: 1px solid rgba(255, 255, 255, 0.1);
 
       span {
-          color: $white10;
+          color: var(--white10);
       }
     }
   }

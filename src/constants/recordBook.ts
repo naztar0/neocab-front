@@ -1,2 +1,3 @@
-export const colorsRange = ['#8095ff', '#b964ff'];
-export const colorsRangeLight = ['#8095ff19', '#b963ff19'];
+export const hueShiftRange = [[-6, 36], [-6, 36]];
+export const alphaRange = [[1, 1], [0.1, 0.1]];
+export const luminance = 0.3;

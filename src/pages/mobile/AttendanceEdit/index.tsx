@@ -131,10 +131,10 @@ export default function AttendanceEdit() {
     setAttendanceModal({
       title: (
         <div className="attendance-modal-title">
-          <div className="subject">
+          <div className="subject font-size-16">
             {record.schedule_subject.subject.title}
           </div>
-          <div className="date">
+          <div className="date color-black-75 font-size-12">
             {`${format(new Date(record.date), dateFormat)} ${record.schedule_subject.time}`}
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'subject',
       title: t('attendance.edit.subject'),
-      render: (value, data) => (
+      render: (_, data) => (
         <SubjectData
           title={data.schedule_subject.subject.title}
           professor={getProfessorName(data.schedule_subject.subject)}
@@ -169,7 +169,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'date',
       title: t('attendance.edit.date'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="date">{format(new Date(data.date), dateFormat)}</span>
       ),
       onCell: (data) => ({
@@ -179,7 +179,7 @@ export default function AttendanceEdit() {
     {
       dataIndex: 'time',
       title: t('attendance.edit.time'),
-      render: (value, data) => (
+      render: (_, data) => (
         <span className="time">{data.schedule_subject.time}</span>
       ),
       onCell: (data) => ({
@@ -303,7 +303,7 @@ export default function AttendanceEdit() {
               name="students"
             >
               <List
-                className="attendance-students"
+                className="no-select"
                 size="small"
                 dataSource={groupUsers.data}
                 renderItem={(user) => (

@@ -1,4 +1,7 @@
 import React, {
+  lazy,
+  Suspense,
+  useEffect,
   useState,
   useMemo,
   useCallback,
@@ -15,7 +18,13 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import { Helmet } from 'react-helmet';
 import cookies from 'js-cookie';
-import Icon, * as Icons from '@ant-design/icons';
+import Icon, {
+  GlobalOutlined,
+  DownCircleOutlined,
+  UpCircleOutlined,
+  InsertRowAboveOutlined,
+  SyncOutlined,
+} from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import { ReactComponent as RoutineIcon } from '@/assets/icons/routine.svg';
@@ -37,6 +46,8 @@ import {
 } from '@/constants/settings';
 import { syncUserPhoto } from '@/store/actions/users';
 import './index.scss';
+
+const ExperimentalSettings = lazy(() => import('@/pages/desktop/Settings/experimental'));
 
 interface ElementTitle {
   text: string;
@@ -64,11 +75,23 @@ export default function Settings() {
   const [themeSelected, setThemeSelected] = useState(theme);
   const [languageSelected, setLanguageSelected] = useState(language);
   const [calendarWeekDaysSelected, setCalendarWeekDaysSelected] = useState(calendarWeekDays);
+  const [experimentalSettingsVisible, setExperimentalSettingsVisible] = useState(false);
 
+  useEffect(() => {
+    const eventListener = (event: KeyboardEvent) => {
+      if (event.shiftKey && event.code === 'KeyE') {
+        setExperimentalSettingsVisible(true);
+        document.removeEventListener('keydown', eventListener);
+      }
+    };
+    document.addEventListener('keydown', eventListener);
+  }, []);
+
+  // noinspection DuplicatedCode
   const settingsTitles = useMemo(() => [
     {
       text: t('settings.language'),
-      icon: <Icons.GlobalOutlined className="icon" />,
+      icon: <GlobalOutlined className="icon" />,
     },
     {
       text: t('settings.theme'),
@@ -76,19 +99,19 @@ export default function Settings() {
     },
     {
       text: t('settings.calendar_start_hour'),
-      icon: <Icons.DownCircleOutlined className="icon" />,
+      icon: <DownCircleOutlined className="icon" />,
     },
     {
       text: t('settings.calendar_end_hour'),
-      icon: <Icons.UpCircleOutlined className="icon" />,
+      icon: <UpCircleOutlined className="icon" />,
     },
     {
       text: t('settings.calendar_week_days'),
-      icon: <Icons.InsertRowAboveOutlined className="icon" />,
+      icon: <InsertRowAboveOutlined className="icon" />,
     },
     {
       text: t('settings.sync_profile_photo'),
-      icon: <Icons.SyncOutlined className="icon" />,
+      icon: <SyncOutlined className="icon" />,
     },
   ], [t]);
 
@@ -259,6 +282,13 @@ export default function Settings() {
           showHeader={false}
         />
       </div>
+      {experimentalSettingsVisible ? (
+        <Suspense fallback={<div />}>
+          <ExperimentalSettings />
+        </Suspense>
+      ) : (
+        <span className="experimental-tip color-black-10">Shift + E</span>
+      )}
     </Layout>
   );
 }

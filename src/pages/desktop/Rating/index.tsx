@@ -47,14 +47,14 @@ export default function Rating() {
 
   useEffect(() => {
     setTimeout(() => {
-      const oldSelectors = document.getElementsByClassName('rating-me');
+      const oldSelectors = document.getElementsByClassName('bg-black-10');
       for (let i = 0; i < oldSelectors.length; i++) {
-        oldSelectors[i].classList.remove('rating-me');
+        oldSelectors[i].classList.remove('bg-black-10');
       }
       const ratingMe = document.getElementsByClassName('student-id');
       for (let i = 0; i < ratingMe.length; i++) {
         if (ratingMe[i].innerHTML === profileData.student_id.toString()) {
-          ratingMe[i].parentElement?.parentElement?.classList.add('rating-me');
+          ratingMe[i].parentElement?.parentElement?.classList.add('bg-black-10');
           ratingMe[i].parentElement?.parentElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
@@ -66,7 +66,7 @@ export default function Rating() {
       key: 'position',
       dataIndex: 'position',
       title: '№',
-      render: (value, record, index) => (
+      render: (_, record, index) => (
         <>
           <span>{index + 1}</span>
           <span className="student-id">{record.user?.student_id || record.student_id}</span>
@@ -77,7 +77,7 @@ export default function Rating() {
       key: 'student',
       dataIndex: 'student',
       title: t('rating.student'),
-      render: (value, record, index) => {
+      render: (_, record, index) => {
         const percent = ((index + 1) * 100) / ratingData.length;
         const probability = percent > 50 ? '0%' : (percent > 45 ? t('rating.high_probability') : '100%');
         return (
@@ -113,7 +113,7 @@ export default function Rating() {
       key: 'group',
       dataIndex: 'group',
       title: t('rating.group'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{record.user?.group.name ?? record.group}</span>
       ),
       sorter: (a, b) => (a.user?.group.name ?? a.group).localeCompare(b.user?.group.name ?? b.group),
@@ -122,7 +122,7 @@ export default function Rating() {
       key: 'mark_5',
       dataIndex: 'mark_5',
       title: t('rating.national'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{toMark5(parseFloat(record.mark))}</span>
       ),
       sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
@@ -131,7 +131,7 @@ export default function Rating() {
       key: 'mark_ects',
       dataIndex: 'mark_ects',
       title: t('rating.ects'),
-      render: (value, record) => (
+      render: (_, record) => (
         <span>{toMarkEcts(parseFloat(record.mark))}</span>
       ),
       sorter: (a, b) => parseFloat(a.mark) - parseFloat(b.mark),
@@ -140,7 +140,7 @@ export default function Rating() {
       dataIndex: 'mark_100',
       key: 'mark_100',
       title: t('rating.mark'),
-      render: (value, record) => (
+      render: (_, record) => (
         <Tooltip title={record.comment} placement="left">
           <span>{record.mark}</span>
         </Tooltip>

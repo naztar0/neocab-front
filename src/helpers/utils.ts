@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 export function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 }
@@ -102,12 +104,33 @@ export function getProfessorName(
   return professor_name || '';
 }
 
-export const truncate = (str: string, length: number): string => {
-  if (str.length <= length) return str;
-  return `${str.substring(0, length)}...`;
-};
-
 export const isPrefersDark = (): boolean => {
   if (typeof window === 'undefined') return false;
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+
+export const hueShift = (color: string, shift: number, alpha: number = 1): chroma.Color => (
+  chroma(color).set('hsl.h', chroma(color).get('hsl.h') + shift).alpha(alpha)
+);
+
+const copyToClipboardViaExecCommand = (text: string, callback?: () => void) => {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  // noinspection JSDeprecatedSymbols
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  if (callback) callback();
+};
+
+export const copyToClipboard = (text: string, callback?: () => void) => {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => callback && callback());
+  } else {
+    copyToClipboardViaExecCommand(text, callback);
+  }
 };
