@@ -50,12 +50,24 @@ export default function StudentProfileData({ isLoading, user }: Props) {
     <>
       <div className="mobile-list">
         {profileRowTitles.map((title, index) => (
-          <ListItem icon={title[1]} title={title[0] as string} value={profileRowValues[index]} loading={isLoading} />
+          <ListItem
+            key={title[0] as string}
+            icon={title[1]}
+            title={title[0] as string}
+            value={profileRowValues[index]}
+            loading={isLoading}
+          />
         ))}
       </div>
       <div className="mobile-list">
         {profileColTitles.map((title, index) => (
-          <ListItem title={title} value={profileColValues[index]} column loading={isLoading} />
+          <ListItem
+            key={title}
+            title={title}
+            value={profileColValues[index]}
+            loading={isLoading}
+            column
+          />
         ))}
       </div>
     </>
