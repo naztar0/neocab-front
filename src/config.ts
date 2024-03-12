@@ -1,4 +1,4 @@
-export const DEBUG = import.meta.env.VITE_APP_DEBUG;
+export const DEBUG = import.meta.env.VITE_APP_DEBUG === 'true';
 export const DEBUG_LAYOUT = import.meta.env.VITE_APP_DEBUG_LAYOUT;
 export const APP_URL = import.meta.env.VITE_APP_URL;
 export const APP_MOBILE_URL = import.meta.env.VITE_APP_MOBILE_URL;
