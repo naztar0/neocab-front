@@ -9,6 +9,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AppDispatch } from '@/store/store';
 import Layout from '@/components/desktop/Layout';
 import Avatar from '@/components/common/Avatar';
+import Email from '@/components/common/Email';
 import StudentProfileData from '@/components/desktop/StudentProfileData';
 import { setUserCover } from '@/store/actions/users';
 import { IMAGES_URL } from '@/config';
@@ -80,7 +81,7 @@ export default function Profile() {
               <span className="name">
                 {`${profileData?.last_name} ${profileData?.first_name} ${profileData?.middle_name}`}
               </span>
-              <a className="email text-dark" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+              <Email email={profileData?.email} />
             </Skeleton>
           </div>
         </div>

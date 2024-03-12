@@ -5,6 +5,8 @@ import {
 } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
 import Avatar from '@/components/common/Avatar';
+import Email from '@/components/common/Email';
+import ScrollContainer from '@/components/common/ScrollContainer';
 import StudentProfileData from '@/components/mobile/StudentProfileData';
 import './index.scss';
 
@@ -43,15 +45,19 @@ export default function UserModal({
               <Skeleton.Avatar size={78} active />
             )}
           </div>
-          <div className="info">
+          <div className="info mask-overflow-container">
             <Skeleton loading={isLoadingLocal} paragraph={{ rows: 1 }} style={{ width: '250px' }} active>
-              <span className="name">
-                {`${user?.last_name} ${user?.first_name} ${user?.middle_name}`}
-              </span>
+              <ScrollContainer className="name-wrap">
+                <span className="name">
+                  {`${user?.last_name} ${user?.first_name} ${user?.middle_name}`}
+                </span>
+              </ScrollContainer>
               <span className="role">
                 <Trans i18nKey={`profile.roles.${user?.role}`} />
               </span>
-              <a className="email color-black" href={`mailto:${user?.email}`}>{user?.email}</a>
+              <ScrollContainer>
+                <Email email={user?.email} />
+              </ScrollContainer>
             </Skeleton>
           </div>
         </div>

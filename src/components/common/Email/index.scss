@@ -1,0 +1,25 @@
+.email {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  align-items: center;
+  opacity: 50%;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 75%;
+  }
+
+  &.no-icon {
+    margin-top: 5px;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  button {
+    margin-left: 5px;
+  }
+}

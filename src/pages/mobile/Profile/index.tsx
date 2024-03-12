@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import Layout from '@/components/mobile/Layout';
 import Avatar from '@/components/common/Avatar';
+import Email from '@/components/common/Email';
 import StudentProfileData from '@/components/mobile/StudentProfileData';
 import { IMAGES_URL } from '@/config';
 import './index.scss';
@@ -57,7 +58,7 @@ export default function Profile() {
             <span className="name">
               {profileData?.middle_name}
             </span>
-            <a className="email text-dark" href={`mailto:${profileData?.email}`}>{profileData?.email}</a>
+            <Email email={profileData?.email} copy={false} />
           </Skeleton>
         </div>
         <div className="misc">

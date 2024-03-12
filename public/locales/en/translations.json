@@ -96,6 +96,7 @@
       "syllabus": "Syllabus"
     },
     "messages": {
+      "copied": "Copied",
       "fill_all_fields": "Please fill all fields",
       "fill_one_field": "Please fill at least one field",
       "incorrect_value": "Incorrect value",

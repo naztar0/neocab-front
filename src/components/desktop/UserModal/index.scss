@@ -10,17 +10,6 @@
     .name {
       font-size: 1.25rem;
     }
-
-    .email {
-      font-size: 0.875rem;
-      font-weight: 400;
-      opacity: 50%;
-      transition: opacity 0.2s ease-in-out;
-
-      &:hover {
-        opacity: 75%;
-      }
-    }
   }
 }
 

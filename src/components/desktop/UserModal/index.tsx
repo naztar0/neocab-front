@@ -5,6 +5,7 @@ import {
 } from 'antd';
 import { Trans, useTranslation } from 'react-i18next';
 import Avatar from '@/components/common/Avatar';
+import Email from '@/components/common/Email';
 import StudentProfileData from '@/components/desktop/StudentProfileData';
 import './index.scss';
 
@@ -49,7 +50,7 @@ export default function UserModal({
               <span className="role">
                 <Trans i18nKey={`profile.roles.${user.role}`} />
               </span>
-              <a className="email color-black" href={`mailto:${user.email}`}>{user.email}</a>
+              <Email email={user?.email} />
             </>
           ) : (
             <Skeleton paragraph={{ rows: 1 }} style={{ width: '250px' }} active />

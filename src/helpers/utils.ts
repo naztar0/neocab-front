@@ -112,3 +112,25 @@ export const isPrefersDark = (): boolean => {
 export const hueShift = (color: string, shift: number, alpha: number = 1): chroma.Color => (
   chroma(color).set('hsl.h', chroma(color).get('hsl.h') + shift).alpha(alpha)
 );
+
+const copyToClipboardViaExecCommand = (text: string, callback?: () => void) => {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  // noinspection JSDeprecatedSymbols
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  if (callback) callback();
+};
+
+export const copyToClipboard = (text: string, callback?: () => void) => {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => callback && callback());
+  } else {
+    copyToClipboardViaExecCommand(text, callback);
+  }
+};
