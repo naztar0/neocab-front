@@ -51,7 +51,7 @@ export default function Rating() {
       }
       const ratingMe = document.getElementsByClassName('student-id');
       for (let i = 0; i < ratingMe.length; i++) {
-        if (ratingMe[i].innerHTML === profileData.student_id.toString()) {
+        if (ratingMe[i].innerHTML === profileData.id.toString()) {
           ratingMe[i].parentElement?.parentElement?.classList.add('bg-black-10');
           ratingMe[i].parentElement?.parentElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -67,7 +67,7 @@ export default function Rating() {
       render: (_, record, index) => (
         <>
           <span>{index + 1}</span>
-          <span className="student-id">{record.user?.student_id || record.student_id}</span>
+          <span className="student-id">{record.user?.id}</span>
         </>
       ),
     },
@@ -81,7 +81,7 @@ export default function Rating() {
         return (
           <Tooltip
             title={
-              record.user?.student_id === profileData?.student_id
+              record.user?.id === profileData?.id
                 ? t('rating.percentage', { percent: percent.toFixed(2), probability })
                 : null
             }
